@@ -1,0 +1,921 @@
+{
+	"info": {
+		"_postman_id": "c7244d96-f2b8-4516-b226-03f5ce039e4c",
+		"name": "apiPastillero",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "crear usuario admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{MASTER_KEY}}",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "juanma@juanma.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "juanma1234",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear usuario user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{MASTER_KEY}}",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "usuario@usuario.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "usuario1234",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "user",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar un usuario concreto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/users/5c3cc271f05e75226598c297",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"5c3cc271f05e75226598c297"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar todos los usuarios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzQ4NjY5MX0.0W9bBs1ND3a54mzV5VC3mgSTX51t0964EwR4r7Uhoeg",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "juanma1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "juanma@juanma.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{MASTER_KEY}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear medicamento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzQ4NjY5MX0.0W9bBs1ND3a54mzV5VC3mgSTX51t0964EwR4r7Uhoeg",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Ibuprofeno",
+							"type": "text"
+						},
+						{
+							"key": "cantidad",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "gramos",
+							"value": "0,7",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/medicamentos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"medicamentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar medicamentos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzQ4NjY5MX0.0W9bBs1ND3a54mzV5VC3mgSTX51t0964EwR4r7Uhoeg",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/medicamentos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"medicamentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar un medicamento concreto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzQ4NjY5MX0.0W9bBs1ND3a54mzV5VC3mgSTX51t0964EwR4r7Uhoeg",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/medicamentos/5c3cc745f05e75226598c29a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"medicamentos",
+						"5c3cc745f05e75226598c29a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar usuario",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzQ5NTkyMn0.Yz1_TbarGxfF31qoCdkpshKv3NkzRhS0DN3SBzCame8",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "useeeeeeeer",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/5c3cc478f05e75226598c298",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"5c3cc478f05e75226598c298"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar medicamento",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMjU2OX0.CUKTw8q74hU_vVOg3TbgrpiDxJxXdyS-ChvYC4K-pjo",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "MedicamentoEditado1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/medicamentos/5c3cc745f05e75226598c29a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"medicamentos",
+						"5c3cc745f05e75226598c29a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear persona",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMjU2OX0.CUKTw8q74hU_vVOg3TbgrpiDxJxXdyS-ChvYC4K-pjo",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Juanma",
+							"type": "text"
+						},
+						{
+							"key": "fecha_nacimiento",
+							"value": "07/05/1994",
+							"type": "text"
+						},
+						{
+							"key": "genero",
+							"value": "masculino",
+							"type": "text"
+						},
+						{
+							"key": "enfermedad",
+							"value": "miope",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/personas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"personas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar todas las personas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMjU2OX0.CUKTw8q74hU_vVOg3TbgrpiDxJxXdyS-ChvYC4K-pjo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/personas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"personas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar una persona concreta",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMjU2OX0.CUKTw8q74hU_vVOg3TbgrpiDxJxXdyS-ChvYC4K-pjo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/personas/5c3d04b69cb81d0adedb22dd",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"personas",
+						"5c3d04b69cb81d0adedb22dd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar persona",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMjU2OX0.CUKTw8q74hU_vVOg3TbgrpiDxJxXdyS-ChvYC4K-pjo",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Juanma Vela",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/personas/5c3d04b69cb81d0adedb22dd",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"personas",
+						"5c3d04b69cb81d0adedb22dd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear tratamiento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMzcyNX0.WpbPtQ8AtI6vSLFSKHWAbQrZnY1aXIvvijQ90yLtf3M",
+							"type": "text"
+						},
+						{
+							"key": "periodo_toma",
+							"value": "20 días",
+							"type": "text"
+						},
+						{
+							"key": "fecha_inicio",
+							"value": "01/01/2019",
+							"type": "text"
+						},
+						{
+							"key": "fecha_final",
+							"value": "01/01/2020",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tratamientos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tratamientos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar todos los tratamientos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMzcyNX0.WpbPtQ8AtI6vSLFSKHWAbQrZnY1aXIvvijQ90yLtf3M",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tratamientos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tratamientos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar un tratamiento concreto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMzcyNX0.WpbPtQ8AtI6vSLFSKHWAbQrZnY1aXIvvijQ90yLtf3M",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tratamientos/5c3d08bf9cb81d0adedb22e0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tratamientos",
+						"5c3d08bf9cb81d0adedb22e0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar tratamiento",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwMzcyNX0.WpbPtQ8AtI6vSLFSKHWAbQrZnY1aXIvvijQ90yLtf3M",
+							"type": "text"
+						},
+						{
+							"key": "periodo_toma",
+							"value": "77 días",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tratamientos/5c3d08bf9cb81d0adedb22e0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tratamientos",
+						"5c3d08bf9cb81d0adedb22e0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwNDMwNn0.r3nSSvcwIwvdi6IrNJjifkg_mF0IdcQ1li4ZiNm-pCc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/5c3cc478f05e75226598c298",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"5c3cc478f05e75226598c298"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar medicamento",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwNDMwNn0.r3nSSvcwIwvdi6IrNJjifkg_mF0IdcQ1li4ZiNm-pCc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/medicamentos/5c3cc745f05e75226598c29a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"medicamentos",
+						"5c3cc745f05e75226598c29a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar persona",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwNDMwNn0.r3nSSvcwIwvdi6IrNJjifkg_mF0IdcQ1li4ZiNm-pCc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/personas/5c3d051a9cb81d0adedb22de",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"personas",
+						"5c3d051a9cb81d0adedb22de"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar tratamiento",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjM2NjMjcxZjA1ZTc1MjI2NTk4YzI5NyIsImlhdCI6MTU0NzUwNDMwNn0.r3nSSvcwIwvdi6IrNJjifkg_mF0IdcQ1li4ZiNm-pCc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tratamientos/5c3d08bf9cb81d0adedb22e0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tratamientos",
+						"5c3d08bf9cb81d0adedb22e0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4f054734-23a4-4b1a-a1c6-230a79c9e6d4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "755d760f-b825-465f-9a58-debe28aa93c4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
