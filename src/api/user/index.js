@@ -83,7 +83,7 @@ router.post('/',
  * @apiError 404 User not found.
  */
 router.put('/:id',
-  token({ required: true }),
+  token({ required: true, roles:['admin'] }),
   body({ name, picture }),
   update)
 

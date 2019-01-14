@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, index, show, update, destroy } from './controller'
+import { token } from '../../services/passport'
 import { schema } from './model'
 export Persona, { schema } from './model'
 
@@ -21,6 +22,7 @@ const { nombre, fecha_nacimiento, genero, enfermedad } = schema.tree
  * @apiError 404 Persona not found.
  */
 router.post('/',
+  token({required: true, roles:['admin','user']}),
   body({ nombre, fecha_nacimiento, genero, enfermedad }),
   create)
 
@@ -34,6 +36,7 @@ router.post('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/',
+  token({required: true, roles:['admin','user']}),
   query(),
   index)
 
@@ -46,6 +49,7 @@ router.get('/',
  * @apiError 404 Persona not found.
  */
 router.get('/:id',
+  token({required: true, roles:['admin','user']}),
   show)
 
 /**
@@ -61,6 +65,7 @@ router.get('/:id',
  * @apiError 404 Persona not found.
  */
 router.put('/:id',
+  token({required: true, roles:['admin','user']}),
   body({ nombre, fecha_nacimiento, genero, enfermedad }),
   update)
 
@@ -72,6 +77,7 @@ router.put('/:id',
  * @apiError 404 Persona not found.
  */
 router.delete('/:id',
+  token({required: true, roles:['admin','user']}),
   destroy)
 
 export default router

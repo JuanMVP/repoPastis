@@ -39,7 +39,7 @@ const config = {
   test: { },
   development: {
     mongo: {
-      uri: 'mongodb://localhost/api-pastillero-dev',
+      uri: 'mongodb://admin:admin1234@ds155164.mlab.com:55164/dbpillbox',
       options: {
         debug: true
       }
@@ -49,7 +49,7 @@ const config = {
     ip: process.env.IP || undefined,
     port: process.env.PORT || 8080,
     mongo: {
-      uri: process.env.MONGODB_URI || 'mongodb://localhost/api-pastillero'
+      uri: process.env.MONGODB_URI || 'mongodb://admin:admin1234@ds155164.mlab.com:55164/dbpillbox'
     }
   }
 }

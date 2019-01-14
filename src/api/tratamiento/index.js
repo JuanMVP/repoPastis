@@ -3,6 +3,7 @@ import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
+import { token } from '../../services/passport'
 export Tratamiento, { schema } from './model'
 
 const router = new Router()
@@ -20,6 +21,7 @@ const { periodo_toma, fecha_inicio, fecha_final } = schema.tree
  * @apiError 404 Tratamiento not found.
  */
 router.post('/',
+  token({required: true, roles:['admin','user']}),
   body({ periodo_toma, fecha_inicio, fecha_final }),
   create)
 
@@ -33,6 +35,7 @@ router.post('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/',
+  token({required: true, roles:['admin','user']}),
   query(),
   index)
 
@@ -45,6 +48,7 @@ router.get('/',
  * @apiError 404 Tratamiento not found.
  */
 router.get('/:id',
+  token({required: true, roles:['admin','user']}),
   show)
 
 /**
@@ -59,6 +63,7 @@ router.get('/:id',
  * @apiError 404 Tratamiento not found.
  */
 router.put('/:id',
+  token({required: true, roles:['admin','user']}),
   body({ periodo_toma, fecha_inicio, fecha_final }),
   update)
 
@@ -70,6 +75,7 @@ router.put('/:id',
  * @apiError 404 Tratamiento not found.
  */
 router.delete('/:id',
+  token({required: true, roles:['admin','user']}),
   destroy)
 
 export default router
