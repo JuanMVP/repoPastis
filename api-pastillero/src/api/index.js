@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import user from './user'
 import auth from './auth'
-import medicamento from './medicamento'
 import persona from './persona'
+import medicamento from './medicamento'
 import tratamiento from './tratamiento'
 
 const router = new Router()
@@ -32,8 +32,8 @@ const router = new Router()
  */
 router.use('/users', user)
 router.use('/auth', auth)
-router.use('/medicamentos', medicamento)
 router.use('/personas', persona)
+router.use('/medicamentos', medicamento)
 router.use('/tratamientos', tratamiento)
 
 export default router
