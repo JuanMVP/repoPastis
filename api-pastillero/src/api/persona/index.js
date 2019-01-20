@@ -7,7 +7,7 @@ import { schema } from './model'
 export Persona, { schema } from './model'
 
 const router = new Router()
-const { nombre, fecha_nacimiento, genero, enfermedad } = schema.tree
+const { nombre, fecha_nacimiento, genero, enfermedad, user_id } = schema.tree
 
 /**
  * @api {post} /personas Create persona
@@ -23,7 +23,7 @@ const { nombre, fecha_nacimiento, genero, enfermedad } = schema.tree
  */
 router.post('/',
   token({required: true, roles:['admin','user']}),
-  body({ nombre, fecha_nacimiento, genero, enfermedad }),
+  body({ nombre, fecha_nacimiento, genero, enfermedad, user_id}),
   create)
 
 /**

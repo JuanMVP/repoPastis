@@ -38,7 +38,11 @@ const userSchema = new Schema({
   picture: {
     type: String,
     trim: true
-  }
+  },
+  personas: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Persona'
+  }]
 }, {
   timestamps: true
 })
@@ -71,7 +75,7 @@ userSchema.pre('save', function (next) {
 userSchema.methods = {
   view (full) {
     let view = {}
-    let fields = ['id', 'name', 'picture']
+    let fields = ['id', 'name', 'picture', 'personas']
 
     if (full) {
       fields = [...fields, 'email', 'createdAt']

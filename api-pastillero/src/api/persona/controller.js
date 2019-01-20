@@ -1,11 +1,33 @@
 import { success, notFound } from '../../services/response/'
 import { Persona } from '.'
+import { User } from '../user/'
 
-export const create = ({ bodymen: { body } }, res, next) =>
-  Persona.create(body)
-    .then((persona) => persona.view(true))
+export const create = ({ bodymen: { body } }, res, next) => {
+
+  let nuevaPersona = new Persona()
+
+  nuevaPersona.nombre = body.nombre
+  nuevaPersona.fecha_nacimiento = body.fecha_nacimiento
+  nuevaPersona.genero = body.genero
+  nuevaPersona.enfermedad = body.enfermedad
+
+  Persona.create(nuevaPersona)
+    .then((persona) => {
+      return new Promise((resolve, reject) => {
+        User.findByIdAndUpdate(body.user_id, { $push: {personas: persona} }, (err, user) => {
+          if(err) {
+            return reject(err.me)
+          }
+
+          return resolve(persona)
+        })
+      })
+    })
+  
     .then(success(res, 201))
     .catch(next)
+
+}
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Persona.count(query)
