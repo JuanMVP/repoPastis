@@ -1,6 +1,7 @@
 import { success, notFound } from '../../services/response/'
 import { User } from '.'
 import { sign } from '../../services/jwt'
+import { Schema } from 'querymen';
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   User.count(query)
@@ -15,6 +16,8 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
 
 export const show = ({ params }, res, next) =>
   User.findById(params.id)
+    .populate('personas')
+    .exec()
     .then(notFound(res))
     .then((user) => user ? user.view() : null)
     .then(success(res))

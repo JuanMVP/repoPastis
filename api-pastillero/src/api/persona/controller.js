@@ -18,15 +18,12 @@ export const create = ({ bodymen: { body } }, res, next) => {
           if(err) {
             return reject(err.me)
           }
-
           return resolve(persona)
         })
       })
-    })
-  
+    })  
     .then(success(res, 201))
     .catch(next)
-
 }
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
