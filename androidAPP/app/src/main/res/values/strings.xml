@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PillboxApp</string>
+    <string-array name="tipoTarjeta">
+        <item> - </item>
+        <item>DNI</item>
+        <item>NIE</item>
+    </string-array>
 </resources>
