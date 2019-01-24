@@ -7,25 +7,9 @@
     android:background="#ffffff"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/btnGoogle"
-        android:layout_width="44dp"
-        android:layout_height="49dp"
-        android:src="@drawable/googlelogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="539dp" />
 
-    <ImageView
-        android:id="@+id/btnFacebook"
-        android:layout_width="44dp"
-        android:layout_height="49dp"
-        android:src="@drawable/facebooklogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.308"
-        app:layout_constraintStart_toEndOf="@+id/btnGoogle"
-        tools:layout_editor_absoluteY="539dp" />
+
+
 
     <LinearLayout
         android:layout_width="368dp"

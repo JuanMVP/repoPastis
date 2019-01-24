@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-<<<<<<< HEAD
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -33,7 +33,7 @@
 
     <EditText
         android:id="@+id/emailLogin2"
-=======
+
     android:id="@+id/fondo_registro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -61,13 +61,13 @@
 
     <EditText
         android:id="@+id/passwordLogin4"
->>>>>>> b41395640ce94713704ea870e35a0a629d2c0ad4
+
         android:layout_width="279dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-<<<<<<< HEAD
+
         android:hint="Correo electrónico"
         android:inputType="textEmailAddress"
         android:text="Email"
@@ -141,7 +141,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         tools:layout_editor_absoluteY="53dp" />
 
-=======
+
         android:hint="Repetir contraseña"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -210,5 +210,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
->>>>>>> b41395640ce94713704ea870e35a0a629d2c0ad4
+
 </android.support.constraint.ConstraintLayout>
