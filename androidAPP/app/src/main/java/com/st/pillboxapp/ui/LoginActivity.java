@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 String credentials = emailTxt + ":" + passwordTxt;
 
-                final String basic = "Basic" + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+                final String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 
                 LoginService loginService = LoginServiceGenerator.createService(LoginService.class);
 
@@ -56,16 +56,16 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "LOGIN CORRECTO", Toast.LENGTH_LONG);
+                            Toast.makeText(LoginActivity.this, "LOGIN CORRECTO", Toast.LENGTH_LONG).show();
 
                         }else {
-                            Toast.makeText(LoginActivity.this, "Error en el login", Toast.LENGTH_LONG);
+                            Toast.makeText(LoginActivity.this, "Error en el login", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_LONG);
+                        Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
 
                     }
                 });
