@@ -1,7 +1,9 @@
-package com.st.pillboxapp;
+package com.st.pillboxapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.st.pillboxapp.R;
 
 public class RegistroActivity extends AppCompatActivity {
 
