@@ -14,12 +14,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginServiceGenerator {
 
-    private static final String BASE_URL = "https://authentication-fppitlaelx.now.sh/";
+
+    //private static final String BASE_URL = "https://authentication-fppitlaelx.now.sh/";
+    private static final String BASE_URL = "https://pillboxapi.herokuapp.com/";
 
 
-    //public static final String access_token = "ZPgUSMUlq4N7hIbuyRU1BsUn1U457dz6";
+    public static final String access_token = "ZPgUSMUlq4N7hIbuyRU1BsUn1U457dz6";
 
-    public static final String access_token = "lNeTI8waAqmpUZa7QSiLv53rqSnlsldv";
+    //public static final String access_token = "lNeTI8waAqmpUZa7QSiLv53rqSnlsldv";
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create());
