@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">PillboxApp</string>
+    <string name="dialog_message">Correo electrónico o contraseña incorrectos</string>
+    <string name="dialog_title">Error</string>
+    <string name="ok">Aceptar</string>
+    <string name="cancel">Cancelar</string>
     <string-array name="tipoTarjeta">
         <item> - </item>
         <item>DNI</item>
