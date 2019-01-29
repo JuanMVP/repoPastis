@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.models.Register;
-import com.st.pillboxapp.responses.LoginResponse;
-import com.st.pillboxapp.retrofit.generator.LoginServiceGenerator;
-import com.st.pillboxapp.retrofit.services.RegisterService;
+import com.st.pillboxapp.responses.AuthAndRegisterResponse;
+import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
+import com.st.pillboxapp.retrofit.services.AuthAndRegisterService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,23 +44,30 @@ public class RegistroActivity extends AppCompatActivity {
 
                 Register registro = new Register(name,email,password);
 
-                RegisterService service = LoginServiceGenerator.createService(RegisterService.class);
+                AuthAndRegisterService service = ServiceGenerator.createService(AuthAndRegisterService.class);
 
-                Call<LoginResponse> registerResponseCall = service.register(registro);
+                Call<AuthAndRegisterResponse> registerResponseCall = service.register(registro);
 
-                registerResponseCall.enqueue(new Callback<LoginResponse>() {
+                registerResponseCall.enqueue(new Callback<AuthAndRegisterResponse>() {
+
                     @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if(response.code() == 201){
-                            LoginServiceGenerator.jwToken = response.body().getToken();
+                    public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
+
+                        if(response.isSuccessful()) {
+
+                            ServiceGenerator.jwToken = response.body().getToken();
+
+                            Toast.makeText(RegistroActivity.this, response.body().getToken(), Toast.LENGTH_LONG).show();
                             startActivity(new Intent(RegistroActivity.this,LoginActivity.class));
-                        }else{
+
+                        }else {
+
                             Toast.makeText(RegistroActivity.this, "Error al registrar, revise los datos introducidos", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
                             Log.e("NetworkFail",t.getMessage());
                         Toast.makeText(RegistroActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
                     }

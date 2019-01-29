@@ -11,9 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.responses.LoginResponse;
-import com.st.pillboxapp.retrofit.generator.LoginServiceGenerator;
-import com.st.pillboxapp.retrofit.services.LoginService;
+import com.st.pillboxapp.responses.AuthAndRegisterResponse;
+import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
+import com.st.pillboxapp.retrofit.services.AuthAndRegisterService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,17 +46,13 @@ public class LoginActivity extends AppCompatActivity {
                 String emailTxt = email.getText().toString();
                 String passwordTxt = password.getText().toString();
 
-                String credentials = emailTxt + ":" + passwordTxt;
+                AuthAndRegisterService loginService = ServiceGenerator.createService(AuthAndRegisterService.class, emailTxt, passwordTxt);
 
-                final String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+                Call<AuthAndRegisterResponse> call = loginService.login();
 
-                LoginService loginService = LoginServiceGenerator.createService(LoginService.class);
-
-                Call<LoginResponse> call = loginService.login(LoginServiceGenerator.access_token, basic);
-
-                call.enqueue(new Callback<LoginResponse>() {
+                call.enqueue(new Callback<AuthAndRegisterResponse>() {
                     @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
                         if(response.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "LOGIN CORRECTO", Toast.LENGTH_LONG).show();
 
@@ -66,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
                         Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
 
                     }

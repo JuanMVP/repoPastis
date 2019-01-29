@@ -2,14 +2,14 @@ package com.st.pillboxapp.responses;
 
 import com.st.pillboxapp.models.User;
 
-public class LoginResponse {
+public class AuthAndRegisterResponse {
 
     private String token;
     private User user;
 
-    public LoginResponse(){}
+    public AuthAndRegisterResponse(){}
 
-    public LoginResponse(String token, User user) {
+    public AuthAndRegisterResponse(String token, User user) {
         this.token = token;
         this.user = user;
     }
@@ -32,7 +32,7 @@ public class LoginResponse {
 
     @Override
     public String toString() {
-        return "LoginResponse{" +
+        return "AuthAndRegisterResponse{" +
                 "token='" + token + '\'' +
                 ", user=" + user +
                 '}';
