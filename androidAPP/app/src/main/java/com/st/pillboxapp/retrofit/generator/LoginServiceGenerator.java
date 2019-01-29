@@ -23,6 +23,8 @@ public class LoginServiceGenerator {
 
     //public static final String access_token = "lNeTI8waAqmpUZa7QSiLv53rqSnlsldv";
 
+    public static String jwToken = null;
+
     private static Retrofit.Builder builder =
             new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create());
 

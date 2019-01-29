@@ -1,5 +1,6 @@
 package com.st.pillboxapp.ui;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
-    Button btnLogin;
+    Button btnLogin, btnRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordLogin);
 
         btnLogin = findViewById(R.id.btnLogin);
+        btnRegistro = findViewById(R.id.btnRegistro);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,5 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+
+
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,RegistroActivity.class));
+            }
+        });
+
     }
 }
