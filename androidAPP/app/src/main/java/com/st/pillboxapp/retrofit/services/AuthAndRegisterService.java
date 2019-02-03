@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 public interface AuthAndRegisterService {
 
     @POST("/auth")
-    Call<AuthAndRegisterResponse> login();
+    Call<AuthAndRegisterResponse> login(@Header("Authorization") String authorization);
 
     @POST("/users")
     Call<AuthAndRegisterResponse> register(@Body Register registro);

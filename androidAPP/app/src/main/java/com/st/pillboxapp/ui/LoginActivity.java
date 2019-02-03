@@ -21,6 +21,7 @@ import com.st.pillboxapp.responses.AuthAndRegisterResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.AuthAndRegisterService;
 
+import okhttp3.Credentials;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,19 +55,21 @@ public class LoginActivity extends AppCompatActivity {
                     String emailTxt = email.getText().toString();
                     String passwordTxt = password.getText().toString();
 
-                    AuthAndRegisterService loginService = ServiceGenerator.createService(AuthAndRegisterService.class, emailTxt, passwordTxt);
+                    String credentials = Credentials.basic(emailTxt, passwordTxt);
 
-                    Call<AuthAndRegisterResponse> call = loginService.login();
+                    AuthAndRegisterService loginService = ServiceGenerator.createService(AuthAndRegisterService.class);
+
+                    Call<AuthAndRegisterResponse> call = loginService.login(credentials);
 
                     call.enqueue(new Callback<AuthAndRegisterResponse>() {
                         @Override
                         public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Login correcto ---", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, response.body().getToken(), Toast.LENGTH_LONG).show();
 
                             } else {
 
-                               /* AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                               AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
 
 
                                 builder.setIcon(R.drawable.ic_cancelar);
@@ -83,11 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 AlertDialog dialog = builder.create();
-
-
-                                dialog.show();*/
-
-                                Toast.makeText(LoginActivity.this, "Login incorrecto", Toast.LENGTH_LONG).show();
+                                dialog.show();
                             }
                         }
 
