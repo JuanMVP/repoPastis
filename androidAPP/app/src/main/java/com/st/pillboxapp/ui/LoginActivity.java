@@ -65,9 +65,13 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
                             if (response.isSuccessful()) {
+<<<<<<< HEAD
                                 //Toast.makeText(LoginActivity.this, response.body().getToken(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(LoginActivity.this,PruebaAddMedicamento.class);
                                 startActivity(intent);
+=======
+                                startActivity(new Intent(LoginActivity.this,MenuActivity.class));
+>>>>>>> a20c655ab586dc6546cb20912f3b7764f180ab94
 
                             } else {
 
