@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, response.body().getToken(), Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(LoginActivity.this,MenuActivity.class));
 
                             } else {
 
