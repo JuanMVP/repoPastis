@@ -85,7 +85,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="¿Olvidaste tu contraseña?"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"

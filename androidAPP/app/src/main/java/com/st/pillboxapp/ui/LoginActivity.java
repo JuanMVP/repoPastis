@@ -1,7 +1,9 @@
 package com.st.pillboxapp.ui;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -65,13 +67,18 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
                             if (response.isSuccessful()) {
-<<<<<<< HEAD
-                                //Toast.makeText(LoginActivity.this, response.body().getToken(), Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(LoginActivity.this,PruebaAddMedicamento.class);
-                                startActivity(intent);
-=======
-                                startActivity(new Intent(LoginActivity.this,MenuActivity.class));
->>>>>>> a20c655ab586dc6546cb20912f3b7764f180ab94
+
+                                SharedPreferences prefs =
+                                        getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("token", response.body().getToken());
+                                editor.putString("idUser", response.body().getUser().getId());
+                                editor.putString("emailUser", response.body().getUser().getEmail());
+                                editor.putString("nombreUser", response.body().getUser().getName());
+                                editor.commit();
+
+                                startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+
 
                             } else {
 
