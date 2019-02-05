@@ -15,11 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.st.pillboxapp.R;
+import com.st.pillboxapp.fragments.MedicamentosFragment;
 import com.st.pillboxapp.fragments.PersonasFragment;
+import com.st.pillboxapp.fragments.dummy.DummyContent;
 import com.st.pillboxapp.responses.OneUserResponse;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,8 @@ public class DashboardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
+            f = new MedicamentosFragment();
+
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -121,6 +125,11 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(OneUserResponse item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
 }

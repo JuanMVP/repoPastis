@@ -9,12 +9,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragments.dummy.DummyContent;
 import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
+import com.st.pillboxapp.responses.MedicamentoResponse;
+import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;
+import com.st.pillboxapp.retrofit.services.MedicamentoService;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MedicamentosFragment extends Fragment {
@@ -24,11 +32,10 @@ public class MedicamentosFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    MyMedicamentosRecyclerViewAdapter adapter;
+    private Context ctx;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public MedicamentosFragment() {
     }
 
@@ -59,13 +66,38 @@ public class MedicamentosFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyMedicamentosRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+
+            MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
+            Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos("paracetamol");
+
+            callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+                @Override
+                public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
+                    if(response.isSuccessful()){
+                        adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
+                        recyclerView.setAdapter(adapter);
+                    }else{
+                        Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+
+                    Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+
+
+                }
+            });
+
+
         }
         return view;
     }
@@ -73,6 +105,7 @@ public class MedicamentosFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        ctx = context;
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
@@ -88,16 +121,7 @@ public class MedicamentosFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);

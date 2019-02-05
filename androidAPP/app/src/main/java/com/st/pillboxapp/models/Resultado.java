@@ -1,17 +1,21 @@
 package com.st.pillboxapp.models;
 
+import java.util.List;
+
 public class Resultado {
 
     private String nregistro;
     private String nombre;
     private String dosis;
+    private List<Foto> fotos;
 
     public Resultado(){}
 
-    public Resultado(String nregistro, String nombre, String dosis) {
+    public Resultado(String nregistro, String nombre, String dosis, List<Foto> fotos) {
         this.nregistro = nregistro;
         this.nombre = nombre;
         this.dosis = dosis;
+        this.fotos = fotos;
     }
 
     public String getNregistro() {
@@ -36,6 +40,14 @@ public class Resultado {
 
     public void setDosis(String dosis) {
         this.dosis = dosis;
+    }
+
+    public List<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<Foto> fotos) {
+        this.fotos = fotos;
     }
 
     @Override

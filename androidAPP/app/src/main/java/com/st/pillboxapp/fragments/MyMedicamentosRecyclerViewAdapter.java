@@ -7,22 +7,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragments.MedicamentosFragment.OnListFragmentInteractionListener;
 import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
 import com.st.pillboxapp.models.Medicamento;
+import com.st.pillboxapp.models.Resultado;
+import com.st.pillboxapp.responses.MedicamentoResponse;
 
 import java.util.List;
 
 public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMedicamentosRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Medicamento> mValues;
+    private final List<Resultado> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Context ctx;
 
-    public MyMedicamentosRecyclerViewAdapter(Context context, int layout, List<Medicamento> items, OnListFragmentInteractionListener listener) {
+    public MyMedicamentosRecyclerViewAdapter(Context context, int layout, List<Resultado> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = context;
@@ -40,7 +44,18 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.nombreMedicamento.setText(holder.mItem.getNombre());
-        Glide.with(ctx).load(holder.mItem.getImagenUrl()).into(holder.imagenMedicamemto);
+        if(holder.mItem.getFotos() != null){
+            Glide.with(ctx).load(holder.mItem.getFotos().get(0).getUrl()).apply(RequestOptions.circleCropTransform()).into(holder.imagenMedicamemto);
+            
+        }else{
+
+
+
+            holder.imagenMedicamemto.setImageResource(R.drawable.ic_no_photo);
+        }
+        
+        
+        
 
 
     }
@@ -54,7 +69,7 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         public final View mView;
         public final TextView nombreMedicamento;
         public final ImageView imagenMedicamemto;
-        public Medicamento mItem;
+        public Resultado mItem;
 
         public ViewHolder(View view) {
             super(view);

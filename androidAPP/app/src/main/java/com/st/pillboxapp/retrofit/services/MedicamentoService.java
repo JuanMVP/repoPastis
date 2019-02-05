@@ -11,6 +11,6 @@ import retrofit2.http.Query;
 
 public interface MedicamentoService {
 
-    @GET("/cima/rest//medicamentos")
+    @GET("/cima/rest/medicamentos")
     Call<MedicamentoResponse> getMedicamentos(@Query("nombre") String nombre);
 }
