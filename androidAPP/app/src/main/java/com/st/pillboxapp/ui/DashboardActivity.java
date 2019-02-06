@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -62,9 +63,14 @@ public class DashboardActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        View headerView = navigationView.getHeaderView(0);
 
-        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_dashboard);
         ImageView iv =  headerView.findViewById(R.id.picture);
+        TextView name = headerView.findViewById(R.id.userName);
+        TextView email = headerView.findViewById(R.id.emailUser);
+
+        name.setText(prefs.getString("nombreUser",""));
+        email.setText(prefs.getString("emailUser",""));
         Glide.with(this).load(prefs.getString("fotoUser","")).apply(RequestOptions.circleCropTransform()).into(iv);
 
         getSupportFragmentManager()

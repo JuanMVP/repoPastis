@@ -34,6 +34,7 @@ public class MedicamentosFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     MyMedicamentosRecyclerViewAdapter adapter;
     private Context ctx;
+    RecyclerView recyclerView;
 
 
     public MedicamentosFragment() {
@@ -66,7 +67,7 @@ public class MedicamentosFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            final RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = view.findViewById(R.id.list);
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
