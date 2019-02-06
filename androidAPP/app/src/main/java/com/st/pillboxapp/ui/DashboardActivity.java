@@ -3,6 +3,7 @@ package com.st.pillboxapp.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,18 +32,18 @@ import com.st.pillboxapp.responses.OneUserResponse;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
 
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Mis Personas");
+
         setSupportActionBar(toolbar);
         SharedPreferences prefs =
                 getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
-
-
-
 
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -124,10 +125,13 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
             f = new PersonasFragment();
+            toolbar.setTitle("Mis Personas");
+
 
         } else if (id == R.id.nav_slideshow) {
 
             f = new MedicamentosFragment();
+            toolbar.setTitle("Medicamentos");
 
         } else if (id == R.id.nav_manage) {
 
