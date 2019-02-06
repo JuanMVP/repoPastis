@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("idUser", response.body().getUser().getId());
                                 editor.putString("emailUser", response.body().getUser().getEmail());
                                 editor.putString("nombreUser", response.body().getUser().getName());
+                                editor.putString("fotoUser", response.body().getUser().getPicture());
                                 editor.commit();
 
                                 startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
