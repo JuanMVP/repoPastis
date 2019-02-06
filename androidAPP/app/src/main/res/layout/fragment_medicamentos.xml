@@ -11,13 +11,13 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/verdeAgua">
+        android:background="#ffffff">
 
         <ImageView
             android:id="@+id/imagenMedicamento"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,12 +27,13 @@
             android:id="@+id/nombreMedicamento"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="casual"
-            android:text="TextView"
+            android:text="Medicamento"
             android:textAlignment="viewStart"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imagenMedicamento"

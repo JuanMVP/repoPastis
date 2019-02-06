@@ -7,9 +7,9 @@
     tools:context=".ui.AddPersonaActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="125dp"
-        android:layout_height="113dp"
+        android:id="@+id/logo"
+        android:layout_width="146dp"
+        android:layout_height="136dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:textColor="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -91,27 +91,34 @@
 
     <Button
         android:id="@+id/buttonRegistrar"
-        android:layout_width="378dp"
+        android:layout_width="279dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/shapebox"
+        android:padding="10dp"
         android:text="Registrar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/pillbox"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginStart="29dp"
         android:layout_marginTop="76dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="64dp"
         android:text="PillBox"
         android:textColor="@color/colorPrimary"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/logo"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
