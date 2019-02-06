@@ -7,31 +7,20 @@
     android:background="#ffffff"
     tools:context=".ui.LoginActivity">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="146dp"
-        android:layout_height="136dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/ic_medicina"
-        app:layout_constraintBottom_toTopOf="@+id/emailLogin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/pillbox"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="64dp"
-        android:text="PillBox"
+        android:text="Añadir medicamento"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/logo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -39,17 +28,17 @@
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="Nombre del tratamiento"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editEmailRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/pillbox" />
 
     <EditText
         android:id="@+id/editEmailRegistro"
@@ -60,7 +49,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="Medicamento"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/autoCompleteTextView"
         app:layout_constraintEnd_toEndOf="parent"

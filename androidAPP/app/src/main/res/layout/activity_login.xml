@@ -11,7 +11,7 @@
         android:id="@+id/logo"
         android:layout_width="146dp"
         android:layout_height="136dp"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="32dp"
         android:src="@drawable/ic_medicina"
@@ -23,9 +23,9 @@
         android:id="@+id/pillbox"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="29dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="52dp"
         android:text="PillBox"
         android:textColor="@color/colorPrimary"
         android:textSize="60sp"
@@ -64,7 +64,7 @@
 
     <Button
         android:id="@+id/btnGuardar"
-        android:layout_width="279dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
@@ -118,7 +118,7 @@
 
     <Button
         android:id="@+id/btnRegistro"
-        android:layout_width="279dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"

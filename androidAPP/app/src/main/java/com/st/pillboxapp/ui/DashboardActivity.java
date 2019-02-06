@@ -23,6 +23,9 @@ import com.st.pillboxapp.responses.OneUserResponse;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
 
+    Fragment f;
+    FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +33,15 @@ public class DashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if(f instanceof PersonasFragment) {
+
+                }
             }
-        });*/
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,6 +57,7 @@ public class DashboardActivity extends AppCompatActivity
                 .add(R.id.contenedor, new PersonasFragment())
                 .commit();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -90,7 +95,7 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        Fragment f = null;
+        f = null;
 
         int id = item.getItemId();
 
@@ -98,12 +103,12 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
             f = new PersonasFragment();
-
-
+            fab.show();
 
         } else if (id == R.id.nav_slideshow) {
 
             f = new MedicamentosFragment();
+            fab.hide();
 
         } else if (id == R.id.nav_manage) {
 
