@@ -27,6 +27,7 @@
         android:ems="10"
         android:hint="Correo electrónico"
         android:inputType="textEmailAddress"
+        android:text="juanma@juanma.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -39,6 +40,7 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:text="juanma1234"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
