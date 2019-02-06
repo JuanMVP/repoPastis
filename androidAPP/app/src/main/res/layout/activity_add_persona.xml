@@ -18,41 +18,33 @@
         tools:ignore="VectorDrawableCompat" />
 
     <EditText
-        android:id="@+id/editTextNumTarjeta"
+        android:id="@+id/nombrePersona"
         android:layout_width="372dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="63dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Nº tarjeta sanitaria"
+        android:text="Nombre"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="100dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="20dp"
-        android:entries="@array/tipoTarjeta"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="291dp"
-        tools:ignore="MissingConstraints" />
-
     <EditText
-        android:id="@+id/editText3"
-        android:layout_width="258dp"
+        android:id="@+id/enfermedadPersona"
+        android:layout_width="372dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Nº identificador"
+        android:inputType="text"
+        android:text="Enfermedad"
         android:textColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/editText4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumTarjeta" />
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombrePersona" />
 
     <EditText
         android:id="@+id/editText4"
@@ -67,34 +59,11 @@
         tools:layout_editor_absoluteY="369dp"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="124dp"
-        android:layout_height="123dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="42dp"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
-        app:srcCompat="@mipmap/ic_launcher" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="59dp"
-        android:layout_height="62dp"
-        android:layout_marginEnd="104dp"
-        android:background="@android:drawable/ic_menu_camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="494dp" />
-
     <Button
         android:id="@+id/buttonRegistrar"
         android:layout_width="279dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="34dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/shapebox"
@@ -103,8 +72,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/pillbox"

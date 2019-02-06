@@ -16,7 +16,6 @@
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.PruebaAddMedicamento" />
-        <activity android:name=".ui.MenuActivity" />
         <activity android:name=".ui.AddPersonaActivity" />
 
         <meta-data

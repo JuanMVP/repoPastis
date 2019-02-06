@@ -32,7 +32,7 @@ public class RegistroActivity extends AppCompatActivity {
         nombre = findViewById(R.id.editNombreRegistro);
         correo = findViewById(R.id.editEmailRegistro);
         clave = findViewById(R.id.passwordRegsitro);
-        btnRegistro = findViewById(R.id.buttonRegistro);
+        btnRegistro = findViewById(R.id.btnRegistro);
 
 
         btnRegistro.setOnClickListener(new View.OnClickListener() {
