@@ -13,11 +13,8 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-<<<<<<< HEAD
+
         android:id="@+id/picture"
-=======
-        android:id="@+id/logo"
->>>>>>> 13ba21cc9e693a2b7150fdf05836e582eb95efe4
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"

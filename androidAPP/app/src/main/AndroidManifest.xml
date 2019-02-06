@@ -15,11 +15,10 @@
             android:name=".ui.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-<<<<<<< HEAD
+
         <activity android:name=".ui.MenuActivity" />
-=======
+
         <activity android:name=".ui.PruebaAddMedicamento" />
->>>>>>> 13ba21cc9e693a2b7150fdf05836e582eb95efe4
         <activity android:name=".ui.AddPersonaActivity" />
 
         <meta-data
