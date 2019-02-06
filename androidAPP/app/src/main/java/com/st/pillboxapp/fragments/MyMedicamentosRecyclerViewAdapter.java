@@ -1,6 +1,8 @@
 package com.st.pillboxapp.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragments.MedicamentosFragment.OnListFragmentInteractionListener;
 import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
@@ -45,18 +48,32 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         holder.mItem = mValues.get(position);
         holder.nombreMedicamento.setText(holder.mItem.getNombre());
         if(holder.mItem.getFotos() != null){
-            Glide.with(ctx).load(holder.mItem.getFotos().get(0).getUrl()).apply(RequestOptions.circleCropTransform()).into(holder.imagenMedicamemto);
+            Glide.with(ctx).load(holder.mItem.getFotos().get(0).getUrl()).into(holder.imagenMedicamemto);
             
         }else{
 
-
-
             holder.imagenMedicamemto.setImageResource(R.drawable.ic_no_photo);
         }
-        
-        
-        
 
+        final ImagePopup imagePopup = new ImagePopup(ctx);
+
+        imagePopup.setWindowHeight(400); // Optional
+        imagePopup.setWindowWidth(400); // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(true);  // Optional
+        imagePopup.setImageOnClickClose(true);  // Optional
+
+
+        imagePopup.initiatePopup(holder.imagenMedicamemto.getDrawable());
+
+        holder.imagenMedicamemto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** Initiate Popup view **/
+                imagePopup.viewPopup();
+
+            }
+        });
 
     }
 
