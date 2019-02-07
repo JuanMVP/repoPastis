@@ -75,7 +75,7 @@ public class MedicamentosFragment extends Fragment {
             }
 
             MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
-            Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos("paracetamol");
+            Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos("omeprazol");
 
             callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
                 @Override

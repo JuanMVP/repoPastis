@@ -70,7 +70,7 @@ public class DashboardActivity extends AppCompatActivity
         TextView name = headerView.findViewById(R.id.userName);
         TextView email = headerView.findViewById(R.id.emailUser);
 
-        name.setText(prefs.getString("nombreUser",""));
+        name.setText(prefs.getString("nombreUser","").substring(0,1).toUpperCase()+ prefs.getString("nombreUser", "").substring(1));
         email.setText(prefs.getString("emailUser",""));
         Glide.with(this).load(prefs.getString("fotoUser","")).apply(RequestOptions.circleCropTransform()).into(iv);
 
@@ -121,25 +121,24 @@ public class DashboardActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_misPersonas) {
 
             f = new PersonasFragment();
             toolbar.setTitle("Mis Personas");
-
-
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_buscarMedicamento) {
 
             f = new MedicamentosFragment();
-            toolbar.setTitle("Medicamentos");
+            toolbar.setTitle("Buscar Medicamentos");
 
-        } else if (id == R.id.nav_manage) {
+        } else if(id == R.id.nav_logout){
+            Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
 
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            SharedPreferences prefs =
+                    getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.commit();
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
