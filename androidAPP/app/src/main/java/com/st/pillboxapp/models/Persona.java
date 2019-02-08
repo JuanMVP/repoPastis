@@ -1,21 +1,19 @@
 package com.st.pillboxapp.models;
 
+import java.util.Objects;
+
 public class Persona {
 
     private String id;
     private String nombre;
     private String fecha_nacimiento;
-    private String genero;
-    private String enfermedad;
 
     public Persona(){}
 
-    public Persona(String id, String nombre, String fecha_nacimiento, String genero, String enfermedad) {
+    public Persona(String id, String nombre, String fecha_nacimiento) {
         this.id = id;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
-        this.genero = genero;
-        this.enfermedad = enfermedad;
     }
 
     public String getId() {
@@ -42,20 +40,19 @@ public class Persona {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public String getGenero() {
-        return genero;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Persona persona = (Persona) o;
+        return Objects.equals(id, persona.id) &&
+                Objects.equals(nombre, persona.nombre) &&
+                Objects.equals(fecha_nacimiento, persona.fecha_nacimiento);
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getEnfermedad() {
-        return enfermedad;
-    }
-
-    public void setEnfermedad(String enfermedad) {
-        this.enfermedad = enfermedad;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, fecha_nacimiento);
     }
 
     @Override
@@ -64,8 +61,6 @@ public class Persona {
                 "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", fecha_nacimiento='" + fecha_nacimiento + '\'' +
-                ", genero='" + genero + '\'' +
-                ", enfermedad='" + enfermedad + '\'' +
                 '}';
     }
 }

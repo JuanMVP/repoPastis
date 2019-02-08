@@ -8,8 +8,6 @@ export const create = ({ bodymen: { body } }, res, next) => {
 
   nuevaPersona.nombre = body.nombre
   nuevaPersona.fecha_nacimiento = body.fecha_nacimiento
-  nuevaPersona.genero = body.genero
-  nuevaPersona.enfermedad = body.enfermedad
 
   Persona.create(nuevaPersona)
     .then((persona) => {

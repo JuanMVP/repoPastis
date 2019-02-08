@@ -6,12 +6,6 @@ const personaSchema = new Schema({
   },
   fecha_nacimiento: {
     type: String
-  },
-  genero: {
-    type: String
-  },
-  enfermedad: {
-    type: String
   }
 }, {
   timestamps: true,
@@ -28,8 +22,6 @@ personaSchema.methods = {
       id: this.id,
       nombre: this.nombre,
       fecha_nacimiento: this.fecha_nacimiento,
-      genero: this.genero,
-      enfermedad: this.enfermedad,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

@@ -22,8 +22,8 @@ const { nombre, fecha_nacimiento, genero, enfermedad, user_id } = schema.tree
  * @apiError 404 Persona not found.
  */
 router.post('/',
-  token({required: true, roles:['admin','user']}),
-  body({ nombre, fecha_nacimiento, genero, enfermedad, user_id}),
+  token({required: true, roles:['user']}),
+  body({ nombre, fecha_nacimiento, user_id}),
   create)
 
 /**
@@ -36,7 +36,7 @@ router.post('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/',
-  token({required: true, roles:['admin','user']}),
+  token({required: true, roles:['user']}),
   query(),
   index)
 
@@ -49,7 +49,7 @@ router.get('/',
  * @apiError 404 Persona not found.
  */
 router.get('/:id',
-  token({required: true, roles:['admin','user']}),
+  token({required: true, roles:['user']}),
   show)
 
 /**
@@ -65,8 +65,8 @@ router.get('/:id',
  * @apiError 404 Persona not found.
  */
 router.put('/:id',
-  token({required: true, roles:['admin','user']}),
-  body({ nombre, fecha_nacimiento, genero, enfermedad }),
+  token({required: true, roles:['user']}),
+  body({ nombre, fecha_nacimiento, }),
   update)
 
 /**
@@ -77,7 +77,7 @@ router.put('/:id',
  * @apiError 404 Persona not found.
  */
 router.delete('/:id',
-  token({required: true, roles:['admin','user']}),
+  token({required: true, roles:['user']}),
   destroy)
 
 export default router

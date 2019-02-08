@@ -14,13 +14,11 @@ beforeEach(async () => {
 test('POST /personas 201', async () => {
   const { status, body } = await request(app())
     .post(`${apiRoot}`)
-    .send({ nombre: 'test', fecha_nacimiento: 'test', genero: 'test', enfermedad: 'test' })
+    .send({ nombre: 'test', fecha_nacimiento: 'test' })
   expect(status).toBe(201)
   expect(typeof body).toEqual('object')
   expect(body.nombre).toEqual('test')
   expect(body.fecha_nacimiento).toEqual('test')
-  expect(body.genero).toEqual('test')
-  expect(body.enfermedad).toEqual('test')
 })
 
 test('GET /personas 200', async () => {

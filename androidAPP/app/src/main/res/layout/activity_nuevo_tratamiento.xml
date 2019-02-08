@@ -7,59 +7,30 @@
     android:background="#ffffff"
     tools:context=".ui.LoginActivity">
 
-<<<<<<< HEAD
     <TextView
-        android:id="@+id/pillbox"
+        android:id="@+id/pillbox2"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="64dp"
-        android:text="Añadir medicamento"
+        android:layout_marginBottom="24dp"
+        android:text="Añadir Tratamiento"
         android:textAlignment="center"
-=======
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="57dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/ic_medicina"
-        app:layout_constraintBottom_toTopOf="@+id/emailLogin"
-        app:layout_constraintEnd_toStartOf="@+id/pillbox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/pillbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginBottom="25dp"
-        android:text="Tratamiento"
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
         android:textColor="@color/colorPrimary"
-        android:textSize="65sp"
+        android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editNombreRegistro"
+        app:layout_constraintBottom_toTopOf="@+id/nombrePersona"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-=======
-        app:layout_constraintStart_toEndOf="@+id/logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.411" />
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
 
     <EditText
         android:id="@+id/editNombreRegistro"
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
@@ -69,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pillbox" />
+        app:layout_constraintTop_toBottomOf="@+id/pillbox2" />
 
     <EditText
         android:id="@+id/editEmailRegistro"
@@ -152,3 +123,4 @@
         tools:layout_width="0dp" />
 
 </android.support.constraint.ConstraintLayout>
+
