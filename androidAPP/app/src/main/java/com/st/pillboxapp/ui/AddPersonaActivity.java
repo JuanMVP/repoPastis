@@ -16,6 +16,8 @@ import com.st.pillboxapp.fragments.PersonasFragment;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.AuthAndRegisterResponse;
+import com.st.pillboxapp.responses.OneUserResponse;
+import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
 
@@ -24,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class AddPersonaActivity extends AppCompatActivity {
+public class AddPersonaActivity extends AppCompatActivity implements PersonasFragment.OnListFragmentInteractionListener {
 
     EditText nombre, fechaNacimiento;
     Button registrar;
@@ -48,21 +50,28 @@ public class AddPersonaActivity extends AppCompatActivity {
 
                 Persona persona = new Persona(name, fecha);
 
-                SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                final SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
                 PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
 
-                Call personaResponseCall = pService.register(persona);
+                Call<PersonaResponse> personaResponseCall = pService.register(persona);
 
-                personaResponseCall.enqueue(new Callback() {
+                personaResponseCall.enqueue(new Callback<PersonaResponse>() {
                     @Override
-                    public void onResponse(Call call, Response response) {
+                    public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
 
                         f = null;
 
                         if(response.isSuccessful()){
-                            f = new PersonasFragment();
-                            getSupportFragmentManager().beginTransaction().add(R.id.contenedor, f).commit();
+
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("id", response.body().getId());
+                            editor.putString("emailUser", response.body().getNombre());
+                            editor.putString("fecha_nacimiento", response.body().getFechaNacimiento());
+
+                            //f = new PersonasFragment();
+                            //getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, f).commit();
+                            finish();
                         }else{
                             Toast.makeText(AddPersonaActivity.this, "no funka", Toast.LENGTH_LONG);
                         }
@@ -80,4 +89,8 @@ public class AddPersonaActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onListFragmentInteraction(OneUserResponse item) {
+
+    }
 }
