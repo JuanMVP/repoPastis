@@ -7,6 +7,36 @@
     android:background="#ffffffff"
     tools:context=".ui.LoginActivity">
 
+<<<<<<< HEAD
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="146dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/ic_medicina"
+        app:layout_constraintBottom_toTopOf="@+id/emailLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pillbox"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="52dp"
+        android:text="PillBox"
+        android:textColor="@color/colorPrimary"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+=======
+>>>>>>> c214f6a364a34a136af56880693fced844e23ab3
     <EditText
         android:id="@+id/emailLogin"
         android:layout_width="0dp"

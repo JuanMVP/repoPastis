@@ -32,13 +32,7 @@ import com.st.pillboxapp.responses.OneUserResponse;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
 
-<<<<<<< HEAD
-    Fragment f;
-    FloatingActionButton fab;
-
-=======
     private Toolbar toolbar;
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -51,15 +45,14 @@ public class DashboardActivity extends AppCompatActivity
         SharedPreferences prefs =
                 getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
-       fab = findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(f instanceof PersonasFragment) {
-
-                }
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,7 +80,6 @@ public class DashboardActivity extends AppCompatActivity
                 .commit();
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -125,28 +117,13 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        f = null;
+        Fragment f = null;
 
         int id = item.getItemId();
 
         if (id == R.id.nav_misPersonas) {
 
             f = new PersonasFragment();
-<<<<<<< HEAD
-            fab.show();
-
-        } else if (id == R.id.nav_slideshow) {
-
-            f = new MedicamentosFragment();
-            fab.hide();
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-=======
             toolbar.setTitle("Mis Personas");
         } else if (id == R.id.nav_buscarMedicamento) {
 
@@ -163,7 +140,6 @@ public class DashboardActivity extends AppCompatActivity
             editor.commit();
             startActivity(i);
             finish();
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

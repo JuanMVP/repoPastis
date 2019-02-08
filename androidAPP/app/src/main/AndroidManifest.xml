@@ -19,7 +19,6 @@
         <activity android:name=".ui.MenuActivity" />
 
         <activity android:name=".ui.PruebaAddMedicamento" />
-        <activity android:name=".ui.AddPersonaActivity" />
 
         <meta-data
             android:name="com.google.android.actions"
