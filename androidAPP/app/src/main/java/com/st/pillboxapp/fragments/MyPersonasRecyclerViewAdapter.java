@@ -51,7 +51,6 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         public final View mView;
         public final TextView nombrePersona;
         public final TextView fechaNacPersona;
-        public final TextView enfermedad;
         public Persona mItem;
 
         public ViewHolder(View view) {
@@ -59,7 +58,6 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             mView = view;
             nombrePersona = view.findViewById(R.id.nombrePersona);
             fechaNacPersona =  view.findViewById(R.id.fechaNacPersona);
-            enfermedad = view.findViewById(R.id.enfermedadPersona);
         }
 
         @Override

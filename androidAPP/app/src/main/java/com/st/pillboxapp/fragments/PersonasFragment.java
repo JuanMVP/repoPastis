@@ -98,9 +98,6 @@ public class PersonasFragment extends Fragment {
                 }
             });
         }
-
-
-
             //recyclerView.setAdapter(new MyPersonasRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         return view;
         }
