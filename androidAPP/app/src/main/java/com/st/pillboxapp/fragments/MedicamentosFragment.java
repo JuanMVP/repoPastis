@@ -2,6 +2,7 @@ package com.st.pillboxapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
@@ -37,6 +41,7 @@ public class MedicamentosFragment extends Fragment {
     private Context ctx;
     RecyclerView recyclerView;
     EditText buscarMedicamentoPorNombre;
+    ImageButton btnBuscarMedicamento;
 
 
     public MedicamentosFragment() {
@@ -61,15 +66,21 @@ public class MedicamentosFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_medicamentos_list, container, false);
 
-        buscarMedicamentoPorNombre = view.findViewById(R.id.nombreBuscarMedicamento);
+        buscarMedicamentoPorNombre = view.findViewById(R.id.findMedicamento);
+        btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
+
+
+
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (view instanceof ConstraintLayout) {
             Context context = view.getContext();
             recyclerView = view.findViewById(R.id.list);
             if (mColumnCount <= 1) {
@@ -78,29 +89,39 @@ public class MedicamentosFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
-            Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos("Codeina");
 
-            callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+            btnBuscarMedicamento.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
-                    if(response.isSuccessful()){
-                        adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
-                        recyclerView.setAdapter(adapter);
-                    }else{
-                        Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                public void onClick(View v) {
+                    InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
+                    String findMedicamento = buscarMedicamentoPorNombre.getText().toString();
+                    MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
+                    Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
 
-                    }
-                }
+                    callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+                        @Override
+                        public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
+                            if(response.isSuccessful()){
+                                adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
+                                recyclerView.setAdapter(adapter);
+                            }else{
+                                Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
 
-                @Override
-                public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+                            }
+                        }
 
-                    Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                        @Override
+                        public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+                            Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
 
+                        }
+                    });
 
                 }
             });
+
+
 
 
         }
