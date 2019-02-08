@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
@@ -35,6 +36,7 @@ public class MedicamentosFragment extends Fragment {
     MyMedicamentosRecyclerViewAdapter adapter;
     private Context ctx;
     RecyclerView recyclerView;
+    EditText buscarMedicamentoPorNombre;
 
 
     public MedicamentosFragment() {
@@ -64,6 +66,8 @@ public class MedicamentosFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_medicamentos_list, container, false);
 
+        buscarMedicamentoPorNombre = view.findViewById(R.id.nombreBuscarMedicamento);
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -75,7 +79,7 @@ public class MedicamentosFragment extends Fragment {
             }
 
             MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
-            Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos("omeprazol");
+            Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos("Codeina");
 
             callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
                 @Override
