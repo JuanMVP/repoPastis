@@ -17,13 +17,13 @@
         android:ems="10"
         android:hint="Buscar Medicamento"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintBottom_toTopOf="@+id/listPersonas"
         app:layout_constraintEnd_toStartOf="@+id/buttonBuscarMedicamento"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/listPersonas"
         android:name="com.st.pillboxapp.fragments.MedicamentosFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"

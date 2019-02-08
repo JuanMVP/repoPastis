@@ -4,24 +4,20 @@ import java.util.Objects;
 
 public class Persona {
 
-    private String id;
+    private long id;
     private String nombre;
     private String fecha_nacimiento;
 
     public Persona(){}
 
-    public Persona(String id, String nombre, String fecha_nacimiento) {
+    public Persona(String nombre, String fecha_nacimiento) {
         this.id = id;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNombre() {

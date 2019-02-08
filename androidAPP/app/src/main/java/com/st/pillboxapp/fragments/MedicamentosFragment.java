@@ -11,19 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.fragments.dummy.DummyContent;
 import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
 import com.st.pillboxapp.responses.MedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,7 +78,7 @@ public class MedicamentosFragment extends Fragment {
         // Set the adapter
         if (view instanceof ConstraintLayout) {
             Context context = view.getContext();
-            recyclerView = view.findViewById(R.id.list);
+            recyclerView = view.findViewById(R.id.listPersonas);
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

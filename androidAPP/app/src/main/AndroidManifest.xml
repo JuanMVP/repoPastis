@@ -16,10 +16,6 @@
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".ui.MenuActivity" />
-
-        <activity android:name=".ui.PruebaAddMedicamento" />
-
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@drawable/shapebox" />
@@ -35,6 +31,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.RegistroActivity" />
+
+        <activity android:name=".ui.AddPersonaActivity"></activity>
+
     </application>
 
 </manifest>

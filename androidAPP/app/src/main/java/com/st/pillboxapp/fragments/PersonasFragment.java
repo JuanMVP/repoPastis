@@ -65,7 +65,7 @@ public class PersonasFragment extends Fragment {
 
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            final RecyclerView recyclerView = (RecyclerView) view;
+            final RecyclerView recyclerView = view.findViewById(R.id.listPersonas);
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

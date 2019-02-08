@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -83,6 +84,15 @@ public class DashboardActivity extends AppCompatActivity
                 .add(R.id.contenedor, new PersonasFragment())
                 .commit();
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DashboardActivity.this, AddPersonaActivity.class);
+                startActivity(i);
+                Toast.makeText(DashboardActivity.this, "Entro", Toast.LENGTH_LONG);
+            }
+        });
+
     }
 
 
@@ -126,9 +136,19 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_misPersonas) {
+            fab =findViewById(R.id.fab);
 
             f = new PersonasFragment();
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(DashboardActivity.this, AddPersonaActivity.class);
+                    startActivity(i);
+                    Toast.makeText(DashboardActivity.this, "Entro", Toast.LENGTH_LONG);
+                }
+            });
             fab.show();
+
             toolbar.setTitle("Mis Personas");
 
         } else if (id == R.id.nav_buscarMedicamento) {

@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pillbox" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/fechaNacPersona"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -33,7 +33,7 @@
         android:ems="10"
         android:inputType="datetime"
         android:text="dd/mm/yyyy"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegistrar"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegistrarPersona"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/buttonRegistrar"
+        android:id="@+id/btnRegistrarPersona"
         android:layout_width="279dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/fechaNacPersona" />
 
     <TextView
         android:id="@+id/pillbox"
