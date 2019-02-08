@@ -1,6 +1,9 @@
 package com.st.pillboxapp.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +32,8 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         nombre = findViewById(R.id.editNombreRegistro);
         correo = findViewById(R.id.editEmailRegistro);
         clave = findViewById(R.id.passwordRegsitro);
@@ -55,10 +60,16 @@ public class RegistroActivity extends AppCompatActivity {
 
                         if(response.isSuccessful()) {
 
-                            ServiceGenerator.jwToken = response.body().getToken();
-
-                            Toast.makeText(RegistroActivity.this, response.body().getToken(), Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(RegistroActivity.this,LoginActivity.class));
+                            SharedPreferences prefs =
+                                    getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("token", response.body().getToken());
+                            editor.putString("idUser", response.body().getUser().getId());
+                            editor.putString("emailUser", response.body().getUser().getEmail());
+                            editor.putString("nombreUser", response.body().getUser().getName());
+                            editor.putString("fotoUser", response.body().getUser().getPicture());
+                            editor.commit();
+                            startActivity(new Intent(RegistroActivity.this,DashboardActivity.class));
 
                         }else {
 

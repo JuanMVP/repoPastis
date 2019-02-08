@@ -1,10 +1,5 @@
 package com.st.pillboxapp.ui;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,11 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragments.MedicamentosFragment;
 import com.st.pillboxapp.fragments.PersonasFragment;
@@ -32,24 +23,15 @@ import com.st.pillboxapp.responses.OneUserResponse;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
 
-<<<<<<< HEAD
     Fragment f;
     FloatingActionButton fab;
 
-=======
-    private Toolbar toolbar;
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Mis Personas");
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        SharedPreferences prefs =
-                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,22 +52,10 @@ public class DashboardActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        View headerView = navigationView.getHeaderView(0);
-
-        ImageView iv =  headerView.findViewById(R.id.picture);
-        TextView name = headerView.findViewById(R.id.userName);
-        TextView email = headerView.findViewById(R.id.emailUser);
-
-        name.setText(prefs.getString("nombreUser","").substring(0,1).toUpperCase()+ prefs.getString("nombreUser", "").substring(1));
-        email.setText(prefs.getString("emailUser",""));
-        Glide.with(this).load(prefs.getString("fotoUser","")).apply(RequestOptions.circleCropTransform()).into(iv);
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.contenedor, new PersonasFragment())
                 .commit();
-
     }
 
 
@@ -129,10 +99,10 @@ public class DashboardActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_misPersonas) {
+        if (id == R.id.nav_camera) {
+        } else if (id == R.id.nav_gallery) {
 
             f = new PersonasFragment();
-<<<<<<< HEAD
             fab.show();
 
         } else if (id == R.id.nav_slideshow) {
@@ -146,24 +116,6 @@ public class DashboardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-=======
-            toolbar.setTitle("Mis Personas");
-        } else if (id == R.id.nav_buscarMedicamento) {
-
-            f = new MedicamentosFragment();
-            toolbar.setTitle("Buscar Medicamentos");
-
-        } else if(id == R.id.nav_logout){
-            Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
-
-            SharedPreferences prefs =
-                    getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.clear();
-            editor.commit();
-            startActivity(i);
-            finish();
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
