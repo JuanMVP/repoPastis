@@ -7,10 +7,13 @@
     android:background="#ffffffff"
     tools:context=".ui.LoginActivity"><![CDATA[
 
+<<<<<<< HEAD
     =======
 >>>>>>> c214f6a364a34a136af56880693fced844e23ab3
     ]]>
 
+=======
+>>>>>>> 3d3280af249ea0d99969ebc5ea888878e328c518
     <EditText
         android:id="@+id/emailLogin"
         android:layout_width="0dp"

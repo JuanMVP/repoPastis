@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         this.ctx = context;
 
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -93,6 +96,7 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             mView = view;
             nombreMedicamento = view.findViewById(R.id.nombreMedicamento);
             imagenMedicamemto = view.findViewById(R.id.imagenMedicamento);
+
         }
 
         @Override

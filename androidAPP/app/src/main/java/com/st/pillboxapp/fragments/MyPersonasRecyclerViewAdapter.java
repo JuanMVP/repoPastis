@@ -26,7 +26,6 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         mValues = items;
         mListener = listener;
         this.ctx = ctx;
-
     }
 
     @Override
@@ -41,10 +40,6 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         holder.mItem = mValues.get(position);
         holder.nombrePersona.setText(holder.mItem.getNombre());
         holder.fechaNacPersona.setText(holder.mItem.getFecha_nacimiento());
-        holder.enfermedad.setText(holder.mItem.getEnfermedad());
-
-
-
     }
 
     @Override
