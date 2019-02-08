@@ -32,13 +32,12 @@ import com.st.pillboxapp.responses.OneUserResponse;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
 
-<<<<<<< HEAD
+
     Fragment f;
     FloatingActionButton fab;
 
-=======
+
     private Toolbar toolbar;
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -121,7 +120,6 @@ public class DashboardActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
@@ -132,26 +130,12 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_misPersonas) {
 
             f = new PersonasFragment();
-<<<<<<< HEAD
             fab.show();
 
-        } else if (id == R.id.nav_slideshow) {
-
-            f = new MedicamentosFragment();
-            fab.hide();
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-=======
-            toolbar.setTitle("Mis Personas");
         } else if (id == R.id.nav_buscarMedicamento) {
 
             f = new MedicamentosFragment();
-            toolbar.setTitle("Buscar Medicamentos");
+            fab.hide();
 
         } else if(id == R.id.nav_logout){
             Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
@@ -163,7 +147,6 @@ public class DashboardActivity extends AppCompatActivity
             editor.commit();
             startActivity(i);
             finish();
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
