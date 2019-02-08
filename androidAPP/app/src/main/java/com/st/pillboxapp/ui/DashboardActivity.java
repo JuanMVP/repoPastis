@@ -139,6 +139,7 @@ public class DashboardActivity extends AppCompatActivity
             editor.clear();
             editor.commit();
             startActivity(i);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
