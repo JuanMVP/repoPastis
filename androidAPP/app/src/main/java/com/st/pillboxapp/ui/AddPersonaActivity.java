@@ -1,6 +1,7 @@
 package com.st.pillboxapp.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -48,9 +49,10 @@ public class AddPersonaActivity extends AppCompatActivity implements PersonasFra
                 String name = nombre.getText().toString().trim();
                 String fecha = fechaNacimiento.getText().toString().trim();
 
-                Persona persona = new Persona(name, fecha);
-
                 final SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                Persona persona = new Persona(name, fecha, prefs.getString("idUser",""));
+
+
 
                 PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
 
@@ -64,14 +66,10 @@ public class AddPersonaActivity extends AppCompatActivity implements PersonasFra
 
                         if(response.isSuccessful()){
 
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("id", response.body().getId());
-                            editor.putString("emailUser", response.body().getNombre());
-                            editor.putString("fecha_nacimiento", response.body().getFechaNacimiento());
-
-                            //f = new PersonasFragment();
-                            //getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, f).commit();
+                            Intent i = new Intent(AddPersonaActivity.this, DashboardActivity.class);
+                            startActivity(i);
                             finish();
+
                         }else{
                             Toast.makeText(AddPersonaActivity.this, "no funka", Toast.LENGTH_LONG);
                         }

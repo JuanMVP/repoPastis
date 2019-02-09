@@ -1,5 +1,6 @@
 package com.st.pillboxapp.ui;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.pm.ActivityInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,8 @@ import com.st.pillboxapp.R;
 import com.st.pillboxapp.responses.AuthAndRegisterResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.AuthAndRegisterService;
+
+import java.util.regex.Pattern;
 
 import okhttp3.Credentials;
 import retrofit2.Call;
@@ -43,10 +47,71 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnGuardar);
         btnRegistro = findViewById(R.id.btnRegistro);
 
+        doLogin();
+
+
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegistroActivity.class));
+            }
+        });
+
+    }
+
+
+
+    //Métodos------------
+
+
+    public void onLoginSuccess(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
+
+        SharedPreferences prefs =
+                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("token", response.body().getToken());
+        editor.putString("idUser", response.body().getUser().getId());
+        editor.putString("emailUser", response.body().getUser().getEmail());
+        editor.putString("nombreUser", response.body().getUser().getName());
+        editor.putString("fotoUser", response.body().getUser().getPicture());
+        editor.commit();
+
+        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+        finish();
+
+    }
+
+    public void onLoginFail() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+
+
+        builder.setIcon(R.drawable.ic_cancelar);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+
+            }
+        });
+
+        builder.setMessage(R.string.dialog_message)
+                .setTitle(R.string.dialog_title);
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void doLogin(){
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                    final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.Theme_AppCompat_DayNight_Dialog);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setMessage("Autenticando...");
+                    progressDialog.show();
 
 
                     String emailTxt = email.getText().toString();
@@ -61,42 +126,15 @@ public class LoginActivity extends AppCompatActivity {
                     call.enqueue(new Callback<AuthAndRegisterResponse>() {
                         @Override
                         public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
+
                             if (response.isSuccessful()) {
 
-                                SharedPreferences prefs =
-                                        getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("token", response.body().getToken());
-                                editor.putString("idUser", response.body().getUser().getId());
-                                editor.putString("emailUser", response.body().getUser().getEmail());
-                                editor.putString("nombreUser", response.body().getUser().getName());
-                                editor.putString("fotoUser", response.body().getUser().getPicture());
-                                editor.commit();
-
-                                startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                                finish();
-
+                                progressDialog.dismiss();
+                                onLoginSuccess(call, response);
 
                             } else {
-
-                               AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-
-
-                                builder.setIcon(R.drawable.ic_cancelar);
-
-                                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-
-                                    }
-                                });
-
-                                builder.setMessage(R.string.dialog_message)
-                                        .setTitle(R.string.dialog_title);
-
-
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
+                                progressDialog.dismiss();
+                                onLoginFail();
                             }
                         }
 
@@ -108,14 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
 
-            }
-        });
-
-
-        btnRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,RegistroActivity.class));
             }
         });
 

@@ -4,20 +4,43 @@ import java.util.Objects;
 
 public class Persona {
 
-    private long id;
+    private String id;
     private String nombre;
     private String fecha_nacimiento;
+    private String user_id;
 
     public Persona(){}
 
-    public Persona(String nombre, String fecha_nacimiento) {
+
+    public Persona(String nombre, String fecha_nacimiento, String user_id) {
+        this.nombre = nombre;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.user_id = user_id;
+    }
+
+
+
+    public Persona(String id, String nombre, String fecha_nacimiento, String user_id) {
         this.id = id;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
+        this.user_id = user_id;
     }
 
-    public long getId() {
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -34,21 +57,6 @@ public class Persona {
 
     public void setFecha_nacimiento(String fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Persona persona = (Persona) o;
-        return Objects.equals(id, persona.id) &&
-                Objects.equals(nombre, persona.nombre) &&
-                Objects.equals(fecha_nacimiento, persona.fecha_nacimiento);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nombre, fecha_nacimiento);
     }
 
     @Override

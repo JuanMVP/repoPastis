@@ -105,6 +105,7 @@ public class PersonasFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        ctx = context;
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
