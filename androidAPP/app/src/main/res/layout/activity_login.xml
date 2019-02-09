@@ -5,27 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffffff"
-    tools:context=".ui.LoginActivity"><![CDATA[
-
-<<<<<<< HEAD
-    =======
->>>>>>> c214f6a364a34a136af56880693fced844e23ab3
-    ]]>
-
-=======
->>>>>>> 3d3280af249ea0d99969ebc5ea888878e328c518
+    tools:context=".ui.LoginActivity">
 
     <EditText
         android:id="@+id/emailLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:text="juanma@juanma.com"
         app:layout_constraintBottom_toTopOf="@+id/passwordLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -43,6 +34,7 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:text="juanma1234"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -56,10 +48,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/shapebox"
         android:padding="10dp"
-        android:text="LOGIN"
+        android:text="Iniciar sesión"
         app:layout_constraintBottom_toTopOf="@+id/btnRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -72,37 +63,36 @@
         android:layout_width="44dp"
         android:layout_height="49dp"
         android:layout_marginStart="112dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="107dp"
         android:layout_marginBottom="40dp"
         android:src="@drawable/googlelogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegistro" />
 
     <ImageView
         android:id="@+id/btnFacebook"
         android:layout_width="44dp"
         android:layout_height="49dp"
         android:layout_marginStart="107dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="104dp"
         android:layout_marginBottom="40dp"
         android:src="@drawable/facebooklogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnGoogle"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegistro" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="31dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="¿Olvidaste tu contraseña?"
         android:textAlignment="viewStart"
         app:layout_constraintBottom_toTopOf="@+id/btnGuardar"
@@ -118,11 +108,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="40dp"
         android:background="@drawable/shapebox"
         android:padding="10dp"
-        android:text="SIGN UP"
-        app:layout_constraintBottom_toTopOf="@+id/btnGoogle"
+        android:text="Registrarse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.37"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,14 +119,14 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/emailLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
+        app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/pillbox" />
 
     <android.support.constraint.Guideline
@@ -146,6 +134,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="550dp" />
+        app:layout_constraintGuide_begin="649dp" />
 
 </android.support.constraint.ConstraintLayout>

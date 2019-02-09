@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,6 +66,8 @@ public class PersonasFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             final RecyclerView recyclerView = view.findViewById(R.id.listPersonas);
+            recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+                    DividerItemDecoration.VERTICAL));
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -84,6 +87,7 @@ public class PersonasFragment extends Fragment {
                 public void onResponse(Call<OneUserResponse> call, Response<OneUserResponse> response) {
                     if(response.isSuccessful()){
                         adapter = new MyPersonasRecyclerViewAdapter(ctx, R.layout.fragment_personas, response.body().getPersonas(),mListener);
+
                         recyclerView.setAdapter(adapter);
                     }else{
                         Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();

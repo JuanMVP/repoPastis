@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
+                            progressDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
 
                         }
