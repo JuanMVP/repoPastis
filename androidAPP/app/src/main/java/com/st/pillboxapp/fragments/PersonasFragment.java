@@ -15,13 +15,11 @@ import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 
+import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.OneUserResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.UserService;
-import com.st.pillboxapp.ui.LoginActivity;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +32,7 @@ public class PersonasFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private OnListPersonasInteractionListener mListener;
     private MyPersonasRecyclerViewAdapter adapter;
     private Context ctx;
 
@@ -78,18 +76,18 @@ public class PersonasFragment extends Fragment {
             SharedPreferences prefs = this.getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
 
-            UserService userService = ServiceGenerator.createService(UserService.class, prefs.getString("token",""), TipoAutenticacion.JWT);
+            UserService userService = ServiceGenerator.createService(UserService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
 
-            Call<OneUserResponse> call = userService.oneUserById(prefs.getString("idUser",""));
+            Call<OneUserResponse> call = userService.oneUserById(prefs.getString("idUser", ""));
 
             call.enqueue(new Callback<OneUserResponse>() {
                 @Override
                 public void onResponse(Call<OneUserResponse> call, Response<OneUserResponse> response) {
-                    if(response.isSuccessful()){
-                        adapter = new MyPersonasRecyclerViewAdapter(ctx, R.layout.fragment_personas, response.body().getPersonas(),mListener);
+                    if (response.isSuccessful()) {
+                        adapter = new MyPersonasRecyclerViewAdapter(ctx, R.layout.fragment_personas, response.body().getPersonas(), mListener);
 
                         recyclerView.setAdapter(adapter);
-                    }else{
+                    } else {
                         Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -101,21 +99,19 @@ public class PersonasFragment extends Fragment {
                 }
             });
         }
-            //recyclerView.setAdapter(new MyPersonasRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         return view;
-        }
-
+    }
 
 
     @Override
     public void onAttach(Context context) {
         ctx = context;
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OnListPersonasInteractionListener) {
+            mListener = (OnListPersonasInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnListPersonasInteractionListener");
         }
     }
 
@@ -124,13 +120,6 @@ public class PersonasFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(OneUserResponse item);
-    }
-
-
 
 
 }

@@ -1,6 +1,7 @@
 package com.st.pillboxapp.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +32,19 @@ import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragments.MedicamentosFragment;
 import com.st.pillboxapp.fragments.PersonasFragment;
 import com.st.pillboxapp.fragments.dummy.DummyContent;
+import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
+import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.OneUserResponse;
+import com.st.pillboxapp.responses.PersonaResponse;
+import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
+import com.st.pillboxapp.retrofit.services.PersonaService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PersonasFragment.OnListFragmentInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
 
     Fragment f;
     FloatingActionButton fab;
@@ -42,7 +55,7 @@ public class DashboardActivity extends AppCompatActivity
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Mis Personas");
 
         setSupportActionBar(toolbar);
@@ -59,13 +72,13 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -98,7 +111,7 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -110,8 +123,11 @@ public class DashboardActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
+
+
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -179,13 +195,73 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
-    public void onListFragmentInteraction(OneUserResponse item) {
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onDeleteBtnClick(String id, String nombre) {
+
+        SharedPreferences prefs =
+                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+        PersonaService service = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
+
+        final Call<PersonaResponse> call = service.deleteOne(id);
+
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+        builder.setPositiveButton(R.string.borrar, new DialogInterface.OnClickListener() {
+            public void onClick(final DialogInterface dialog, int id) {
+                // User clicked OK button
+
+                call.enqueue(new Callback<PersonaResponse>() {
+                    @Override
+                    public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
+                        if(response.isSuccessful()) {
+                            dialog.dismiss();
+                            finish();
+                            startActivity(getIntent());
+                        } else {
+
+                            dialog.dismiss();
+                            Toast.makeText(DashboardActivity.this, "Error al borrar", Toast.LENGTH_LONG);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PersonaResponse> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+
+                dialog.dismiss();
+
+
+            }
+        });
+
+        builder.setTitle("¿Seguro que quiere borrar a "+nombre);
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+
+
+
+
+
 
     }
 }

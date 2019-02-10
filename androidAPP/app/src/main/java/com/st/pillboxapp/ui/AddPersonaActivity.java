@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragments.PersonasFragment;
+import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.AuthAndRegisterResponse;
@@ -27,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class AddPersonaActivity extends AppCompatActivity implements PersonasFragment.OnListFragmentInteractionListener {
+public class AddPersonaActivity extends AppCompatActivity implements OnListPersonasInteractionListener {
 
     EditText nombre, fechaNacimiento;
     Button registrar;
@@ -87,8 +88,9 @@ public class AddPersonaActivity extends AppCompatActivity implements PersonasFra
 
     }
 
+
     @Override
-    public void onListFragmentInteraction(OneUserResponse item) {
+    public void onDeleteBtnClick(String id, String nombre) {
 
     }
 }

@@ -1,19 +1,25 @@
 package com.st.pillboxapp.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
@@ -21,6 +27,7 @@ import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
 import com.st.pillboxapp.responses.MedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
+import com.st.pillboxapp.ui.DashboardActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,9 +36,8 @@ import retrofit2.Response;
 
 public class MedicamentosFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
+
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     MyMedicamentosRecyclerViewAdapter adapter;
@@ -40,12 +46,10 @@ public class MedicamentosFragment extends Fragment {
     EditText buscarMedicamentoPorNombre;
     ImageButton btnBuscarMedicamento;
 
-
     public MedicamentosFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+
     public static MedicamentosFragment newInstance(int columnCount) {
         MedicamentosFragment fragment = new MedicamentosFragment();
         Bundle args = new Bundle();
@@ -64,7 +68,6 @@ public class MedicamentosFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,9 +75,6 @@ public class MedicamentosFragment extends Fragment {
 
         buscarMedicamentoPorNombre = view.findViewById(R.id.findMedicamento);
         btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
-
-
-
 
         // Set the adapter
         if (view instanceof ConstraintLayout) {
@@ -89,10 +89,15 @@ public class MedicamentosFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-
             btnBuscarMedicamento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    final ProgressDialog progressDialog = new ProgressDialog(getContext(), R.style.Theme_AppCompat_DayNight_Dialog);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setMessage("Buscando medicamento...");
+                    progressDialog.show();
+
                     InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
                     String findMedicamento = buscarMedicamentoPorNombre.getText().toString();
@@ -103,6 +108,7 @@ public class MedicamentosFragment extends Fragment {
                         @Override
                         public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
                             if(response.isSuccessful()){
+                                progressDialog.dismiss();
                                 adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
                                 recyclerView.setAdapter(adapter);
                             }else{
@@ -117,6 +123,7 @@ public class MedicamentosFragment extends Fragment {
 
                         }
                     });
+
 
                 }
             });
