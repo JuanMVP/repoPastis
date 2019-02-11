@@ -7,7 +7,7 @@ import { token } from '../../services/passport'
 export Tratamiento, { schema } from './model'
 
 const router = new Router()
-const { periodo_toma, fecha_inicio, fecha_final } = schema.tree
+const { nombreTratamiento,periodo_toma, diasDuracionTratamiento } = schema.tree
 
 /**
  * @api {post} /tratamientos Create tratamiento
@@ -22,7 +22,7 @@ const { periodo_toma, fecha_inicio, fecha_final } = schema.tree
  */
 router.post('/',
   token({required: true, roles:['admin','user']}),
-  body({ periodo_toma, fecha_inicio, fecha_final }),
+  body({ nombreTratamiento,periodo_toma, diasDuracionTratamiento }),
   create)
 
 /**
@@ -64,7 +64,7 @@ router.get('/:id',
  */
 router.put('/:id',
   token({required: true, roles:['admin','user']}),
-  body({ periodo_toma, fecha_inicio, fecha_final }),
+  body({ nombreTratamiento,periodo_toma, diasDuracionTratamiento }),
   update)
 
 /**

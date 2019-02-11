@@ -100,7 +100,7 @@ public class MedicamentosFragment extends Fragment {
 
                     InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
-                    String findMedicamento = buscarMedicamentoPorNombre.getText().toString();
+                    String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
                     MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
                     Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
 

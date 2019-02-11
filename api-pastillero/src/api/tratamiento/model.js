@@ -1,13 +1,16 @@
 import mongoose, { Schema } from 'mongoose'
 
 const tratamientoSchema = new Schema({
+
+  nombreTratamiento:{
+    type: String
+  },
+
   periodo_toma: {
-    type: String
+    type: Integer
   },
-  fecha_inicio: {
-    type: String
-  },
-  fecha_final: {
+  
+  diasDuracionTratamiento: {
     type: String
   }
 }, {
@@ -24,8 +27,7 @@ tratamientoSchema.methods = {
       // simple view
       id: this.id,
       periodo_toma: this.periodo_toma,
-      fecha_inicio: this.fecha_inicio,
-      fecha_final: this.fecha_final,
+      diasDuracionTratamiento: this.diasDuracionTratamiento,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
