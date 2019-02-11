@@ -1,6 +1,7 @@
 package com.st.pillboxapp.fragments;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,13 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
                 mListener.onDeleteBtnClick(holder.mItem.getId(), holder.mItem.getNombre());
             }
         });
+        holder.elementoPersona.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mListener.onEditPersonaClick(holder.mItem);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -63,6 +71,7 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         public final TextView fechaNacPersona;
         public Persona mItem;
         public final Button btnDelete;
+        public final CardView elementoPersona;
 
         public ViewHolder(View view) {
             super(view);
@@ -70,6 +79,7 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             nombrePersona = view.findViewById(R.id.nombrePersona);
             fechaNacPersona =  view.findViewById(R.id.fechaNacPersona);
             btnDelete = view.findViewById(R.id.btnDelete);
+            elementoPersona = view.findViewById(R.id.cardView);
         }
 
         @Override

@@ -10,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface PersonaService {
@@ -22,5 +23,8 @@ public interface PersonaService {
 
     @DELETE("/personas/{id}")
     Call<PersonaResponse> deleteOne(@Path("id") String id);
+
+    @PUT("personas/{id}")
+    Call<PersonaResponse> editOne(@Path("id") String id);
 
 }

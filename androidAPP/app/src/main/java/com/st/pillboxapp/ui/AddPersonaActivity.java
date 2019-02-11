@@ -9,16 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.fragments.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.TipoAutenticacion;
-import com.st.pillboxapp.responses.AuthAndRegisterResponse;
-import com.st.pillboxapp.responses.OneUserResponse;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
@@ -52,8 +48,6 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
 
                 final SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
                 Persona persona = new Persona(name, fecha, prefs.getString("idUser",""));
-
-
 
                 PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
 
@@ -91,6 +85,11 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
 
     @Override
     public void onDeleteBtnClick(String id, String nombre) {
+
+    }
+
+    @Override
+    public void onEditPersonaClick(Persona p) {
 
     }
 }

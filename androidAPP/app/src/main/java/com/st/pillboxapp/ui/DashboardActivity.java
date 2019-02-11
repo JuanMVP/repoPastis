@@ -5,12 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,7 +20,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +30,8 @@ import com.st.pillboxapp.fragments.MedicamentosFragment;
 import com.st.pillboxapp.fragments.PersonasFragment;
 import com.st.pillboxapp.fragments.dummy.DummyContent;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
+import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.TipoAutenticacion;
-import com.st.pillboxapp.responses.OneUserResponse;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
@@ -44,7 +41,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, MedicamentosFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener,
+        MedicamentosFragment.OnListFragmentInteractionListener {
 
     Fragment f;
     FloatingActionButton fab;
@@ -200,6 +198,16 @@ public class DashboardActivity extends AppCompatActivity
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
+
+    @Override
+    public void onEditPersonaClick(Persona p){
+
+        EditPersonaFragment f = EditPersonaFragment.newInstance(p);
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "EditarPersona");
+
+    }
+
 
     @Override
     public void onDeleteBtnClick(String id, String nombre) {
