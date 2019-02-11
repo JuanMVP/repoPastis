@@ -3,9 +3,11 @@ package com.st.pillboxapp.fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +47,7 @@ public class MedicamentosFragment extends Fragment {
     RecyclerView recyclerView;
     EditText buscarMedicamentoPorNombre;
     ImageButton btnBuscarMedicamento;
+    SwipeRefreshLayout swipe;
 
     public MedicamentosFragment() {
     }
@@ -62,6 +65,7 @@ public class MedicamentosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -75,6 +79,9 @@ public class MedicamentosFragment extends Fragment {
 
         buscarMedicamentoPorNombre = view.findViewById(R.id.findMedicamento);
         btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
+        //swipe = view.findViewById(R.id.)
+
+
 
         // Set the adapter
         if (view instanceof ConstraintLayout) {
@@ -104,6 +111,7 @@ public class MedicamentosFragment extends Fragment {
                     MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
                     Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
 
+
                     callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
                         @Override
                         public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
@@ -125,15 +133,73 @@ public class MedicamentosFragment extends Fragment {
                     });
 
 
+
+
                 }
             });
 
 
+        /*swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        actualizarDatos();
+                    }
+                },3000);
+            }
 
+
+        });*/
 
         }
         return view;
+
+
     }
+
+    /*private void actualizarDatos() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext(), R.style.Theme_AppCompat_DayNight_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Buscando medicamento...");
+        progressDialog.show();
+
+        InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
+        String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
+        MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
+        Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
+        swipe.setColorSchemeResources(R.color.azulSwipe,R.color.rojoSwipe);
+
+        callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+            @Override
+            public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
+                if(response.isSuccessful()){
+                    progressDialog.dismiss();
+                    adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
+                    recyclerView.setAdapter(adapter);
+                }else{
+                    Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+    }*/
+
+
+
+
+
 
 
     @Override
