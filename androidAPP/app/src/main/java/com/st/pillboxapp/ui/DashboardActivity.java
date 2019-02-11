@@ -42,12 +42,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity
-<<<<<<< HEAD
-        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener,
-        MedicamentosFragment.OnListFragmentInteractionListener {
-=======
         implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener {
->>>>>>> 89aec441ff016bcfdfcddf4dee448460e7c21523
+
 
     Fragment f;
     FloatingActionButton fab;
@@ -65,11 +61,11 @@ public class DashboardActivity extends AppCompatActivity
         SharedPreferences prefs =
                 getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
-       fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(f instanceof PersonasFragment) {
+                if (f instanceof PersonasFragment) {
 
                 }
             }
@@ -87,13 +83,13 @@ public class DashboardActivity extends AppCompatActivity
 
         View headerView = navigationView.getHeaderView(0);
 
-        ImageView iv =  headerView.findViewById(R.id.picture);
+        ImageView iv = headerView.findViewById(R.id.picture);
         TextView name = headerView.findViewById(R.id.userName);
         TextView email = headerView.findViewById(R.id.emailUser);
 
-        name.setText(prefs.getString("nombreUser","").substring(0,1).toUpperCase()+ prefs.getString("nombreUser", "").substring(1));
-        email.setText(prefs.getString("emailUser",""));
-        Glide.with(this).load(prefs.getString("fotoUser","")).apply(RequestOptions.circleCropTransform()).into(iv);
+        name.setText(prefs.getString("nombreUser", "").substring(0, 1).toUpperCase() + prefs.getString("nombreUser", "").substring(1));
+        email.setText(prefs.getString("emailUser", ""));
+        Glide.with(this).load(prefs.getString("fotoUser", "")).apply(RequestOptions.circleCropTransform()).into(iv);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -155,7 +151,7 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_misPersonas) {
-            fab =findViewById(R.id.fab);
+            fab = findViewById(R.id.fab);
 
             f = new PersonasFragment();
             fab.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +172,7 @@ public class DashboardActivity extends AppCompatActivity
             fab.hide();
             toolbar.setTitle("Buscar Medicamentos");
 
-        }  else if(id == R.id.nav_logout){
+        } else if (id == R.id.nav_logout) {
             Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
 
             SharedPreferences prefs =
@@ -191,7 +187,7 @@ public class DashboardActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        if(f != null){
+        if (f != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, f).commit();
             return true;
         }
@@ -199,7 +195,7 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
-    public void onEditPersonaClick(Persona p){
+    public void onEditPersonaClick(Persona p) {
 
         EditPersonaFragment f = EditPersonaFragment.newInstance(p);
         FragmentManager fm = getSupportFragmentManager();
@@ -219,7 +215,6 @@ public class DashboardActivity extends AppCompatActivity
         final Call<PersonaResponse> call = service.deleteOne(id);
 
 
-
         AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
         builder.setPositiveButton(R.string.borrar, new DialogInterface.OnClickListener() {
             public void onClick(final DialogInterface dialog, int id) {
@@ -228,7 +223,7 @@ public class DashboardActivity extends AppCompatActivity
                 call.enqueue(new Callback<PersonaResponse>() {
                     @Override
                     public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
-                        if(response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                             dialog.dismiss();
                             finish();
                             startActivity(getIntent());
@@ -258,16 +253,11 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        builder.setTitle("¿Seguro que quiere borrar a "+nombre);
+        builder.setTitle("¿Seguro que quiere borrar a " + nombre);
 
         AlertDialog dialog = builder.create();
 
         dialog.show();
-
-
-
-
-
 
 
     }
