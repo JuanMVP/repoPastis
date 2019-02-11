@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.AddMedicamentoActivity"></activity>
         <activity
             android:name=".ui.DashboardActivity"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -31,9 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.RegistroActivity" />
-
-        <activity android:name=".ui.AddPersonaActivity"></activity>
-
+        <activity android:name=".ui.AddPersonaActivity" />
     </application>
 
 </manifest>

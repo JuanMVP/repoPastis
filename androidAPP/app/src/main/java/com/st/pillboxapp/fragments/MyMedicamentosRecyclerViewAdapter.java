@@ -3,6 +3,7 @@ package com.st.pillboxapp.fragments;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.fragments.MedicamentosFragment.OnListFragmentInteractionListener;
 import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
+import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.responses.MedicamentoResponse;
@@ -27,10 +28,10 @@ import java.util.List;
 public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMedicamentosRecyclerViewAdapter.ViewHolder> {
 
     private final List<Resultado> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnListMedicamentosInteractionListener mListener;
     private Context ctx;
 
-    public MyMedicamentosRecyclerViewAdapter(Context context, int layout, List<Resultado> items, OnListFragmentInteractionListener listener) {
+    public MyMedicamentosRecyclerViewAdapter(Context context, int layout, List<Resultado> items, OnListMedicamentosInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = context;
@@ -78,6 +79,14 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             }
         });
 
+        holder.cardViewMedicamentos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mListener.onClickMedicamento(holder.mItem.getNregistro());
+            }
+        });
+
     }
 
     @Override
@@ -89,6 +98,7 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         public final View mView;
         public final TextView nombreMedicamento;
         public final ImageView imagenMedicamemto;
+        public final CardView cardViewMedicamentos;
         public Resultado mItem;
 
         public ViewHolder(View view) {
@@ -96,6 +106,7 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             mView = view;
             nombreMedicamento = view.findViewById(R.id.nombreMedicamento);
             imagenMedicamemto = view.findViewById(R.id.imagenMedicamento);
+            cardViewMedicamentos = view.findViewById(R.id.cardViewMedicamentos);
 
         }
 

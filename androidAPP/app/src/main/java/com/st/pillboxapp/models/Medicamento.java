@@ -2,7 +2,7 @@ package com.st.pillboxapp.models;
 
 public class Medicamento {
 
-    private Long id;
+    private String nregistro;
     private String nombre;
     private Integer cantidad;
     private Float gramos;
@@ -11,8 +11,8 @@ public class Medicamento {
 
     public Medicamento(){}
 
-    public Medicamento(Long id, String nombre, Integer cantidad, Float gramos, String imagenUrl) {
-        this.id = id;
+    public Medicamento(String nregistro, String nombre, Integer cantidad, Float gramos, String imagenUrl) {
+        this.nregistro = nregistro;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.gramos = gramos;
@@ -20,12 +20,12 @@ public class Medicamento {
     }
 
 
-    public Long getId() {
-        return id;
+    public String getNregistro() {
+        return nregistro;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNregistro(String nregistro) {
+        this.nregistro = nregistro;
     }
 
     public String getNombre() {
@@ -63,7 +63,6 @@ public class Medicamento {
     @Override
     public String toString() {
         return "Medicamento{" +
-                "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", cantidad=" + cantidad +
                 ", gramos=" + gramos +

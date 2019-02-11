@@ -13,4 +13,7 @@ public interface MedicamentoService {
 
     @GET("/cima/rest/medicamentos")
     Call<MedicamentoResponse> getMedicamentos(@Query("nombre") String nombre);
+
+    @GET("/cima/rest/medicamentos")
+    Call<MedicamentoResponse> getOneMedicamento(@Query("nregistro") String nregistro);
 }
