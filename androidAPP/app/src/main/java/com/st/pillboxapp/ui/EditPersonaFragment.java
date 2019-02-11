@@ -40,6 +40,7 @@ public class EditPersonaFragment extends DialogFragment {
     public static EditPersonaFragment newInstance() {
         return new EditPersonaFragment();
     }
+
     private View view;
     private EditText nombre, fechaNacimiento;
     private String argNombre, argFecha, argId;
@@ -55,7 +56,7 @@ public class EditPersonaFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(getArguments() != null) {
+        if (getArguments() != null) {
             argNombre = getArguments().getString(ARG_NOMBRE);
             argFecha = getArguments().getString(ARG_FECHA_NAC);
             argId = getArguments().getString(ARG_ID_PERSONA);
@@ -85,7 +86,7 @@ public class EditPersonaFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         String nombreEditado = nombre.getText().toString();
                         String fechaNacimientoEditado = fechaNacimiento.getText().toString();
-                        }
+                    }
                 })
                 .setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -104,20 +105,19 @@ public class EditPersonaFragment extends DialogFragment {
         fechaNacimiento.setText(argFecha);
 
         registrarPersona.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    String name = nombre.getText().toString().trim();
-                                                    String fecha = fechaNacimiento.getText().toString().trim();
+            @Override
+            public void onClick(View v) {
+                String name = nombre.getText().toString().trim();
+                String fecha = fechaNacimiento.getText().toString().trim();
 
-                                                    final SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-                                                    Persona persona = new Persona(name, fecha, prefs.getString("idUser",""));
+                final SharedPreferences prefs = getContext().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                Persona persona = new Persona(name, fecha, prefs.getString("idUser", ""));
 
-                                                    PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
+                PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
 
-                            );
-                                                }
-                                            }
 
+            }
+        });
 
 
         builder.setView(view);
