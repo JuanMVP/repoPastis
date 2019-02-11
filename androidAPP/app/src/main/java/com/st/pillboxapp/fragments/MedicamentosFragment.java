@@ -23,7 +23,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
+import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.responses.MedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
@@ -39,7 +39,7 @@ public class MedicamentosFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private OnListMedicamentosInteractionListener mListener;
     MyMedicamentosRecyclerViewAdapter adapter;
     private Context ctx;
     RecyclerView recyclerView;
@@ -140,8 +140,8 @@ public class MedicamentosFragment extends Fragment {
     public void onAttach(Context context) {
         ctx = context;
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OnListMedicamentosInteractionListener) {
+            mListener = (OnListMedicamentosInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -152,10 +152,5 @@ public class MedicamentosFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(DummyItem item);
     }
 }

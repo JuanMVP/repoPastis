@@ -29,6 +29,7 @@ import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragments.MedicamentosFragment;
 import com.st.pillboxapp.fragments.PersonasFragment;
 import com.st.pillboxapp.fragments.dummy.DummyContent;
+import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.TipoAutenticacion;
@@ -41,8 +42,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity
+<<<<<<< HEAD
         implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener,
         MedicamentosFragment.OnListFragmentInteractionListener {
+=======
+        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener {
+>>>>>>> 89aec441ff016bcfdfcddf4dee448460e7c21523
 
     Fragment f;
     FloatingActionButton fab;
@@ -193,12 +198,6 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 
-
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
-
     @Override
     public void onEditPersonaClick(Persona p){
 
@@ -271,5 +270,19 @@ public class DashboardActivity extends AppCompatActivity
 
 
 
+    }
+
+    @Override
+    public void onClickMedicamento(String nregistro) {
+
+
+        SharedPreferences prefs =
+                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("nregistro", nregistro);
+        editor.commit();
+
+        startActivity(new Intent(DashboardActivity.this, AddMedicamentoActivity.class));
     }
 }
