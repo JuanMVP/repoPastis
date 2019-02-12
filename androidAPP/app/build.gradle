@@ -38,4 +38,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     /*implementation 'com.github.chrisbanes:PhotoView:2.3.0'*/
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 }
