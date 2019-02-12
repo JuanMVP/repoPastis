@@ -16,6 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.responses.AuthAndRegisterResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
@@ -32,6 +37,10 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button btnLogin, btnRegistro;
+    GoogleSignInClient gSignInClient;
+    SignInButton gSignButton;
+    final int RC_SIGN_IN = 7;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,14 @@ public class LoginActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        GoogleSignInOptions gSignOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gSignInClient = GoogleSignIn.getClient(this,gSignOptions);
+
+
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         email = findViewById(R.id.emailLogin);
@@ -47,6 +64,23 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnGuardar);
         btnRegistro = findViewById(R.id.btnRegistro);
+        gSignButton = findViewById(R.id.btnGoogle);
+        gSignButton.setSize(SignInButton.SIZE_STANDARD);
+
+        gSignButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                googleSignIn();
+            }
+
+            private void googleSignIn() {
+                Intent signIntent = gSignInClient.getSignInIntent();
+                startActivityForResult(signIntent,RC_SIGN_IN);
+                startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
+
+
+            }
+        });
 
         doLogin();
 
