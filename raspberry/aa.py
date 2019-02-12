@@ -25,7 +25,7 @@ while ans:
     3.Inicio
     4.Salir
     """)
-    ans=raw_input("Elige una opcion") 
+    ans=raw_input("Elige una opcion: ") 
     if ans=="1":
       for i in range(512):
   	for halfstep in range(8):
