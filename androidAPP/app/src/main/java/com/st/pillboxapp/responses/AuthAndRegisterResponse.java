@@ -7,7 +7,8 @@ public class AuthAndRegisterResponse {
     private String token;
     private User user;
 
-    public AuthAndRegisterResponse(){}
+    public AuthAndRegisterResponse() {
+    }
 
     public AuthAndRegisterResponse(String token, User user) {
         this.token = token;

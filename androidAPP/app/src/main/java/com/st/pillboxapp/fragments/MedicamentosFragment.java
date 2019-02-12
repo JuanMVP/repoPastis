@@ -123,14 +123,15 @@ public class MedicamentosFragment extends Fragment {
                                 adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
                                 recyclerView.setAdapter(adapter);
                             }else{
-                                Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+                                Toast.makeText(getContext(), "Error. Intenta de nuevo.", Toast.LENGTH_LONG).show();
 
                             }
                         }
 
                         @Override
                         public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
-                            Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Error de conexión.", Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -165,10 +166,6 @@ public class MedicamentosFragment extends Fragment {
 
     private void actualizarDatos() {
 
-        final ProgressDialog progressDialog = new ProgressDialog(getContext(), R.style.Theme_AppCompat_DayNight_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Buscando medicamento...");
-        progressDialog.show();
 
         InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
@@ -181,18 +178,17 @@ public class MedicamentosFragment extends Fragment {
             @Override
             public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
                 if(response.isSuccessful()){
-                    progressDialog.dismiss();
                     adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
                     recyclerView.setAdapter(adapter);
                 }else{
-                    Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Error. Intenta de nuevo.", Toast.LENGTH_LONG).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
 
             }
         });

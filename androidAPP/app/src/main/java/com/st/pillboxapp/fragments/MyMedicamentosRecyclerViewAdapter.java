@@ -1,27 +1,25 @@
 package com.st.pillboxapp.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
+
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.fragments.dummy.DummyContent.DummyItem;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
-import com.st.pillboxapp.models.Medicamento;
+
 import com.st.pillboxapp.models.Resultado;
-import com.st.pillboxapp.responses.MedicamentoResponse;
+
 
 import java.util.List;
 
@@ -39,7 +37,6 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
     }
 
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -51,10 +48,10 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.nombreMedicamento.setText(holder.mItem.getNombre());
-        if(holder.mItem.getFotos() != null){
+        if (holder.mItem.getFotos() != null) {
             Glide.with(ctx).load(holder.mItem.getFotos().get(0).getUrl()).into(holder.imagenMedicamemto);
-            
-        }else{
+
+        } else {
 
             holder.imagenMedicamemto.setImageResource(R.drawable.ic_no_photo);
         }
@@ -83,7 +80,7 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             @Override
             public void onClick(View v) {
 
-                mListener.onClickMedicamento(holder.mItem.getNregistro());
+                mListener.onClickMedicamento(holder.mItem);
             }
         });
 

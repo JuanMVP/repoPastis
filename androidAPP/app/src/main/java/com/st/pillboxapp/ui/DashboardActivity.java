@@ -26,12 +26,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.st.pillboxapp.R;
+import com.st.pillboxapp.fragments.AddMedicamentoFragment;
 import com.st.pillboxapp.fragments.EditPersonaFragment;
 import com.st.pillboxapp.fragments.MedicamentosFragment;
 import com.st.pillboxapp.fragments.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
+import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
@@ -262,7 +264,7 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
-    @Override
+    /*@Override
     public void onClickMedicamento(String nregistro) {
 
         SharedPreferences prefs =
@@ -273,5 +275,15 @@ public class DashboardActivity extends AppCompatActivity
         editor.commit();
 
         startActivity(new Intent(DashboardActivity.this, AddMedicamentoActivity.class));
+    }*/
+
+    @Override
+    public void onClickMedicamento(Resultado resultado) {
+
+        AddMedicamentoFragment f = AddMedicamentoFragment.newInstance(resultado);
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "AñadirMedicamento");
+
+
     }
 }

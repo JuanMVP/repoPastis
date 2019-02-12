@@ -8,7 +8,8 @@ public class PersonaResponse {
     private String nombre;
     private String fechaNacimiento;
 
-    public PersonaResponse() {  }
+    public PersonaResponse() {
+    }
 
     public PersonaResponse(String id, String nombre, String fechaNacimiento) {
         this.id = id;

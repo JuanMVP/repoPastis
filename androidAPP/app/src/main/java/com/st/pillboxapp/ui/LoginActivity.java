@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     //Métodos------------
 
 
@@ -102,49 +102,59 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void doLogin(){
+    public void doLogin() {
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.Theme_AppCompat_DayNight_Dialog);
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.setMessage("Autenticando...");
-                    progressDialog.show();
+                final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.Theme_AppCompat_DayNight_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Autenticando...");
+                progressDialog.show();
 
 
-                    String emailTxt = email.getText().toString();
-                    String passwordTxt = password.getText().toString();
+                String emailTxt = email.getText().toString();
+                String passwordTxt = password.getText().toString();
 
-                    String credentials = Credentials.basic(emailTxt, passwordTxt);
+                String credentials = Credentials.basic(emailTxt, passwordTxt);
 
-                    AuthAndRegisterService loginService = ServiceGenerator.createService(AuthAndRegisterService.class);
+                AuthAndRegisterService loginService = ServiceGenerator.createService(AuthAndRegisterService.class);
 
-                    Call<AuthAndRegisterResponse> call = loginService.login(credentials);
+                Call<AuthAndRegisterResponse> call = loginService.login(credentials);
 
-                    call.enqueue(new Callback<AuthAndRegisterResponse>() {
-                        @Override
-                        public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
+                call.enqueue(new Callback<AuthAndRegisterResponse>() {
+                    @Override
+                    public void onResponse(final Call<AuthAndRegisterResponse> call, final Response<AuthAndRegisterResponse> response) {
 
-                            if (response.isSuccessful()) {
+                        if (response.isSuccessful()) {
 
-                                progressDialog.dismiss();
-                                onLoginSuccess(call, response);
+                            Runnable progressRunnable = new Runnable() {
 
-                            } else {
-                                progressDialog.dismiss();
-                                onLoginFail();
-                            }
+                                @Override
+                                public void run() {
+                                    progressDialog.cancel();
+                                    onLoginSuccess(call, response);
+                                }
+                            };
+
+                            Handler pdCanceller = new Handler();
+                            pdCanceller.postDelayed(progressRunnable, 2000);
+
+
+                        } else {
+                            progressDialog.cancel();
+                            onLoginFail();
                         }
+                    }
 
-                        @Override
-                        public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
-                            progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
 
-                        }
-                    });
+                    }
+                });
 
 
             }

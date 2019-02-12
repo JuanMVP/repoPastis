@@ -37,18 +37,17 @@ public class AddMedicamentoActivity extends AppCompatActivity {
 
         MedicamentoService service = ServiceApiGenerator.createService(MedicamentoService.class);
 
-        Call<MedicamentoResponse> call = service.getOneMedicamento(prefs.getString("nregistro",""));
+        Call<MedicamentoResponse> call = service.getOneMedicamento(prefs.getString("nregistro", ""));
 
         call.enqueue(new Callback<MedicamentoResponse>() {
             @Override
             public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     etMedicamento.setText(response.body().getResultados().get(0).getNombre());
-                    etMedicamento.setEnabled(false);
-                    if(response.body().getFotos() != null){
+                    if (response.body().getFotos() != null) {
                         Glide.with(AddMedicamentoActivity.this).load(response.body().getFotos().get(1).getUrl()).into(imgMedicamentoAdd);
 
-                    }else{
+                    } else {
                         imgMedicamentoAdd.setImageResource(R.drawable.ic_no_photo);
                     }
 

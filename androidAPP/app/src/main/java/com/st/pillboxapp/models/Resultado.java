@@ -18,6 +18,12 @@ public class Resultado {
         this.fotos = fotos;
     }
 
+    public Resultado(String nombre, String dosis) {
+        this.nombre = nombre;
+        this.dosis = dosis;
+
+    }
+
     public String getNregistro() {
         return nregistro;
     }

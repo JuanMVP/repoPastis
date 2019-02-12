@@ -9,7 +9,8 @@ public class User {
     private String picture;
     private String email;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String id, String name, String picture, String email) {
         this.id = id;

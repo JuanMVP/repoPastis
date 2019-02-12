@@ -36,8 +36,6 @@ public class ServiceGenerator {
     private static OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
 
 
-
-
     // Sin autenticación
     //#######################################################################################//
 
@@ -45,7 +43,6 @@ public class ServiceGenerator {
 
         return createService(serviceClass, null, TipoAutenticacion.SIN_AUTENTICACION);
     }
-
 
 
     // Autenticación básica
@@ -63,10 +60,9 @@ public class ServiceGenerator {
     }
 
 
-
     public static <S> S createService(Class<S> serviceClass, final String authtoken, final TipoAutenticacion tipo) {
 
-        if (retrofit == null || tipoActual != tipo ) {
+        if (retrofit == null || tipoActual != tipo) {
 
             httpClientBuilder.interceptors().clear();
 
@@ -87,7 +83,7 @@ public class ServiceGenerator {
                 }
             });
 
-            if (tipo == TipoAutenticacion.SIN_AUTENTICACION || tipo == TipoAutenticacion.BASIC ) {
+            if (tipo == TipoAutenticacion.SIN_AUTENTICACION || tipo == TipoAutenticacion.BASIC) {
 
                 httpClientBuilder.addInterceptor(new Interceptor() {
                     @Override
@@ -140,10 +136,6 @@ public class ServiceGenerator {
 
         return retrofit.create(serviceClass);
     }
-
-
-
-
 
 
 }

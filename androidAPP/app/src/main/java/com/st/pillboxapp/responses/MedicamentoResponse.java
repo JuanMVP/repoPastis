@@ -10,7 +10,8 @@ public class MedicamentoResponse {
     private List<Resultado> resultados;
     private List<Foto> fotos;
 
-    public MedicamentoResponse(){}
+    public MedicamentoResponse() {
+    }
 
     public MedicamentoResponse(List<Resultado> resultados, List<Foto> fotos) {
         this.resultados = resultados;
@@ -20,7 +21,6 @@ public class MedicamentoResponse {
     public List<Resultado> getResultados() {
         return resultados;
     }
-
 
 
     public void setResultados(List<Resultado> resultados) {

@@ -48,7 +48,6 @@ public class EditPersonaFragment extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(EditPersonaViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     @Override
@@ -78,11 +77,11 @@ public class EditPersonaFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setMessage("Editar persona: ")
-                .setPositiveButton(R.string.edit_persona, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.editPersona, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, int id) {
                         String nombreEditado = nombre.getText().toString();
                         String fechaNacimientoEditado = fechaNacimiento.getText().toString();
@@ -97,10 +96,10 @@ public class EditPersonaFragment extends DialogFragment {
                         call.enqueue(new Callback<PersonaResponse>() {
                             @Override
                             public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
-                                if(response.isSuccessful()){
+                                if (response.isSuccessful()) {
                                     dialog.dismiss();
                                     //actualizar la pantalla
-                                } else{
+                                } else {
                                     //toast de error
                                 }
                             }

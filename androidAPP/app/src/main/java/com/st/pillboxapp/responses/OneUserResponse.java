@@ -11,7 +11,8 @@ public class OneUserResponse {
     private String picture;
     private List<Persona> personas;
 
-    public OneUserResponse(){}
+    public OneUserResponse() {
+    }
 
     public OneUserResponse(String id, String nombre, String picture, List<Persona> personas) {
         this.id = id;

@@ -4,21 +4,23 @@ public class Medicamento {
 
     private String nregistro;
     private String nombre;
-    private Integer cantidad;
-    private Float gramos;
+    private String dosis;
     private String imagenUrl;
 
 
     public Medicamento(){}
 
-    public Medicamento(String nregistro, String nombre, Integer cantidad, Float gramos, String imagenUrl) {
+    public Medicamento(String nregistro, String nombre, String dosis, String imagenUrl) {
         this.nregistro = nregistro;
         this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.gramos = gramos;
+        this.dosis = dosis;
         this.imagenUrl = imagenUrl;
     }
 
+    public Medicamento(String nombre, String dosis) {
+        this.nombre = nombre;
+        this.dosis = dosis;
+    }
 
     public String getNregistro() {
         return nregistro;
@@ -36,20 +38,12 @@ public class Medicamento {
         this.nombre = nombre;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
+    public String getDosis() {
+        return dosis;
     }
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public Float getGramos() {
-        return gramos;
-    }
-
-    public void setGramos(Float gramos) {
-        this.gramos = gramos;
+    public void setDosis(String dosis) {
+        this.dosis = dosis;
     }
 
     public String getImagenUrl() {
@@ -58,15 +52,5 @@ public class Medicamento {
 
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Medicamento{" +
-                ", nombre='" + nombre + '\'' +
-                ", cantidad=" + cantidad +
-                ", gramos=" + gramos +
-                ", imagenUrl='" + imagenUrl + '\'' +
-                '}';
     }
 }

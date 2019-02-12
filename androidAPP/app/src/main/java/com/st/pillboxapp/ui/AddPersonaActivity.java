@@ -39,7 +39,7 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
         fechaNacimiento = findViewById(R.id.fechaNacPersona);
         registrar = findViewById(R.id.btnRegistrarPersona);
 
-        registrar.setOnClickListener(new View.OnClickListener(){
+        registrar.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -47,7 +47,7 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
                 String fecha = fechaNacimiento.getText().toString().trim();
 
                 final SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-                Persona persona = new Persona(name, fecha, prefs.getString("idUser",""));
+                Persona persona = new Persona(name, fecha, prefs.getString("idUser", ""));
 
                 PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
 
@@ -59,13 +59,13 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
 
                         f = null;
 
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
 
                             Intent i = new Intent(AddPersonaActivity.this, DashboardActivity.class);
                             startActivity(i);
                             finish();
 
-                        }else{
+                        } else {
                             Toast.makeText(AddPersonaActivity.this, "no funka", Toast.LENGTH_LONG);
                         }
                     }
