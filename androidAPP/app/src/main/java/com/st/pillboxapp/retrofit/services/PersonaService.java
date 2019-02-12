@@ -26,6 +26,6 @@ public interface PersonaService {
     Call<PersonaResponse> deleteOne(@Path("id") String id);
 
     @PUT("personas/{id}")
-    Call<PersonaResponse> editOne(@Path("id") String id);
+    Call<PersonaResponse> editOne(@Path("id") String id, @Body Persona persona);
 
 }

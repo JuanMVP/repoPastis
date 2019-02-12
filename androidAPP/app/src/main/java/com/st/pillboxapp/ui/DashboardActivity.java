@@ -26,9 +26,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.st.pillboxapp.R;
+import com.st.pillboxapp.fragments.EditPersonaFragment;
 import com.st.pillboxapp.fragments.MedicamentosFragment;
 import com.st.pillboxapp.fragments.PersonasFragment;
-import com.st.pillboxapp.fragments.dummy.DummyContent;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
@@ -264,7 +264,6 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onClickMedicamento(String nregistro) {
-
 
         SharedPreferences prefs =
                 getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);

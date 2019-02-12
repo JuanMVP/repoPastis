@@ -1,4 +1,4 @@
-package com.st.pillboxapp.ui;
+package com.st.pillboxapp.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,14 +22,14 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
+import com.st.pillboxapp.ui.DashboardActivity;
+import com.st.pillboxapp.ui.EditPersonaViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EditPersonaFragment extends DialogFragment {
-
-    private Button registrarPersona;
 
     private static final String ARG_FECHA_NAC = "fecha_nacimiento";
     private static final String ARG_NOMBRE = "nombre";
@@ -55,6 +54,7 @@ public class EditPersonaFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         if (getArguments() != null) {
             argNombre = getArguments().getString(ARG_NOMBRE);
@@ -83,14 +83,39 @@ public class EditPersonaFragment extends DialogFragment {
 
         builder.setMessage("")
                 .setPositiveButton(R.string.edit_persona, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, int id) {
                         String nombreEditado = nombre.getText().toString();
                         String fechaNacimientoEditado = fechaNacimiento.getText().toString();
+
+                        final SharedPreferences prefs = getContext().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                        Persona persona = new Persona(nombreEditado, fechaNacimientoEditado, prefs.getString("idUser", ""));
+
+                        PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
+
+                        Call<PersonaResponse> call = pService.editOne(getArguments().getString(ARG_ID_PERSONA), persona);
+
+                        call.enqueue(new Callback<PersonaResponse>() {
+                            @Override
+                            public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
+                                if(response.isSuccessful()){
+                                    dialog.dismiss();
+                                    //actualizar la pantalla
+                                } else{
+                                    //toast de error
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<PersonaResponse> call, Throwable t) {
+                                //toast de error
+                            }
+                        });
+
                     }
                 })
                 .setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                        dialog.dismiss();
                     }
                 });
 
@@ -99,26 +124,9 @@ public class EditPersonaFragment extends DialogFragment {
 
         nombre = view.findViewById(R.id.editNombrePersona);
         fechaNacimiento = view.findViewById(R.id.editFechaNacPersona);
-        registrarPersona = view.findViewById(R.id.btnRegistrarEditPersona);
 
         nombre.setText(argNombre);
         fechaNacimiento.setText(argFecha);
-
-        registrarPersona.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = nombre.getText().toString().trim();
-                String fecha = fechaNacimiento.getText().toString().trim();
-
-                final SharedPreferences prefs = getContext().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-                Persona persona = new Persona(name, fecha, prefs.getString("idUser", ""));
-
-                PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
-
-
-            }
-        });
-
 
         builder.setView(view);
 
