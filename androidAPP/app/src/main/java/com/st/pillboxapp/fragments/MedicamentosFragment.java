@@ -79,12 +79,14 @@ public class MedicamentosFragment extends Fragment {
 
         buscarMedicamentoPorNombre = view.findViewById(R.id.findMedicamento);
         btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
-        //swipe = view.findViewById(R.id.)
+        swipe = view.findViewById(R.id.swipeMedicamentos);
+        swipe.setColorSchemeResources(R.color.azulSwipe,R.color.rojoSwipe);
+
 
 
 
         // Set the adapter
-        if (view instanceof ConstraintLayout) {
+        if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
             recyclerView = view.findViewById(R.id.listPersonas);
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
@@ -110,6 +112,7 @@ public class MedicamentosFragment extends Fragment {
                     String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
                     MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
                     Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
+
 
 
                     callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
@@ -139,19 +142,20 @@ public class MedicamentosFragment extends Fragment {
             });
 
 
-        /*swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         actualizarDatos();
+                        swipe.setRefreshing(false);
                     }
                 },3000);
             }
 
 
-        });*/
+        });
 
         }
         return view;
@@ -159,7 +163,7 @@ public class MedicamentosFragment extends Fragment {
 
     }
 
-    /*private void actualizarDatos() {
+    private void actualizarDatos() {
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext(), R.style.Theme_AppCompat_DayNight_Dialog);
         progressDialog.setIndeterminate(true);
@@ -194,7 +198,7 @@ public class MedicamentosFragment extends Fragment {
         });
 
 
-    }*/
+    }
 
 
 
