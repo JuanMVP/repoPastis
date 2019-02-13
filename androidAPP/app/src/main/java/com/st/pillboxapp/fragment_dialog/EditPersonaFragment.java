@@ -19,6 +19,7 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
+import com.st.pillboxapp.util.Util;
 import com.st.pillboxapp.viewModel.EditPersonaViewModel;
 
 import retrofit2.Call;
@@ -73,6 +74,16 @@ public class EditPersonaFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        view = inflater.inflate(R.layout.edit_persona_fragment, null);
+
+        nombre = view.findViewById(R.id.editNombrePersona);
+        fechaNacimiento = view.findViewById(R.id.editFechaNacPersona);
+
+        nombre.setText(argNombre);
+        fechaNacimiento.setText(argFecha);
+
+        //*Se crea el DialogFragment*//
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setMessage("Editar persona: ")
@@ -83,49 +94,40 @@ public class EditPersonaFragment extends DialogFragment {
                         String nombreEditado = nombre.getText().toString();
                         String fechaNacimientoEditado = fechaNacimiento.getText().toString();
 
-                        final SharedPreferences prefs = getContext().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
-                        Persona persona = new Persona(nombreEditado, fechaNacimientoEditado, prefs.getString("idUser", ""));
-                        PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
+                        //*Petición a nuestra API*//
+                        Persona persona = new Persona(nombreEditado, fechaNacimientoEditado, Util.getUserId(getContext()));
 
+                        PersonaService pService = ServiceGenerator.createService(PersonaService.class, Util.getToken(getContext()), TipoAutenticacion.JWT);
                         Call<PersonaResponse> call = pService.editOne(getArguments().getString(ARG_ID_PERSONA), persona);
+
                         call.enqueue(new Callback<PersonaResponse>() {
                             @Override
                             public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
                                 if (response.isSuccessful()) {
                                     dialog.dismiss();
-                                    //actualizar la pantalla
+                                    //TODO Implementar refresh al cerrar este DialogFragment
                                 } else {
-                                    //toast de error
+                                    //TODO Implementar Toast
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<PersonaResponse> call, Throwable t) {
-                                //toast de error
+                                //TODO Implementar Toast
                             }
                         });
 
                     }
                 })
-                .setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                     }
                 });
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        view = inflater.inflate(R.layout.edit_persona_fragment, null);
-
-        nombre = view.findViewById(R.id.editNombrePersona);
-        fechaNacimiento = view.findViewById(R.id.editFechaNacPersona);
-
-        nombre.setText(argNombre);
-        fechaNacimiento.setText(argFecha);
 
         builder.setView(view);
-
-        // Create the AlertDialog object and return it
         return builder.create();
     }
 

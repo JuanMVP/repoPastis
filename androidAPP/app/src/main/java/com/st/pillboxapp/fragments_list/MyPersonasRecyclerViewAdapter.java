@@ -45,12 +45,15 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         holder.nombrePersona.setText(holder.mItem.getNombre());
         holder.fechaNacPersona.setText(holder.mItem.getFecha_nacimiento());
 
+        //*Click para borrar una persona*//
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onDeleteBtnClick(holder.mItem.getId(), holder.mItem.getNombre());
             }
         });
+
+        //*Click largo para editar una persona*//
         holder.elementoPersona.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

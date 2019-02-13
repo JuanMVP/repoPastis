@@ -1,5 +1,6 @@
 package com.st.pillboxapp.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -38,6 +40,7 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
+import com.st.pillboxapp.util.Util;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,7 +53,6 @@ public class DashboardActivity extends AppCompatActivity
     private Fragment f;
     private FloatingActionButton fab;
     private Toolbar toolbar;
-    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +66,31 @@ public class DashboardActivity extends AppCompatActivity
         toolbar.setTitle("Mis Personas");
         setSupportActionBar(toolbar);
 
-        prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.contenedor, new PersonasFragment(),"mainFragment")
+                .commit();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (f instanceof PersonasFragment) {
-
-                }
+            public void onClick(View v) {
+                Intent i = new Intent(DashboardActivity.this, AddPersonaActivity.class);
+                startActivity(i);
             }
         });
 
-        asignarUsuario(prefs);
+        mostrarInfoUsuarioMenu();
 
     }
 
-    public void asignarUsuario(SharedPreferences prefs){
+
+    /**
+     * Métodos propios
+     **/
+
+    //*Método para mostrar el nombre, email y foto del usuario logueado en el menú lateral*//
+    public void mostrarInfoUsuarioMenu() {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -97,28 +108,24 @@ public class DashboardActivity extends AppCompatActivity
         TextView name = headerView.findViewById(R.id.userName);
         TextView email = headerView.findViewById(R.id.emailUser);
 
-        name.setText(prefs.getString("nombreUser", "").substring(0, 1).toUpperCase() + prefs.getString("nombreUser", "").substring(1));
-        email.setText(prefs.getString("emailUser", ""));
-        Glide.with(this).load(prefs.getString("fotoUser", "")).apply(RequestOptions.circleCropTransform()).into(iv);
+        name.setText(Util.getNombreUser(DashboardActivity.this).substring(0, 1).toUpperCase() + Util.getNombreUser(DashboardActivity.this).substring(1));
+        email.setText(Util.getEmailUser(DashboardActivity.this));
+        Glide.with(this).load(Util.getPhotoUser(DashboardActivity.this)).apply(RequestOptions.circleCropTransform()).into(iv);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.contenedor, new PersonasFragment())
-                .commit();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(DashboardActivity.this, AddPersonaActivity.class);
-                startActivity(i);
-                Toast.makeText(DashboardActivity.this, "Entro", Toast.LENGTH_LONG);
-            }
-        });
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -146,6 +153,10 @@ public class DashboardActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     * Opciones del menú lateral
+     **/
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
@@ -174,22 +185,17 @@ public class DashboardActivity extends AppCompatActivity
             toolbar.setTitle("Buscar Medicamentos");
 
         } else if (id == R.id.nav_logout) {
+            Util.clearSharedPreferences(DashboardActivity.this);
+
             Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
-
-            prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.clear();
-            editor.commit();
-
             startActivity(i);
-
             finish();
-        } else if(id == R.id.nav_tratamientos){
+
+        } else if (id == R.id.nav_tratamientos) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         if (f != null) {
@@ -198,6 +204,10 @@ public class DashboardActivity extends AppCompatActivity
         }
         return true;
     }
+
+
+
+    /** Métodos onClick **/
 
     @Override
     public void onEditPersonaClick(Persona p) {
@@ -211,10 +221,7 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public void onDeleteBtnClick(String id, String nombre) {
 
-        SharedPreferences prefs =
-                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
-        PersonaService service = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
+        PersonaService service = ServiceGenerator.createService(PersonaService.class,Util.getToken(DashboardActivity.this), TipoAutenticacion.JWT);
 
         final Call<PersonaResponse> call = service.deleteOne(id);
 
@@ -222,7 +229,6 @@ public class DashboardActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
         builder.setPositiveButton(R.string.borrar, new DialogInterface.OnClickListener() {
             public void onClick(final DialogInterface dialog, int id) {
-                // User clicked OK button
 
                 call.enqueue(new Callback<PersonaResponse>() {
                     @Override
@@ -240,6 +246,7 @@ public class DashboardActivity extends AppCompatActivity
 
                     @Override
                     public void onFailure(Call<PersonaResponse> call, Throwable t) {
+                        Toast.makeText(DashboardActivity.this, "Error de conexión", Toast.LENGTH_LONG);
 
                     }
                 });
@@ -249,7 +256,6 @@ public class DashboardActivity extends AppCompatActivity
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
 
                 dialog.dismiss();
 
@@ -257,13 +263,11 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        builder.setTitle("¿Seguro que quiere borrar a " + nombre);
+        builder.setTitle("¿Seguro que quiere borrar a " + nombre.toUpperCase()+"?");
 
         AlertDialog dialog = builder.create();
 
         dialog.show();
-
-
     }
 
     @Override

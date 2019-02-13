@@ -31,20 +31,18 @@ import retrofit2.Response;
 
 public class MedicamentosFragment extends Fragment {
 
-
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListMedicamentosInteractionListener mListener;
-    MyMedicamentosRecyclerViewAdapter adapter;
+    private MyMedicamentosRecyclerViewAdapter adapter;
     private Context ctx;
-    RecyclerView recyclerView;
-    EditText buscarMedicamentoPorNombre;
-    ImageButton btnBuscarMedicamento;
-    SwipeRefreshLayout swipe;
+    private RecyclerView recyclerView;
+    private EditText buscarMedicamentoPorNombre;
+    private ImageButton btnBuscarMedicamento;
+    private SwipeRefreshLayout swipe;
 
     public MedicamentosFragment() {
     }
-
 
     public static MedicamentosFragment newInstance(int columnCount) {
         MedicamentosFragment fragment = new MedicamentosFragment();
@@ -73,12 +71,9 @@ public class MedicamentosFragment extends Fragment {
         buscarMedicamentoPorNombre = view.findViewById(R.id.findMedicamento);
         btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
         swipe = view.findViewById(R.id.swipeMedicamentos);
-        swipe.setColorSchemeResources(R.color.azulSwipe,R.color.rojoSwipe);
+        swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
 
 
-
-
-        // Set the adapter
         if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
             recyclerView = view.findViewById(R.id.listPersonas);
@@ -91,109 +86,28 @@ public class MedicamentosFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            btnBuscarMedicamento.setOnClickListener(new View.OnClickListener() {
+            buscarMedicamento();
+
+            swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
-                public void onClick(View v) {
-
-                    final ProgressDialog progressDialog = new ProgressDialog(getContext(), R.style.Theme_AppCompat_DayNight_Dialog);
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.setMessage("Buscando medicamento...");
-                    progressDialog.show();
-
-                    InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
-                    String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
-                    MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
-                    Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
-
-
-
-                    callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+                public void onRefresh() {
+                    new Handler().postDelayed(new Runnable() {
                         @Override
-                        public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
-                            if(response.isSuccessful()){
-                                progressDialog.dismiss();
-                                adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
-                                recyclerView.setAdapter(adapter);
-                            }else{
-                                progressDialog.dismiss();
-                                Toast.makeText(getContext(), "Error. Intenta de nuevo.", Toast.LENGTH_LONG).show();
-
-                            }
+                        public void run() {
+                            actualizarDatos();
+                            swipe.setRefreshing(false);
                         }
-
-                        @Override
-                        public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
-                            Toast.makeText(getContext(), "Error de conexión.", Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-
-
-
-
+                    }, 3000);
                 }
+
+
             });
-
-
-        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        actualizarDatos();
-                        swipe.setRefreshing(false);
-                    }
-                },3000);
-            }
-
-
-        });
 
         }
         return view;
 
 
     }
-
-    private void actualizarDatos() {
-
-
-        InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
-        String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
-        MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
-        Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
-        swipe.setColorSchemeResources(R.color.azulSwipe,R.color.rojoSwipe);
-
-        callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
-            @Override
-            public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
-                if(response.isSuccessful()){
-                    adapter = new MyMedicamentosRecyclerViewAdapter(ctx,R.layout.fragment_medicamentos, response.body().getResultados(),mListener);
-                    recyclerView.setAdapter(adapter);
-                }else{
-                    Toast.makeText(getContext(), "Error. Intenta de nuevo.", Toast.LENGTH_LONG).show();
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-
-    }
-
-
-
-
-
-
 
     @Override
     public void onAttach(Context context) {
@@ -211,5 +125,95 @@ public class MedicamentosFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+
+
+    /**Métodos propios **/
+
+    public void buscarMedicamento() {
+
+        btnBuscarMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
+
+                final ProgressDialog progressDialog = new ProgressDialog(getContext(), R.style.Theme_AppCompat_DayNight_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Buscando medicamento...");
+                progressDialog.show();
+
+                //*Para ocultar automáticamente el teclado del móvil cuando se le da al botón de Buscar*//
+                InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
+
+
+                //*Petición al API de medicamentos*//
+                MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
+                Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
+
+                callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+                    @Override
+                    public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
+                        if (response.isSuccessful()) {
+                            progressDialog.dismiss();
+                            adapter = new MyMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_medicamentos, response.body().getResultados(), mListener);
+                            recyclerView.setAdapter(adapter);
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "Error de conexión.", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
+            }
+        });
+
+    }
+
+    public void actualizarDatos() {
+
+        String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
+        swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
+
+
+        //*Para ocultar automáticamente el teclado del móvil cuando se le da al botón de Buscar*//
+        InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(buscarMedicamentoPorNombre.getWindowToken(), 0);
+
+        //*Petición a nuestra API*//
+        MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
+        Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
+
+        callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+            @Override
+            public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
+                if (response.isSuccessful()) {
+                    adapter = new MyMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_medicamentos, response.body().getResultados(), mListener);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getContext(), "Error. Intenta de nuevo.", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
     }
 }

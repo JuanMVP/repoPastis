@@ -3,9 +3,7 @@ package com.st.pillboxapp.fragment_dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +23,7 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
 
+import com.st.pillboxapp.util.Util;
 import com.st.pillboxapp.viewModel.AddMedicamentoViewModel;
 
 import retrofit2.Call;
@@ -81,45 +80,6 @@ public class AddMedicamentoFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setPositiveButton(R.string.add_medicamento, new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, int id) {
-                String nombreMedicamento = nombre.getText().toString();
-                String dosisMedicamento = dosis.getText().toString();
-
-                SharedPreferences prefs = getContext().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
-                Resultado resultado = new Resultado(nombreMedicamento, dosisMedicamento);
-
-                MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
-
-                Call<Resultado> call = service.addMedicamento(resultado);
-
-                call.enqueue(new Callback<Resultado>() {
-                    @Override
-                    public void onResponse(Call<Resultado> call, Response<Resultado> response) {
-                        if (response.isSuccessful()) {
-                            dialog.dismiss();
-                        } else {
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Resultado> call, Throwable t) {
-
-                    }
-                });
-
-            }
-        })
-                .setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.add_medicamento_fragment, null);
 
@@ -129,7 +89,52 @@ public class AddMedicamentoFragment extends DialogFragment {
         nombre.setText(argNombre);
         dosis.setText(argDosis);
 
+
+        //*Se crea el DialogFragment*//
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setPositiveButton(R.string.add_medicamento, new DialogInterface.OnClickListener() {
+            public void onClick(final DialogInterface dialog, int id) {
+                String nombreMedicamento = nombre.getText().toString();
+                String dosisMedicamento = dosis.getText().toString();
+
+
+                //*Petición a nuestra API*//
+                Resultado resultado = new Resultado(nombreMedicamento, dosisMedicamento);
+
+                MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(getContext()), TipoAutenticacion.JWT);
+                Call<Resultado> call = service.addMedicamento(resultado);
+
+                call.enqueue(new Callback<Resultado>() {
+                    @Override
+                    public void onResponse(Call<Resultado> call, Response<Resultado> response) {
+                        if (response.isSuccessful()) {
+                            dialog.dismiss();
+                            //TODO Implementar refresh al cerrar este DialogFragment
+                        } else {
+                            //TODO Implementar Toast
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Resultado> call, Throwable t) {
+
+                        //TODO Implementar Toast
+                    }
+                });
+
+            }
+        })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+
         builder.setView(view);
+
+
         return builder.create();
     }
 }

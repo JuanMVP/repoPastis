@@ -1,23 +1,19 @@
 package com.st.pillboxapp.ui;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
@@ -25,8 +21,7 @@ import com.st.pillboxapp.R;
 import com.st.pillboxapp.responses.AuthAndRegisterResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.AuthAndRegisterService;
-
-import java.util.regex.Pattern;
+import com.st.pillboxapp.util.Util;
 
 import okhttp3.Credentials;
 import retrofit2.Call;
@@ -35,17 +30,21 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText email, password;
-    Button btnLogin, btnRegistro;
-    GoogleSignInClient gSignInClient;
-    SignInButton gSignButton;
-    final int RC_SIGN_IN = 7;
+    private EditText email, password;
+    private Button btnLogin, btnRegistro;
+    private GoogleSignInClient gSignInClient;
+    private SignInButton gSignButton;
+    private final int RC_SIGN_IN = 7;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        /*if(Util.getToken(LoginActivity.this) != null) {
+            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+        }*/
 
         getSupportActionBar().hide();
 
@@ -100,15 +99,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
 
-        SharedPreferences prefs =
-                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("token", response.body().getToken());
-        editor.putString("idUser", response.body().getUser().getId());
-        editor.putString("emailUser", response.body().getUser().getEmail());
-        editor.putString("nombreUser", response.body().getUser().getName());
-        editor.putString("fotoUser", response.body().getUser().getPicture());
-        editor.commit();
+
+        Util.setData(LoginActivity.this, response.body().getToken(), response.body().getUser().getId(),
+                response.body().getUser().getEmail(),response.body().getUser().getName()
+                ,response.body().getUser().getPicture());
 
         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
         finish();

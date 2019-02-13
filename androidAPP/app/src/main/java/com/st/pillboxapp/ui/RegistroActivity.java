@@ -1,10 +1,8 @@
 package com.st.pillboxapp.ui;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +18,7 @@ import com.st.pillboxapp.models.Register;
 import com.st.pillboxapp.responses.AuthAndRegisterResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.AuthAndRegisterService;
+import com.st.pillboxapp.util.Util;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,8 +26,8 @@ import retrofit2.Response;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    EditText nombre, correo, clave;
-    Button btnRegistro;
+    private EditText nombre, correo, clave;
+    private Button btnRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +49,10 @@ public class RegistroActivity extends AppCompatActivity {
 
     public void onRegisterSuccess(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
 
-        SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putString("token", response.body().getToken());
-        editor.putString("idUser", response.body().getUser().getId());
-        editor.putString("emailUser", response.body().getUser().getEmail());
-        editor.putString("nombreUser", response.body().getUser().getName());
-        editor.putString("fotoUser", response.body().getUser().getPicture());
-        editor.commit();
+        Util.setData(RegistroActivity.this, response.body().getToken(), response.body().getUser().getId(),
+                response.body().getUser().getEmail(),response.body().getUser().getName()
+                ,response.body().getUser().getPicture());
 
         startActivity(new Intent(RegistroActivity.this, DashboardActivity.class));
 

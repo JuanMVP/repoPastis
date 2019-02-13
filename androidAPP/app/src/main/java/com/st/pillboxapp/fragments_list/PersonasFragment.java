@@ -1,7 +1,7 @@
 package com.st.pillboxapp.fragments_list;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,6 +20,7 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.OneUserResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.UserService;
+import com.st.pillboxapp.util.Util;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,17 +29,13 @@ import retrofit2.Response;
 
 public class PersonasFragment extends Fragment {
 
-
     private static final String ARG_COLUMN_COUNT = "column-count";
-
     private int mColumnCount = 1;
     private OnListPersonasInteractionListener mListener;
     private MyPersonasRecyclerViewAdapter adapter;
     private Context ctx;
 
-    public PersonasFragment() {
-    }
-
+    public PersonasFragment() { }
 
     public static PersonasFragment newInstance(int columnCount) {
         PersonasFragment fragment = new PersonasFragment();
@@ -55,6 +52,8 @@ public class PersonasFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,34 +72,31 @@ public class PersonasFragment extends Fragment {
             }
 
 
-            SharedPreferences prefs = this.getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
-
-            UserService userService = ServiceGenerator.createService(UserService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
-
-            Call<OneUserResponse> call = userService.oneUserById(prefs.getString("idUser", ""));
+            //*Petición a nuestra API*//
+            UserService userService = ServiceGenerator.createService(UserService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
+            Call<OneUserResponse> call = userService.oneUserById(Util.getUserId(this.getActivity()));
 
             call.enqueue(new Callback<OneUserResponse>() {
                 @Override
                 public void onResponse(Call<OneUserResponse> call, Response<OneUserResponse> response) {
                     if (response.isSuccessful()) {
                         adapter = new MyPersonasRecyclerViewAdapter(ctx, R.layout.fragment_personas, response.body().getPersonas(), mListener);
-
                         recyclerView.setAdapter(adapter);
                     } else {
-                        Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<OneUserResponse> call, Throwable t) {
 
-                    Toast.makeText(getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
                 }
             });
         }
         return view;
     }
+
 
 
     @Override

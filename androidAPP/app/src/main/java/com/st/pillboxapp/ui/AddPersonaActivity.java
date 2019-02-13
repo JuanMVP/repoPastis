@@ -18,6 +18,7 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
+import com.st.pillboxapp.util.Util;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,10 +47,9 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
                 String name = nombre.getText().toString().trim();
                 String fecha = fechaNacimiento.getText().toString().trim();
 
-                final SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-                Persona persona = new Persona(name, fecha, prefs.getString("idUser", ""));
+                Persona persona = new Persona(name, fecha, Util.getUserId(AddPersonaActivity.this));
 
-                PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
+                PersonaService pService = ServiceGenerator.createService(PersonaService.class, Util.getToken(AddPersonaActivity.this), TipoAutenticacion.JWT);
 
                 Call<PersonaResponse> personaResponseCall = pService.register(persona);
 

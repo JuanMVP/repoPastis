@@ -33,9 +33,7 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         mValues = items;
         mListener = listener;
         this.ctx = context;
-
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,33 +47,29 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         holder.mItem = mValues.get(position);
         holder.nombreMedicamento.setText(holder.mItem.getNombre());
         if (holder.mItem.getFotos() != null) {
+
             Glide.with(ctx).load(holder.mItem.getFotos().get(0).getUrl()).into(holder.imagenMedicamemto);
 
         } else {
-
             holder.imagenMedicamemto.setImageResource(R.drawable.ic_no_photo);
         }
 
+
+        //*Para aumentar la imagen del medicamento al hacer click*//
         final ImagePopup imagePopup = new ImagePopup(ctx);
-
-        imagePopup.setWindowHeight(400); // Optional
-        imagePopup.setWindowWidth(400); // Optional
-        imagePopup.setFullScreen(true); // Optional
-        imagePopup.setHideCloseIcon(true);  // Optional
-        imagePopup.setImageOnClickClose(true);  // Optional
-
+        configurarPopUp(imagePopup);
 
         imagePopup.initiatePopup(holder.imagenMedicamemto.getDrawable());
 
         holder.imagenMedicamemto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /** Initiate Popup view **/
                 imagePopup.viewPopup();
 
             }
         });
 
+        //*Click para que se abra el DialogFragment (AddMedicamentoFragment)*//
         holder.cardViewMedicamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,5 +110,17 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
                     ", mItem=" + mItem +
                     '}';
         }
+    }
+
+    /**Métodos propios **/
+
+    public void configurarPopUp(ImagePopup imagePopup) {
+
+        imagePopup.setWindowHeight(400);
+        imagePopup.setWindowWidth(400);
+        imagePopup.setFullScreen(true);
+        imagePopup.setHideCloseIcon(true);
+        imagePopup.setImageOnClickClose(true);
+
     }
 }
