@@ -1,27 +1,21 @@
-package com.st.pillboxapp.fragments;
+package com.st.pillboxapp.fragments_list;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
@@ -29,7 +23,6 @@ import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.responses.MedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
-import com.st.pillboxapp.ui.DashboardActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;

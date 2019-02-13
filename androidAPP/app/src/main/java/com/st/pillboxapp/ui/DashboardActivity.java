@@ -26,10 +26,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.fragments.AddMedicamentoFragment;
-import com.st.pillboxapp.fragments.EditPersonaFragment;
-import com.st.pillboxapp.fragments.MedicamentosFragment;
-import com.st.pillboxapp.fragments.PersonasFragment;
+import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
+import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
+import com.st.pillboxapp.fragments_list.MedicamentosFragment;
+import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
@@ -47,23 +47,25 @@ public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener {
 
 
-    Fragment f;
-    FloatingActionButton fab;
+    private Fragment f;
+    private FloatingActionButton fab;
     private Toolbar toolbar;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Mis Personas");
-
-        setSupportActionBar(toolbar);
-        SharedPreferences prefs =
-                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
         fab = findViewById(R.id.fab);
+
+        toolbar.setTitle("Mis Personas");
+        setSupportActionBar(toolbar);
+
+        prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +74,12 @@ public class DashboardActivity extends AppCompatActivity
                 }
             }
         });
+
+        asignarUsuario(prefs);
+
+    }
+
+    public void asignarUsuario(SharedPreferences prefs){
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,13 +114,12 @@ public class DashboardActivity extends AppCompatActivity
                 Toast.makeText(DashboardActivity.this, "Entro", Toast.LENGTH_LONG);
             }
         });
-
     }
-
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -122,9 +129,7 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
-
 
         return true;
     }
@@ -132,12 +137,8 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -148,14 +149,13 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
+        int id = item.getItemId();
         f = null;
 
-        int id = item.getItemId();
-
         if (id == R.id.nav_misPersonas) {
-            fab = findViewById(R.id.fab);
 
             f = new PersonasFragment();
+            fab.show();
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -164,7 +164,6 @@ public class DashboardActivity extends AppCompatActivity
                     Toast.makeText(DashboardActivity.this, "Entro", Toast.LENGTH_LONG);
                 }
             });
-            fab.show();
 
             toolbar.setTitle("Mis Personas");
 
@@ -177,13 +176,17 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
 
-            SharedPreferences prefs =
-                    getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+            prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
             SharedPreferences.Editor editor = prefs.edit();
             editor.clear();
             editor.commit();
+
             startActivity(i);
+
             finish();
+        } else if(id == R.id.nav_tratamientos){
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -204,7 +207,6 @@ public class DashboardActivity extends AppCompatActivity
         f.show(fm, "EditarPersona");
 
     }
-
 
     @Override
     public void onDeleteBtnClick(String id, String nombre) {
@@ -264,26 +266,12 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
-    /*@Override
-    public void onClickMedicamento(String nregistro) {
-
-        SharedPreferences prefs =
-                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("nregistro", nregistro);
-        editor.commit();
-
-        startActivity(new Intent(DashboardActivity.this, AddMedicamentoActivity.class));
-    }*/
-
     @Override
     public void onClickMedicamento(Resultado resultado) {
 
         AddMedicamentoFragment f = AddMedicamentoFragment.newInstance(resultado);
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "AñadirMedicamento");
-
 
     }
 }

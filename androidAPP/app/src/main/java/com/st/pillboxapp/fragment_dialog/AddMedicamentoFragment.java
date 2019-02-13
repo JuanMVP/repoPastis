@@ -1,4 +1,4 @@
-package com.st.pillboxapp.fragments;
+package com.st.pillboxapp.fragment_dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -25,7 +25,7 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
 
-import com.st.pillboxapp.ui.AddMedicamentoViewModel;
+import com.st.pillboxapp.viewModel.AddMedicamentoViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;

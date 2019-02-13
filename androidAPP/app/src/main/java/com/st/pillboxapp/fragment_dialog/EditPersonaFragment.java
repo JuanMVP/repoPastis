@@ -1,20 +1,17 @@
-package com.st.pillboxapp.fragments;
+package com.st.pillboxapp.fragment_dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.models.Persona;
@@ -22,8 +19,7 @@ import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.PersonaService;
-import com.st.pillboxapp.ui.DashboardActivity;
-import com.st.pillboxapp.ui.EditPersonaViewModel;
+import com.st.pillboxapp.viewModel.EditPersonaViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,7 +50,6 @@ public class EditPersonaFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (getArguments() != null) {
             argNombre = getArguments().getString(ARG_NOMBRE);
             argFecha = getArguments().getString(ARG_FECHA_NAC);
@@ -81,18 +76,19 @@ public class EditPersonaFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setMessage("Editar persona: ")
+
                 .setPositiveButton(R.string.editPersona, new DialogInterface.OnClickListener() {
+
                     public void onClick(final DialogInterface dialog, int id) {
                         String nombreEditado = nombre.getText().toString();
                         String fechaNacimientoEditado = fechaNacimiento.getText().toString();
 
                         final SharedPreferences prefs = getContext().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-                        Persona persona = new Persona(nombreEditado, fechaNacimientoEditado, prefs.getString("idUser", ""));
 
+                        Persona persona = new Persona(nombreEditado, fechaNacimientoEditado, prefs.getString("idUser", ""));
                         PersonaService pService = ServiceGenerator.createService(PersonaService.class, prefs.getString("token", ""), TipoAutenticacion.JWT);
 
                         Call<PersonaResponse> call = pService.editOne(getArguments().getString(ARG_ID_PERSONA), persona);
-
                         call.enqueue(new Callback<PersonaResponse>() {
                             @Override
                             public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {

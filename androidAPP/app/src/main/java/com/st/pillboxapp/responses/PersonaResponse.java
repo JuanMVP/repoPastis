@@ -1,5 +1,11 @@
 package com.st.pillboxapp.responses;
 
+import android.app.Application;
+import android.arch.lifecycle.LiveData;
+
+import com.st.pillboxapp.models.Persona;
+
+import java.util.List;
 import java.util.Objects;
 
 public class PersonaResponse {
@@ -8,8 +14,7 @@ public class PersonaResponse {
     private String nombre;
     private String fechaNacimiento;
 
-    public PersonaResponse() {
-    }
+    public PersonaResponse() { }
 
     public PersonaResponse(String id, String nombre, String fechaNacimiento) {
         this.id = id;

@@ -1,4 +1,4 @@
-package com.st.pillboxapp.fragments;
+package com.st.pillboxapp.fragments_list;
 
 import android.content.Context;
 import android.content.SharedPreferences;
