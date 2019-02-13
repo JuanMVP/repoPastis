@@ -6,4 +6,6 @@ public interface OnListMedicamentosInteractionListener {
 
     public void onClickMedicamento(Resultado resultado);
 
+    public void onClickBtnAddMedicamento(String nregistro);
+
 }

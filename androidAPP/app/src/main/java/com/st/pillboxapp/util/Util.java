@@ -55,5 +55,21 @@ public class Util {
 
     }
 
+    public static void setIdMedicamento(Context ctx, String value) {
+
+        SharedPreferences prefs = ctx.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("nRegistro",value);
+        editor.commit();
+
+
+    }
+
+    public static String getIdMedicamento(Context ctx) {
+
+        SharedPreferences prefs = ctx.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        return prefs.getString("nRegistro",null);
+    }
+
 
 }

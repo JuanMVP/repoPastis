@@ -22,7 +22,6 @@
     android:layout_height="match_parent">
 
 
-
     <EditText
         android:id="@+id/findMedicamento"
         android:layout_width="246dp"
@@ -35,6 +34,7 @@
         android:ems="10"
         android:hint="Buscar Medicamento"
         android:inputType="textPersonName"
+        android:text="Paracetamol"
         app:layout_constraintBottom_toTopOf="@+id/swipeMedicamentos"
         app:layout_constraintEnd_toStartOf="@+id/buttonBuscarMedicamento"
         app:layout_constraintStart_toStartOf="parent"

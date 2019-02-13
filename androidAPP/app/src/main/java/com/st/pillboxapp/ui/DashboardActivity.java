@@ -278,4 +278,12 @@ public class DashboardActivity extends AppCompatActivity
         f.show(fm, "AñadirMedicamento");
 
     }
+
+    @Override
+    public void onClickBtnAddMedicamento(String nRegistro) {
+        Util.setIdMedicamento(DashboardActivity.this, nRegistro);
+
+        startActivity(new Intent(DashboardActivity.this, AddMedicamentoActivity.class));
+
+    }
 }
