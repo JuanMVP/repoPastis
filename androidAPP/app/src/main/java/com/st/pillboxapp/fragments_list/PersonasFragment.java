@@ -1,6 +1,5 @@
 package com.st.pillboxapp.fragments_list;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,8 +52,6 @@ public class PersonasFragment extends Fragment {
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,32 +68,35 @@ public class PersonasFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-
             //*Petición a nuestra API*//
-            UserService userService = ServiceGenerator.createService(UserService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-            Call<OneUserResponse> call = userService.oneUserById(Util.getUserId(this.getActivity()));
+            cargarDatos(recyclerView);
 
-            call.enqueue(new Callback<OneUserResponse>() {
-                @Override
-                public void onResponse(Call<OneUserResponse> call, Response<OneUserResponse> response) {
-                    if (response.isSuccessful()) {
-                        adapter = new MyPersonasRecyclerViewAdapter(ctx, R.layout.fragment_personas, response.body().getPersonas(), mListener);
-                        recyclerView.setAdapter(adapter);
-                    } else {
-                        Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<OneUserResponse> call, Throwable t) {
-
-                    Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
-                }
-            });
         }
         return view;
     }
 
+    public void cargarDatos(final RecyclerView recyclerView) {
+        UserService userService = ServiceGenerator.createService(UserService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
+        Call<OneUserResponse> call = userService.oneUserById(Util.getUserId(this.getActivity()));
+
+        call.enqueue(new Callback<OneUserResponse>() {
+            @Override
+            public void onResponse(Call<OneUserResponse> call, Response<OneUserResponse> response) {
+                if (response.isSuccessful()) {
+                    adapter = new MyPersonasRecyclerViewAdapter(ctx, R.layout.fragment_personas, response.body().getPersonas(), mListener);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OneUserResponse> call, Throwable t) {
+
+                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
 
     @Override

@@ -12,49 +12,160 @@
 
         <EditText
             android:id="@+id/nombreMedicamentoAdd"
-            android:layout_width="0dp"
+            android:layout_width="match_constraint"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="Nombre"
             android:inputType="text"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/dosisMedicamentoAdd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pillbox" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/dosisMedicamentoAdd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="Dosis"
             android:inputType="text"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerPersonas2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nombreMedicamentoAdd" />
 
-        <TextView
-            android:id="@+id/pillbox"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/spinnerPersonas2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginEnd="64dp"
-            android:text="Añadir Medicamento"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="45sp"
-            android:textStyle="bold"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroup3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dosisMedicamentoAdd"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroup4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerPersonas2">
+
+            <RadioButton
+                android:id="@+id/rdbtnLunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="L" />
+
+            <RadioButton
+                android:id="@+id/rdbtnMartes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="M" />
+
+            <RadioButton
+                android:id="@+id/rdbtnMiercoles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="X" />
+
+            <RadioButton
+                android:id="@+id/rdbtnJueves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="J" />
+
+            <RadioButton
+                android:id="@+id/rdbtnViernes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="V" />
+
+            <RadioButton
+                android:id="@+id/rdbtnSabado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="S" />
+
+            <RadioButton
+                android:id="@+id/rdbtnDomingo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="D" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/radioGroup4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup3">
+
+            <RadioButton
+                android:id="@+id/rdbtnDesayuno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Desayuno" />
+
+            <RadioButton
+                android:id="@+id/rdbtnAlmuerzo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Almuerzo" />
+
+            <RadioButton
+                android:id="@+id/rdbtnMerienda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Merienda" />
+
+            <RadioButton
+                android:id="@+id/rdbtnCena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ceca" />
+        </RadioGroup>
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

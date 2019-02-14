@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -154,9 +155,7 @@ public class DashboardActivity extends AppCompatActivity
     }
 
 
-    /**
-     * Opciones del menú lateral
-     **/
+    //Opciones del menú lateral
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
@@ -205,14 +204,22 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 
-
-
-    /** Métodos onClick **/
-
+    // Métodos onClick
     @Override
     public void onEditPersonaClick(Persona p) {
 
         EditPersonaFragment f = EditPersonaFragment.newInstance(p);
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                //Toast.makeText(DashboardActivity.this, "asdfg", Toast.LENGTH_SHORT).show();
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        });
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "EditarPersona");
 

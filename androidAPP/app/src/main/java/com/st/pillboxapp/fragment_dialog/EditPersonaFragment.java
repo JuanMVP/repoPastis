@@ -25,6 +25,7 @@ import com.st.pillboxapp.viewModel.EditPersonaViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.GET;
 
 public class EditPersonaFragment extends DialogFragment {
 
@@ -33,13 +34,20 @@ public class EditPersonaFragment extends DialogFragment {
     private static final String ARG_ID_PERSONA = "id_persona";
     private EditPersonaViewModel mViewModel;
 
-    public static EditPersonaFragment newInstance() {
-        return new EditPersonaFragment();
-    }
+    private DialogInterface.OnDismissListener onDismissListener;
 
     private View view;
     private EditText nombre, fechaNacimiento;
     private String argNombre, argFecha, argId;
+
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
+
+    public static EditPersonaFragment newInstance() {
+        return new EditPersonaFragment();
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -94,30 +102,9 @@ public class EditPersonaFragment extends DialogFragment {
                         String nombreEditado = nombre.getText().toString();
                         String fechaNacimientoEditado = fechaNacimiento.getText().toString();
 
-
-                        //*Petición a nuestra API*//
                         Persona persona = new Persona(nombreEditado, fechaNacimientoEditado, Util.getUserId(getContext()));
 
-                        PersonaService pService = ServiceGenerator.createService(PersonaService.class, Util.getToken(getContext()), TipoAutenticacion.JWT);
-                        Call<PersonaResponse> call = pService.editOne(getArguments().getString(ARG_ID_PERSONA), persona);
-
-                        call.enqueue(new Callback<PersonaResponse>() {
-                            @Override
-                            public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
-                                if (response.isSuccessful()) {
-                                    dialog.dismiss();
-                                    //TODO Implementar refresh al cerrar este DialogFragment
-                                } else {
-                                    //TODO Implementar Toast
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<PersonaResponse> call, Throwable t) {
-                                //TODO Implementar Toast
-                            }
-                        });
-
+                        mViewModel.editPersona(persona,argId, dialog);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -129,6 +116,14 @@ public class EditPersonaFragment extends DialogFragment {
 
         builder.setView(view);
         return builder.create();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
+        }
     }
 
 }
