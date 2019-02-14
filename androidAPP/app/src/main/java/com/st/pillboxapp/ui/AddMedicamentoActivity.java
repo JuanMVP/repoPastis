@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +76,14 @@ public class AddMedicamentoActivity extends AppCompatActivity {
                    /* for(int i = 0; i < response.body().getPersonas().size(); i++){
                         list.add(response.body().getPersonas().get(i).getNombre());
                     }*/
+                  /* adapter = new ArrayAdapter<Persona>(AddMedicamentoActivity.this, android.R.layout.simple_spinner_dropdown_item, response.body().getPersonas()) {
+
+
+                       @Override
+                       public View getView(int position, View convertView, ViewGroup parent) {
+                           return super.getView(position, convertView, parent);
+                       }
+                   };*/
                     adapter = new ArrayAdapter<>(AddMedicamentoActivity.this, android.R.layout.simple_spinner_dropdown_item, response.body().getPersonas());
                     spinnerPersonas.setAdapter(adapter);
 

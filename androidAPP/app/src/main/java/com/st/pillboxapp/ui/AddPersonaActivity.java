@@ -37,6 +37,7 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
 
         nombre = findViewById(R.id.nombrePersona);
         fechaNacimiento = findViewById(R.id.fechaNacPersona);
+        registrar = findViewById(R.id.btnRegistrarPersona);
 
 
         addPersona();
