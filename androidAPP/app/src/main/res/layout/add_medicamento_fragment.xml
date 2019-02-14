@@ -6,53 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".fragment_dialog.AddMedicamentoFragment">
 
-    <TextView
-        android:id="@+id/nombreAddMedicamento"
+    <EditText
+        android:id="@+id/nombreAddMedicamentoFrag"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:editable="false"
         android:hint="Nombre medicamento"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloAddMedicamento" />
 
-    <TextView
-        android:id="@+id/dosisAddMedicamento"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
+    <EditText
+        android:id="@+id/dosisAddMedicamentoFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Dosis"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreAddMedicamento" />
+        app:layout_constraintTop_toBottomOf="@+id/nombreAddMedicamentoFrag" />
 
     <Spinner
         android:id="@+id/spinnerPersonas"
-        android:layout_width="379dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
         android:spinnerMode="dialog"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dosisAddMedicamento" />
+        app:layout_constraintTop_toBottomOf="@+id/dosisAddMedicamentoFrag" />
 
     <RadioGroup
         android:id="@+id/radioGroup3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPersonas">
@@ -62,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:text="L" />
 
         <RadioButton
@@ -115,6 +113,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup3">
 
@@ -123,7 +122,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:text="Desayuno" />
+
+        <RadioButton
+            android:id="@+id/rdbtnMediaManana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Media-mañana" />
 
         <RadioButton
             android:id="@+id/rdbtnAlmuerzo"
@@ -133,18 +140,25 @@
             android:text="Almuerzo" />
 
         <RadioButton
-            android:id="@+id/rdbtnMerienda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Merienda" />
-
-        <RadioButton
             android:id="@+id/rdbtnCena"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ceca" />
+            android:text="Cena" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/tituloAddMedicamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Nuevo tratamiento"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

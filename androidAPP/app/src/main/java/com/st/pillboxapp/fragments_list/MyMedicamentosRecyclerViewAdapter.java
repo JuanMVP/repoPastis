@@ -70,20 +70,11 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             }
         });
 
-        //*Click para que se abra el DialogFragment (AddMedicamentoFragment)*//
-        holder.cardViewMedicamentos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mListener.onClickMedicamento(holder.mItem);
-            }
-        });
-
         //*Click para que se abra el activity de añadir medicamento*//
         holder.btnAddMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClickBtnAddMedicamento(holder.mItem.getNregistro());
+                mListener.onClickBtnAddMedicamento(holder.mItem);
             }
         });
 
@@ -98,7 +89,6 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         public final View mView;
         public final TextView nombreMedicamento;
         public final ImageView imagenMedicamemto;
-        public final CardView cardViewMedicamentos;
         public final ImageButton btnAddMedicamento;
         public Resultado mItem;
 
@@ -107,7 +97,6 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             mView = view;
             nombreMedicamento = view.findViewById(R.id.nombreMedicamento);
             imagenMedicamemto = view.findViewById(R.id.imagenMedicamento);
-            cardViewMedicamentos = view.findViewById(R.id.cardViewMedicamentos);
             btnAddMedicamento = view.findViewById(R.id.anadirMedicamento);
 
         }
@@ -123,7 +112,9 @@ public class MyMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         }
     }
 
-    /**Métodos propios **/
+    /**
+     * Métodos propios
+     **/
 
     public void configurarPopUp(ImagePopup imagePopup) {
 

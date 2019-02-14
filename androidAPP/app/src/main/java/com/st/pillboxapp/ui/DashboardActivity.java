@@ -1,10 +1,7 @@
 package com.st.pillboxapp.ui;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -70,7 +66,7 @@ public class DashboardActivity extends AppCompatActivity
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.contenedor, new PersonasFragment(),"mainFragment")
+                .add(R.id.contenedor, new PersonasFragment(), "mainFragment")
                 .commit();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -228,7 +224,7 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public void onDeleteBtnClick(String id, String nombre) {
 
-        PersonaService service = ServiceGenerator.createService(PersonaService.class,Util.getToken(DashboardActivity.this), TipoAutenticacion.JWT);
+        PersonaService service = ServiceGenerator.createService(PersonaService.class, Util.getToken(DashboardActivity.this), TipoAutenticacion.JWT);
 
         final Call<PersonaResponse> call = service.deleteOne(id);
 
@@ -270,27 +266,19 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        builder.setTitle("¿Seguro que quiere borrar a " + nombre.toUpperCase()+"?");
+        builder.setTitle("¿Seguro que quiere borrar a " + nombre.toUpperCase() + "?");
 
         AlertDialog dialog = builder.create();
 
         dialog.show();
     }
 
-    @Override
-    public void onClickMedicamento(Resultado resultado) {
 
+    @Override
+    public void onClickBtnAddMedicamento(Resultado resultado) {
         AddMedicamentoFragment f = AddMedicamentoFragment.newInstance(resultado);
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "AñadirMedicamento");
-
-    }
-
-    @Override
-    public void onClickBtnAddMedicamento(String nRegistro) {
-        Util.setIdMedicamento(DashboardActivity.this, nRegistro);
-
-        startActivity(new Intent(DashboardActivity.this, AddMedicamentoActivity.class));
 
     }
 }

@@ -61,10 +61,6 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", fecha_nacimiento='" + fecha_nacimiento + '\'' +
-                '}';
+        return nombre;
     }
 }
