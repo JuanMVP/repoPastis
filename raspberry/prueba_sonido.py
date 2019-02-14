@@ -11,6 +11,6 @@ buzzer = Buzzer(13)
 buzzer.on()
 sleep(1)
 buzzer.off()
-sleep(1)
+
 #while True:
 #    buzzer.beep()
