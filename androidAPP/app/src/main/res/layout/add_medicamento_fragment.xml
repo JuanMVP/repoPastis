@@ -14,10 +14,17 @@
             android:id="@+id/nombreMedicamentoAdd"
             android:layout_width="match_constraint"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
+=======
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="50dp"
+>>>>>>> 38868beac5593d21d548feb0977eeaa43155f088
             android:ems="10"
             android:hint="Nombre"
             android:inputType="text"
@@ -33,16 +40,27 @@
             android:id="@+id/dosisMedicamentoAdd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
+=======
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="393dp"
+>>>>>>> 38868beac5593d21d548feb0977eeaa43155f088
             android:ems="10"
             android:hint="Dosis"
             android:inputType="text"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
+<<<<<<< HEAD
             app:layout_constraintBottom_toTopOf="@+id/spinnerPersonas2"
+=======
+            app:layout_constraintBottom_toBottomOf="parent"
+>>>>>>> 38868beac5593d21d548feb0977eeaa43155f088
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nombreMedicamentoAdd" />
@@ -51,12 +69,23 @@
             android:id="@+id/spinnerPersonas2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:spinnerMode="dialog"
             app:layout_constraintBottom_toTopOf="@+id/radioGroup3"
+=======
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:text="Añadir Medicamento"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/nombreMedicamentoAdd"
+>>>>>>> 38868beac5593d21d548feb0977eeaa43155f088
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
