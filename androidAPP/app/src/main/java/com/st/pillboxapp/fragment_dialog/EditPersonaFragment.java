@@ -85,7 +85,7 @@ public class EditPersonaFragment extends DialogFragment {
 
         builder.setMessage("Editar persona: ")
 
-                .setPositiveButton(R.string.editPersona, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.edit, new DialogInterface.OnClickListener() {
 
                     public void onClick(final DialogInterface dialog, int id) {
                         String nombreEditado = nombre.getText().toString();

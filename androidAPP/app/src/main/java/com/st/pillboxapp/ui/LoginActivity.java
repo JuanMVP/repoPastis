@@ -122,8 +122,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        builder.setMessage(R.string.dialog_message)
-                .setTitle(R.string.dialog_title);
+        builder.setMessage(R.string.login_error)
+                .setTitle(R.string.error);
 
 
         AlertDialog dialog = builder.create();

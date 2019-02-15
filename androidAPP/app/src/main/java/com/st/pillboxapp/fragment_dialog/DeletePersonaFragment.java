@@ -83,7 +83,7 @@ public class DeletePersonaFragment extends DialogFragment {
 
         builder.setMessage("Eliminar a: ")
 
-                .setPositiveButton(R.string.deletePersona, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
 
                     public void onClick(final DialogInterface dialog, int id) {
                         String nombreEditado = nombre.getText().toString();

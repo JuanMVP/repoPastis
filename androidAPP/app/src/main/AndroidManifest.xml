@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.DashboardActivity"
-            android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

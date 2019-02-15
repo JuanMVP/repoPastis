@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    private EditText nombre, correo, clave;
+    private EditText nombre, correo, clave, comprobacionClave;
     private Button btnRegistro;
 
     @Override
@@ -39,16 +39,14 @@ public class RegistroActivity extends AppCompatActivity {
         nombre = findViewById(R.id.editNombreRegistro);
         correo = findViewById(R.id.editEmailRegistro);
         clave = findViewById(R.id.passwordRegsitro);
+        comprobacionClave = findViewById(R.id.comprobacionPasswordRegistro);
         btnRegistro = findViewById(R.id.btnRegistro);
 
-
         doRegister();
-
 
     }
 
     public void onRegisterSuccess(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
-
 
         Util.setData(RegistroActivity.this, response.body().getToken(), response.body().getUser().getId(),
                 response.body().getUser().getEmail(),response.body().getUser().getName()
@@ -58,22 +56,20 @@ public class RegistroActivity extends AppCompatActivity {
 
     }
 
-    public void onRegisterFail() {
+    //alerta de error en caso de fallo
+    public void onRegisterFail(int tipoError) {
         AlertDialog.Builder builder = new AlertDialog.Builder(RegistroActivity.this);
-
 
         builder.setIcon(R.drawable.ic_cancelar);
 
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
-
             }
         });
 
-        builder.setMessage(R.string.dialog_errorRegistro)
-                .setTitle(R.string.dialog_title);
-
+        builder.setMessage(tipoError)
+                .setTitle(R.string.error);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -93,35 +89,43 @@ public class RegistroActivity extends AppCompatActivity {
                 String name = nombre.getText().toString().trim();
                 String email = correo.getText().toString().trim();
                 String password = clave.getText().toString().trim();
+                String compassword = comprobacionClave.getText().toString().trim();
 
-                Register registro = new Register(name, email, password);
+                if(password.length() < 6){
+                    onRegisterFail(R.string.register_contraseña_no_segura);
+                }
 
-                AuthAndRegisterService service = ServiceGenerator.createService(AuthAndRegisterService.class);
+                if(!password.equals(compassword)){
+                    onRegisterFail(R.string.register_contraseña_incorrecta);
+                }
+            }
+        });
+    }
 
-                Call<AuthAndRegisterResponse> registerResponseCall = service.register(registro);
+    public void crearUsuarioNuevo(Register registro, final ProgressDialog progressDialog){
+        AuthAndRegisterService service = ServiceGenerator.createService(AuthAndRegisterService.class);
 
-                registerResponseCall.enqueue(new Callback<AuthAndRegisterResponse>() {
+        Call<AuthAndRegisterResponse> registerResponseCall = service.register(registro);
 
-                    @Override
-                    public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
+        registerResponseCall.enqueue(new Callback<AuthAndRegisterResponse>() {
 
-                        if (response.isSuccessful()) {
-                            progressDialog.dismiss();
-                            onRegisterSuccess(call, response);
+            @Override
+            public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
 
-                        } else {
-                            progressDialog.dismiss();
-                            onRegisterFail();
-                        }
-                    }
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+                    onRegisterSuccess(call, response);
 
-                    @Override
-                    public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
-                        Log.e("NetworkFail", t.getMessage());
-                        Toast.makeText(RegistroActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                } else {
+                    progressDialog.dismiss();
+                    onRegisterFail(R.string.error);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
+                Log.e("NetworkFail", t.getMessage());
+                Toast.makeText(RegistroActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
     }
