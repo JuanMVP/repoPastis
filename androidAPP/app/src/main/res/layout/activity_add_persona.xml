@@ -11,9 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="25dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="text"
@@ -22,14 +22,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pillbox" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloRegistrarPersona" />
 
     <EditText
         android:id="@+id/fechaNacPersona"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="dd/mm/yyyy"
@@ -60,18 +60,19 @@
         app:layout_constraintVertical_bias="0.951" />
 
     <TextView
-        android:id="@+id/pillbox"
+        android:id="@+id/tituloRegistrarPersona"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
-        android:text="Añadir Persona"
+        android:text="Nueva Persona"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/nombrePersona"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
