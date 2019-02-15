@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.st.pillboxapp.R;
 
 import com.st.pillboxapp.fragments_list.MyPersonasRecyclerViewAdapter;
+import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.models.TipoAutenticacion;
@@ -63,6 +65,7 @@ public class AddMedicamentoFragment extends DialogFragment {
     private Spinner spinnerPersonas;
     private ArrayAdapter<Persona> personas;
     private List<Persona> listpersonas;
+    private String id_persona;
 
 
     @Override
@@ -106,13 +109,26 @@ public class AddMedicamentoFragment extends DialogFragment {
         spinnerPersonas = view.findViewById(R.id.spinnerPersonas);
 
 
-
         nombre.setText(argNombre);
         dosis.setText(argDosis);
 
         nombre.setEnabled(true);
         dosis.setEnabled(true);
         cargarSpinner();
+
+        spinnerPersonas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                Persona persona = listpersonas.get(position);
+                Toast.makeText(getContext(), persona.getId(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         //*Se crea el DialogFragment*//
@@ -123,17 +139,17 @@ public class AddMedicamentoFragment extends DialogFragment {
                 String nombreMedicamento = nombre.getText().toString();
                 String dosisMedicamento = dosis.getText().toString();
 
-
+                id_persona = ((Persona)spinnerPersonas.getSelectedItem()).getId();
 
                 //*Petición a nuestra API*//
-                Resultado resultado = new Resultado(nombreMedicamento, dosisMedicamento);
+                Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento,id_persona);
 
                 MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(getContext()), TipoAutenticacion.JWT);
-                Call<Resultado> call = service.addMedicamento(resultado);
+                Call<Medicamento> call = service.addMedicamento(medicamento);
 
-                call.enqueue(new Callback<Resultado>() {
+                call.enqueue(new Callback<Medicamento>() {
                     @Override
-                    public void onResponse(Call<Resultado> call, Response<Resultado> response) {
+                    public void onResponse(Call<Medicamento> call, Response<Medicamento> response) {
 
                         if (response.isSuccessful()) {
                             dialog.dismiss();
@@ -144,12 +160,11 @@ public class AddMedicamentoFragment extends DialogFragment {
                     }
 
                     @Override
-                    public void onFailure(Call<Resultado> call, Throwable t) {
-
+                    public void onFailure(Call<Medicamento> call, Throwable t) {
+                        Log.i("ERROR", "error: " + t);
                         //TODO Implementar Toast
                     }
                 });
-
             }
         })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -163,6 +178,9 @@ public class AddMedicamentoFragment extends DialogFragment {
 
         return builder.create();
     }
+
+
+
 
     public void cargarSpinner() {
 
@@ -188,19 +206,7 @@ public class AddMedicamentoFragment extends DialogFragment {
             }
         });
 
-        spinnerPersonas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Persona persona = listpersonas.get(position);
-                Toast.makeText(getContext(), persona.getId(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
     }

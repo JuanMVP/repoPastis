@@ -55,7 +55,8 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
                 String name = nombre.getText().toString().trim();
                 String fecha = fechaNacimiento.getText().toString().trim();
 
-                Persona persona = new Persona(name, fecha, Util.getUserId(AddPersonaActivity.this));
+                String user_id = Util.getUserId(AddPersonaActivity.this);
+                Persona persona = new Persona(name, fecha, user_id);
 
                 PersonaService pService = ServiceGenerator.createService(PersonaService.class, Util.getToken(AddPersonaActivity.this), TipoAutenticacion.JWT);
 

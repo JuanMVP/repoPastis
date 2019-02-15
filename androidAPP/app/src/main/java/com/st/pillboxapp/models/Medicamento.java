@@ -6,6 +6,7 @@ public class Medicamento {
     private String nombre;
     private String dosis;
     private String imagenUrl;
+    private String persona_id;
 
 
     public Medicamento(){}
@@ -20,6 +21,11 @@ public class Medicamento {
     public Medicamento(String nombre, String dosis) {
         this.nombre = nombre;
         this.dosis = dosis;
+    }
+    public Medicamento(String nombre, String dosis,String persona_id) {
+        this.nombre = nombre;
+        this.dosis = dosis;
+        this.persona_id = persona_id;
     }
 
     public String getNregistro() {

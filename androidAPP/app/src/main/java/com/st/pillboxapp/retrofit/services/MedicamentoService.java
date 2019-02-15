@@ -22,5 +22,5 @@ public interface MedicamentoService {
     Call<MedicamentoResponse> getOneMedicamento(@Query("nregistro") String nregistro);
 
     @POST("/medicamentos")
-    Call<Resultado> addMedicamento(@Body Resultado resultado);
+    Call<Medicamento> addMedicamento(@Body Medicamento medicamento);
 }

@@ -8,6 +8,7 @@ public class Resultado {
     private String nombre;
     private String dosis;
     private List<Foto> fotos;
+    private String id_persona;
 
     public Resultado(){}
 
@@ -22,6 +23,20 @@ public class Resultado {
         this.nombre = nombre;
         this.dosis = dosis;
 
+    }
+
+    public Resultado(String nombre, String dosis, String id_persona) {
+        this.nombre = nombre;
+        this.dosis = dosis;
+        this.id_persona = id_persona;
+    }
+
+    public String getId_persona() {
+        return id_persona;
+    }
+
+    public void setId_persona(String id_persona) {
+        this.id_persona = id_persona;
     }
 
     public String getNregistro() {
@@ -59,9 +74,9 @@ public class Resultado {
     @Override
     public String toString() {
         return "Resultado{" +
-                "nregistro='" + nregistro + '\'' +
-                ", nombre='" + nombre + '\'' +
+                "nombre='" + nombre + '\'' +
                 ", dosis='" + dosis + '\'' +
+                ", id_persona='" + id_persona + '\'' +
                 '}';
     }
 }
