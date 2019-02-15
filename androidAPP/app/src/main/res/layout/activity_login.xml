@@ -61,13 +61,13 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnGoogle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!--<ImageView
@@ -80,18 +80,6 @@
         app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
         app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/btnFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/facebooklogin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnGoogle" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
@@ -100,7 +88,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:text="¿Olvidaste tu contraseña?"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnGuardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
