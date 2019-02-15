@@ -26,7 +26,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EditPersonaViewModel extends AndroidViewModel {
-
     public EditPersonaViewModel(@NonNull Application application) {
         super(application);
     }

@@ -30,7 +30,6 @@ public class EditPersonaFragment extends DialogFragment {
     private EditText nombre, fechaNacimiento;
     private String argNombre, argFecha, argId;
 
-
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         this.onDismissListener = onDismissListener;
     }
@@ -93,7 +92,6 @@ public class EditPersonaFragment extends DialogFragment {
                         String fechaNacimientoEditado = fechaNacimiento.getText().toString();
 
                         Persona persona = new Persona(nombreEditado, fechaNacimientoEditado, Util.getUserId(getContext()));
-
                         mViewModel.editPersona(persona,argId, dialog);
                     }
                 })
