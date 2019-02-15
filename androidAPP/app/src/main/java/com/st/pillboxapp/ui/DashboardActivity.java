@@ -186,8 +186,6 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(i);
             finish();
 
-        } else if (id == R.id.nav_tratamientos) {
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
