@@ -54,6 +54,14 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             }
         });
 
+<<<<<<< HEAD
+        //*Click corto para ver info una persona*//
+        holder.infoPersona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onClickPersona(holder.mItem);
+
+=======
         //*Click para editar una persona*//
         holder.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +77,7 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
                 Toast.makeText(ctx, "Se encuentra en construccion", Toast.LENGTH_LONG).show();
                 //  mListener.onEditPersonaClick(holder.mItem);
                 return true;
+>>>>>>> cbfea97e2870dd2798f28a6d93a7fccae5eeb634
             }
         });
     }
@@ -84,8 +93,12 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         public final TextView fechaNacPersona;
         public Persona mItem;
         public final Button btnDelete;
+<<<<<<< HEAD
+        public final CardView infoPersona;
+=======
         public final Button btnEditar;
         public final CardView elementoPersona;
+>>>>>>> cbfea97e2870dd2798f28a6d93a7fccae5eeb634
 
         public ViewHolder(View view) {
             super(view);
@@ -93,8 +106,12 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             nombrePersona = view.findViewById(R.id.addNombrePersona);
             fechaNacPersona = view.findViewById(R.id.addFechaNacPersona);
             btnDelete = view.findViewById(R.id.btnDeletePersona);
+<<<<<<< HEAD
+            infoPersona = view.findViewById(R.id.cardViewPersonas);
+=======
             btnEditar = view.findViewById(R.id.btnEditPersona);
             elementoPersona = view.findViewById(R.id.cardView);
+>>>>>>> cbfea97e2870dd2798f28a6d93a7fccae5eeb634
         }
 
         @Override

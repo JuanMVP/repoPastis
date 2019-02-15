@@ -29,6 +29,7 @@ import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
 import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
 import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
+import com.st.pillboxapp.fragment_dialog.InfoPersonaDialogFragment;
 import com.st.pillboxapp.fragments_list.MedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
@@ -248,6 +249,15 @@ public class DashboardActivity extends AppCompatActivity
         });
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "AñadirPersona");
+    }
+
+    @Override
+    public void onClickPersona(Persona p) {
+
+        InfoPersonaDialogFragment f = InfoPersonaDialogFragment.newInstance(p);
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "Infopersona");
+
     }
 
     @Override

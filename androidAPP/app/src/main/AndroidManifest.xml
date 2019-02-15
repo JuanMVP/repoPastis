@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_icon_pillbox_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".viewModel.RecuperarPasswordActivity"></activity>
         <activity
             android:name=".ui.DashboardActivity"
             android:screenOrientation="portrait"

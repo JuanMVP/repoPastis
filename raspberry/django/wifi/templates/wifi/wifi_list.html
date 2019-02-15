@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Conexion Red</title>
+        <style>
+        .btn {
+                background-color: #4CAF50; /* Green */
+                height: 30px;
+                width: 260px;
+                color: white;
+                /*padding: 15px 32px;*/
+                text-align: center;
+                text-decoration: none;
+                /*display: inline-block;*/
+                font-size: 16px;
+            }
+        .b {
+            padding: 5px 30px;
+             background-image:"wifi/fondo.png";
+            background-position: center;
+        }
+        </style>
+    </head>
+    <body class="b" bgcolor="FFCECB" >
+        <h1>Redes</h1>
+        <form  action="/conexion" method="post"></form>
+            <select name="OS" class="btn">
+                {% for r in nombre_redes %}
+                <option value={{r}}>{{r}}</option> 
+                {% endfor %} 
+             </select>
+             <br><br>
+             <div>
+                <label for="name">Contraseña:</label>
+                <input type="text" id="pass" />
+            </div>
+        </form>  
+    </body>
+</html>
