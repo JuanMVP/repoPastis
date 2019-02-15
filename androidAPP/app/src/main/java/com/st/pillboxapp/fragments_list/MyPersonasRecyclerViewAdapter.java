@@ -53,12 +53,12 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             }
         });
 
-        //*Click largo para editar una persona*//
-        holder.elementoPersona.setOnLongClickListener(new View.OnLongClickListener() {
+        //*Click corto para ver info una persona*//
+        holder.infoPersona.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                mListener.onEditPersonaClick(holder.mItem);
-                return true;
+            public void onClick(View v) {
+                mListener.onClickPersona(holder.mItem);
+
             }
         });
     }
@@ -74,7 +74,7 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         public final TextView fechaNacPersona;
         public Persona mItem;
         public final Button btnDelete;
-        public final CardView elementoPersona;
+        public final CardView infoPersona;
 
         public ViewHolder(View view) {
             super(view);
@@ -82,7 +82,7 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             nombrePersona = view.findViewById(R.id.nombrePersona);
             fechaNacPersona = view.findViewById(R.id.fechaNacPersona);
             btnDelete = view.findViewById(R.id.btnDeletePersona);
-            elementoPersona = view.findViewById(R.id.cardView);
+            infoPersona = view.findViewById(R.id.cardViewPersonas);
         }
 
         @Override

@@ -1,5 +1,6 @@
 package com.st.pillboxapp.models;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Persona {
@@ -8,6 +9,7 @@ public class Persona {
     private String nombre;
     private String fecha_nacimiento;
     private String user_id;
+    private List<Resultado> medicamentos;
 
     public Persona(){}
 
@@ -25,6 +27,14 @@ public class Persona {
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
         this.user_id = user_id;
+    }
+
+    public Persona(String id, String nombre, String fecha_nacimiento, String user_id, List<Resultado> medicamentos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.user_id = user_id;
+        this.medicamentos = medicamentos;
     }
 
     public String getUser_id() {
@@ -45,6 +55,14 @@ public class Persona {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public List<Resultado> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(List<Resultado> medicamentos) {
+        this.medicamentos = medicamentos;
     }
 
     public void setNombre(String nombre) {

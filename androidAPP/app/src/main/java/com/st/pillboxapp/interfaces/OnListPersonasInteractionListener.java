@@ -10,4 +10,6 @@ public interface OnListPersonasInteractionListener {
 
     public void onAddPersonaClick(Persona p);
 
+    public void onClickPersona(Persona p);
+
 }
