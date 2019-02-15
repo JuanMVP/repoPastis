@@ -9,24 +9,6 @@
     tools:context=".ui.LoginActivity">
 
     <EditText
-        android:id="@+id/passwordRegsitro2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Repetir contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegistro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordRegsitro"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
         android:id="@+id/editNombreRegistro"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -71,11 +53,29 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/passwordRegsitro2"
+        app:layout_constraintBottom_toTopOf="@+id/comprobacionPasswordRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editEmailRegistro" />
 
+
+    <EditText
+        android:id="@+id/comprobacionPasswordRegistro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Repetir contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegistro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordRegsitro"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnRegistro"
@@ -87,12 +87,13 @@
         android:layout_marginBottom="101dp"
         android:background="@drawable/shapebox"
         android:padding="10dp"
-        android:text="SIGN UP"
+        android:text="REGISTRAR"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordRegsitro2"
+        app:layout_constraintTop_toBottomOf="@+id/comprobacionPasswordRegistro"
         tools:layout_width="0dp" />
 
     <ImageView

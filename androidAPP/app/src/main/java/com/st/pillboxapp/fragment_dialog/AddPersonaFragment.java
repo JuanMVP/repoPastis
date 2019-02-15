@@ -1,36 +1,82 @@
 package com.st.pillboxapp.fragment_dialog;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.st.pillboxapp.R;
+import com.st.pillboxapp.models.Persona;
+import com.st.pillboxapp.util.Util;
 import com.st.pillboxapp.viewModel.AddPersonaViewModel;
 
-public class AddPersonaFragment extends Fragment {
+public class AddPersonaFragment extends DialogFragment {
 
     private AddPersonaViewModel mViewModel;
 
-    public static AddPersonaFragment newInstance() {
-        return new AddPersonaFragment();
+    private DialogInterface.OnDismissListener onDismissListener;
+
+    private View view;
+    private EditText nombre, fechaNacimiento;
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.add_persona_fragment, container, false);
-    }
+    public static AddPersonaFragment newInstance() { return new AddPersonaFragment(); }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(AddPersonaViewModel.class);
-        // TODO: Use the ViewModel
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        view = inflater.inflate(R.layout.add_persona_fragment, null);
+
+        nombre = view.findViewById(R.id.addNombrePersona);
+        fechaNacimiento = view.findViewById(R.id.addFechaNacPersona);
+
+        //*Se crea el DialogFragment*//
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage("Añadir persona")
+                .setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        String nombreAdd = nombre.getText().toString();
+                        String fechaNacimientoAdd = fechaNacimiento.getText().toString();
+
+                        Persona persona = new Persona(nombreAdd, fechaNacimientoAdd, Util.getUserId(getContext()));
+                        mViewModel.AddPersona(persona, dialog);
+
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builder.setView(view);
+        return builder.create();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
+        }
     }
 
 }

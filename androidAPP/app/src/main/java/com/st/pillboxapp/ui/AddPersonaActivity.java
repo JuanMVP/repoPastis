@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.PersonaResponse;
@@ -24,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class AddPersonaActivity extends AppCompatActivity implements OnListPersonasInteractionListener {
+public class AddPersonaActivity extends AppCompatActivity {
 
     EditText nombre, fechaNacimiento;
     Button registrar;
@@ -35,14 +33,11 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_persona);
 
-        nombre = findViewById(R.id.nombrePersona);
-        fechaNacimiento = findViewById(R.id.fechaNacPersona);
+        nombre = findViewById(R.id.addNombrePersona);
+        fechaNacimiento = findViewById(R.id.addFechaNacPersona);
         registrar = findViewById(R.id.btnRegistrarPersona);
 
-
         addPersona();
-
-
 
     }
 
@@ -91,14 +86,4 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
 
     }
 
-
-    @Override
-    public void onDeleteBtnClick(String id, String nombre) {
-
-    }
-
-    @Override
-    public void onEditPersonaClick(Persona p) {
-
-    }
 }

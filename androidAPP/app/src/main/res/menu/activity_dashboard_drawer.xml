@@ -11,11 +11,7 @@
             android:title="Mis Personas" />
         <item
             android:id="@+id/nav_buscarMedicamento"
-            android:icon="@drawable/ic_medicina"
-            android:title="Buscar medicamentos" />
-        <item
-            android:id="@+id/nav_tratamientos"
-            android:icon="@drawable/ic_medicina"
+            android:icon="@drawable/ic_medical_drug_pill"
             android:title="Buscar medicamentos" />
     </group>
 

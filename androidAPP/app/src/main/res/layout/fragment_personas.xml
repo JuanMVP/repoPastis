@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardView"
+    android:id="@+id/cardViewPersonas"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -19,7 +19,7 @@
             app:layout_constraintGuide_begin="122dp" />
 
         <TextView
-            android:id="@+id/nombrePersona"
+            android:id="@+id/addNombrePersona"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fechaNacPersona"
+            android:id="@+id/addFechaNacPersona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -38,12 +38,12 @@
             android:text="TextView"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nombrePersona" />
+            app:layout_constraintTop_toBottomOf="@+id/addNombrePersona" />
 
         <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnDeletePersona"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="32dp"
@@ -53,15 +53,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnTratamiento"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnEditPersona"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/ic_book_black_24dp"
+            android:background="@drawable/ic_edit_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+            app:layout_constraintEnd_toStartOf="@+id/btnDeletePersona"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>

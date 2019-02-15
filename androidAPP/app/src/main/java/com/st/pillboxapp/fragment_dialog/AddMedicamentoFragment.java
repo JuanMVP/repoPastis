@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +63,7 @@ public class AddMedicamentoFragment extends DialogFragment {
     private View view;
     private TextView nombre, dosis;
     private String argNombre, argDosis, argIdMedicamento;
+    private RadioGroup rg_diaSemana, rg_horaToma;
     private Spinner spinnerPersonas;
     private ArrayAdapter<Persona> personas;
     private List<Persona> listpersonas;
@@ -107,7 +109,12 @@ public class AddMedicamentoFragment extends DialogFragment {
         nombre = view.findViewById(R.id.nombreAddMedicamentoFrag);
         dosis = view.findViewById(R.id.dosisAddMedicamentoFrag);
         spinnerPersonas = view.findViewById(R.id.spinnerPersonas);
+<<<<<<< HEAD
 
+=======
+        rg_diaSemana = view.findViewById(R.id.rgDiaSemana);
+        rg_horaToma = view.findViewById(R.id.rgHoraToma);
+>>>>>>> cf3c9c943caddc71af424718f7fad10783b7e056
 
         nombre.setText(argNombre);
         dosis.setText(argDosis);
@@ -134,16 +141,21 @@ public class AddMedicamentoFragment extends DialogFragment {
         //*Se crea el DialogFragment*//
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setPositiveButton("Añadir tratamiento", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
             public void onClick(final DialogInterface dialog, int id) {
                 String nombreMedicamento = nombre.getText().toString();
                 String dosisMedicamento = dosis.getText().toString();
+<<<<<<< HEAD
 
                 id_persona = ((Persona)spinnerPersonas.getSelectedItem()).getId();
+=======
+                String casilla = asignarCasillaPastillero();
+>>>>>>> cf3c9c943caddc71af424718f7fad10783b7e056
 
                 //*Petición a nuestra API*//
                 Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento,id_persona);
 
+<<<<<<< HEAD
                 MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(getContext()), TipoAutenticacion.JWT);
                 Call<Medicamento> call = service.addMedicamento(medicamento);
 
@@ -165,16 +177,17 @@ public class AddMedicamentoFragment extends DialogFragment {
                         //TODO Implementar Toast
                     }
                 });
+=======
+                mViewModel.addMedicamento(resultado, dialog, casilla);
+>>>>>>> cf3c9c943caddc71af424718f7fad10783b7e056
             }
-        })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
 
         builder.setView(view);
-
 
         return builder.create();
     }
@@ -210,4 +223,58 @@ public class AddMedicamentoFragment extends DialogFragment {
 
 
     }
+
+    public String seleccionarHora(){
+        String numCasilla = null;
+
+        switch (rg_horaToma.getCheckedRadioButtonId()) {
+            case R.id.rdbtnDesayuno:
+                numCasilla = "Desayuno";
+                break;
+            case R.id.rdbtnMediaManana:
+                numCasilla = "M.Mediamañana";
+                break;
+            case R.id.rdbtnAlmuerzo:
+                numCasilla = "Almuerzo";
+                break;
+            case R.id.rdbtnCena:
+                numCasilla = "Cenar";
+                break;
+        }
+
+        return numCasilla;
+    }
+
+    public String asignarCasillaPastillero() {
+
+        String casilla = null;
+
+        switch (rg_diaSemana.getCheckedRadioButtonId()) {
+            case R.id.rdbtnLunes:
+                casilla = "Lunes "+seleccionarHora();
+                break;
+            case R.id.rdbtnMartes:
+                casilla = "Martes "+seleccionarHora();
+                break;
+            case R.id.rdbtnMiercoles:
+                casilla = "Miercoles "+seleccionarHora();
+                break;
+            case R.id.rdbtnJueves:
+                casilla = "Jueves "+seleccionarHora();
+                break;
+            case R.id.rdbtnViernes:
+                casilla = "Viernes "+seleccionarHora();
+                break;
+            case R.id.rdbtnSabado:
+                casilla = "Sabado "+seleccionarHora();
+                break;
+            case R.id.rdbtnDomingo:
+                casilla = "Domingo "+seleccionarHora();
+                break;
+        }
+
+        return casilla;
+
+    }
+
 }
