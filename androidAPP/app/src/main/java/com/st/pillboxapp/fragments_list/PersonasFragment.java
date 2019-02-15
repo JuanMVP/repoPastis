@@ -2,7 +2,9 @@ package com.st.pillboxapp.fragments_list;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +35,8 @@ public class PersonasFragment extends Fragment {
     private OnListPersonasInteractionListener mListener;
     private MyPersonasRecyclerViewAdapter adapter;
     private Context ctx;
+    private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipe;
 
     public PersonasFragment() { }
 
@@ -53,13 +57,15 @@ public class PersonasFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personas_list, container, false);
 
-        if (view instanceof RecyclerView) {
+        swipe = view.findViewById(R.id.swipePersonas);
+        swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
+
+        if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
-            final RecyclerView recyclerView = view.findViewById(R.id.listPersonas);
+            recyclerView = view.findViewById(R.id.listPersonas);
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
             if (mColumnCount <= 1) {
@@ -72,6 +78,22 @@ public class PersonasFragment extends Fragment {
             cargarDatos(recyclerView);
 
         }
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        actualizarDatos();
+                        swipe.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+
+
+        });
+
         return view;
     }
 
@@ -98,7 +120,6 @@ public class PersonasFragment extends Fragment {
         });
     }
 
-
     @Override
     public void onAttach(Context context) {
         ctx = context;
@@ -117,5 +138,9 @@ public class PersonasFragment extends Fragment {
         mListener = null;
     }
 
+
+    public void actualizarDatos(){
+        cargarDatos(recyclerView);
+    }
 
 }

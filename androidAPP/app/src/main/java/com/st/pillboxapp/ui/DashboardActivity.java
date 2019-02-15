@@ -73,15 +73,25 @@ public class DashboardActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DashboardActivity.this, AddPersonaFragment.class);
-                startActivity(i);
+                AddPersonaFragment f = AddPersonaFragment.newInstance();
+                f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.detach(currentFragment);
+                        fragmentTransaction.attach(currentFragment);
+                        fragmentTransaction.commit();
+                    }
+                });
+                FragmentManager fm = getSupportFragmentManager();
+                f.show(fm, "AñadirPersona");
             }
         });
 
         mostrarInfoUsuarioMenu();
 
     }
-
 
     /**
      * Métodos propios
@@ -165,9 +175,14 @@ public class DashboardActivity extends AppCompatActivity
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(DashboardActivity.this, AddPersonaFragment.class);
-                    startActivity(i);
-                    Toast.makeText(DashboardActivity.this, "Entro", Toast.LENGTH_LONG);
+                    AddPersonaFragment f = AddPersonaFragment.newInstance();
+                    Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.detach(currentFragment);
+                    fragmentTransaction.attach(currentFragment);
+                    fragmentTransaction.commit();
+                    FragmentManager fm = getSupportFragmentManager();
+                    f.show(fm, "mainFragment");
                 }
             });
 
@@ -192,7 +207,7 @@ public class DashboardActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         if (f != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, f).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, f, "mainFragment").commit();
             return true;
         }
         return true;
@@ -232,7 +247,7 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
         FragmentManager fm = getSupportFragmentManager();
-        f.show(fm, "AddPersona");
+        f.show(fm, "AñadirPersona");
     }
 
     @Override

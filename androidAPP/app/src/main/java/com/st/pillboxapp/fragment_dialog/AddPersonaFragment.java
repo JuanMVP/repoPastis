@@ -5,12 +5,10 @@ import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.st.pillboxapp.R;
@@ -26,15 +24,12 @@ public class AddPersonaFragment extends DialogFragment {
 
     private View view;
     private EditText nombre, fechaNacimiento;
-    private String argNombre, argFecha, argId;
 
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         this.onDismissListener = onDismissListener;
     }
 
-    public static AddPersonaFragment newInstance() {
-        return new AddPersonaFragment();
-    }
+    public static AddPersonaFragment newInstance() { return new AddPersonaFragment(); }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -48,30 +43,29 @@ public class AddPersonaFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.add_persona_fragment, null);
 
-        nombre = view.findViewById(R.id.editNombrePersona);
-        fechaNacimiento = view.findViewById(R.id.editFechaNacPersona);
+        nombre = view.findViewById(R.id.addNombrePersona);
+        fechaNacimiento = view.findViewById(R.id.addFechaNacPersona);
 
         //*Se crea el DialogFragment*//
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setPositiveButton("Añadir persona: ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String nombreAdd = nombre.getText().toString();
-                String fechaNacimientoAdd = fechaNacimiento.getText().toString();
+        builder.setMessage("Añadir persona")
+                .setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
 
-                Persona persona = new Persona(nombreAdd, fechaNacimientoAdd, Util.getUserId(getContext()));
-                mViewModel.AddPersona(persona, dialog);
+                    public void onClick(DialogInterface dialog, int id) {
+                        String nombreAdd = nombre.getText().toString();
+                        String fechaNacimientoAdd = fechaNacimiento.getText().toString();
 
-            }
-        })
-        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+                        Persona persona = new Persona(nombreAdd, fechaNacimientoAdd, Util.getUserId(getContext()));
+                        mViewModel.AddPersona(persona, dialog);
 
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
         builder.setView(view);
         return builder.create();
