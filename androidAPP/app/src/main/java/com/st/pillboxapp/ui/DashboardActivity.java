@@ -26,6 +26,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
+import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
+import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
 import com.st.pillboxapp.fragments_list.MedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
@@ -63,7 +65,6 @@ public class DashboardActivity extends AppCompatActivity
         toolbar.setTitle("Mis Personas");
         setSupportActionBar(toolbar);
 
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.contenedor, new PersonasFragment(), "mainFragment")
@@ -72,7 +73,7 @@ public class DashboardActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DashboardActivity.this, AddPersonaActivity.class);
+                Intent i = new Intent(DashboardActivity.this, AddPersonaFragment.class);
                 startActivity(i);
             }
         });
@@ -150,7 +151,6 @@ public class DashboardActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
     //Opciones del menú lateral
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -165,7 +165,7 @@ public class DashboardActivity extends AppCompatActivity
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(DashboardActivity.this, AddPersonaActivity.class);
+                    Intent i = new Intent(DashboardActivity.this, AddPersonaFragment.class);
                     startActivity(i);
                     Toast.makeText(DashboardActivity.this, "Entro", Toast.LENGTH_LONG);
                 }
@@ -208,7 +208,6 @@ public class DashboardActivity extends AppCompatActivity
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                //Toast.makeText(DashboardActivity.this, "asdfg", Toast.LENGTH_SHORT).show();
                 Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.detach(currentFragment);
@@ -222,57 +221,40 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDeleteBtnClick(String id, String nombre) {
-
-        PersonaService service = ServiceGenerator.createService(PersonaService.class, Util.getToken(DashboardActivity.this), TipoAutenticacion.JWT);
-
-        final Call<PersonaResponse> call = service.deleteOne(id);
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
-        builder.setPositiveButton(R.string.borrar, new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, int id) {
-
-                call.enqueue(new Callback<PersonaResponse>() {
-                    @Override
-                    public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
-                        if (response.isSuccessful()) {
-                            dialog.dismiss();
-                            finish();
-                            startActivity(getIntent());
-                        } else {
-
-                            dialog.dismiss();
-                            Toast.makeText(DashboardActivity.this, "Error al borrar", Toast.LENGTH_LONG);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<PersonaResponse> call, Throwable t) {
-                        Toast.makeText(DashboardActivity.this, "Error de conexión", Toast.LENGTH_LONG);
-
-                    }
-                });
-
-
+    public void onAddPersonaClick(Persona p) {
+        AddPersonaFragment f = AddPersonaFragment.newInstance();
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
             }
         });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-                dialog.dismiss();
-
-
-            }
-        });
-
-        builder.setTitle("¿Seguro que quiere borrar a " + nombre.toUpperCase() + "?");
-
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "AddPersona");
     }
 
+    @Override
+    public void onDeleteBtnClick(String id, String nombre) {
+
+        DeletePersonaFragment f = DeletePersonaFragment.newInstance(id, nombre);
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "DeletePersona");
+
+    }
 
     @Override
     public void onClickBtnAddMedicamento(Resultado resultado) {

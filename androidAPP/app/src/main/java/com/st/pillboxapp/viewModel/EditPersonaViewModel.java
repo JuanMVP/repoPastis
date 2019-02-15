@@ -26,15 +26,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EditPersonaViewModel extends AndroidViewModel {
-    private LiveData<List<Persona>> personas;
 
     public EditPersonaViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    public LiveData<List<Persona>> getPersonas() {
-        personas = new MutableLiveData<List<Persona>>();
-        return personas;
     }
 
     public void editPersona(Persona persona, String persona_id, final DialogInterface dialog) {

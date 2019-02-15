@@ -105,8 +105,6 @@ public class AddMedicamentoFragment extends DialogFragment {
         dosis = view.findViewById(R.id.dosisAddMedicamentoFrag);
         spinnerPersonas = view.findViewById(R.id.spinnerPersonas);
 
-
-
         nombre.setText(argNombre);
         dosis.setText(argDosis);
 
@@ -123,8 +121,6 @@ public class AddMedicamentoFragment extends DialogFragment {
                 String nombreMedicamento = nombre.getText().toString();
                 String dosisMedicamento = dosis.getText().toString();
 
-
-
                 //*Petición a nuestra API*//
                 Resultado resultado = new Resultado(nombreMedicamento, dosisMedicamento);
 
@@ -137,16 +133,14 @@ public class AddMedicamentoFragment extends DialogFragment {
 
                         if (response.isSuccessful()) {
                             dialog.dismiss();
-                            //TODO Implementar refresh al cerrar este DialogFragment
                         } else {
-                            //TODO Implementar Toast
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Resultado> call, Throwable t) {
 
-                        //TODO Implementar Toast
                     }
                 });
 

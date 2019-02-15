@@ -3,9 +3,7 @@ package com.st.pillboxapp.fragment_dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -15,17 +13,9 @@ import android.widget.EditText;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.models.Persona;
-import com.st.pillboxapp.models.TipoAutenticacion;
-import com.st.pillboxapp.responses.PersonaResponse;
-import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
-import com.st.pillboxapp.retrofit.services.PersonaService;
 import com.st.pillboxapp.util.Util;
 import com.st.pillboxapp.viewModel.EditPersonaViewModel;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.GET;
 
 public class EditPersonaFragment extends DialogFragment {
 

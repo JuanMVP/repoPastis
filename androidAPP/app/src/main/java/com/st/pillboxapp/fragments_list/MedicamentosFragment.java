@@ -56,7 +56,6 @@ public class MedicamentosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -72,7 +71,6 @@ public class MedicamentosFragment extends Fragment {
         btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
         swipe = view.findViewById(R.id.swipeMedicamentos);
         swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
-
 
         if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
@@ -102,11 +100,8 @@ public class MedicamentosFragment extends Fragment {
 
 
             });
-
         }
         return view;
-
-
     }
 
     @Override
@@ -185,7 +180,6 @@ public class MedicamentosFragment extends Fragment {
 
         String findMedicamento = buscarMedicamentoPorNombre.getText().toString().trim();
         swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
-
 
         //*Para ocultar automáticamente el teclado del móvil cuando se le da al botón de Buscar*//
         InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class AddPersonaActivity extends AppCompatActivity implements OnListPersonasInteractionListener {
+public class AddPersonaActivity extends AppCompatActivity {
 
     EditText nombre, fechaNacimiento;
     Button registrar;
@@ -39,10 +39,7 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
         fechaNacimiento = findViewById(R.id.fechaNacPersona);
         registrar = findViewById(R.id.btnRegistrarPersona);
 
-
         addPersona();
-
-
 
     }
 
@@ -90,14 +87,4 @@ public class AddPersonaActivity extends AppCompatActivity implements OnListPerso
 
     }
 
-
-    @Override
-    public void onDeleteBtnClick(String id, String nombre) {
-
-    }
-
-    @Override
-    public void onEditPersonaClick(Persona p) {
-
-    }
 }

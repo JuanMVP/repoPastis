@@ -81,7 +81,7 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             mView = view;
             nombrePersona = view.findViewById(R.id.nombrePersona);
             fechaNacPersona = view.findViewById(R.id.fechaNacPersona);
-            btnDelete = view.findViewById(R.id.btnDelete);
+            btnDelete = view.findViewById(R.id.btnDeletePersona);
             elementoPersona = view.findViewById(R.id.cardView);
         }
 
