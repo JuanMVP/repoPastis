@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 
@@ -53,12 +54,30 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             }
         });
 
+<<<<<<< HEAD
         //*Click corto para ver info una persona*//
         holder.infoPersona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onClickPersona(holder.mItem);
 
+=======
+        //*Click para editar una persona*//
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onEditPersonaClick(holder.mItem);
+            }
+        });
+
+        //*Click largo para ver informacion de una persona*//
+        holder.elementoPersona.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(ctx, "Se encuentra en construccion", Toast.LENGTH_LONG).show();
+                //  mListener.onEditPersonaClick(holder.mItem);
+                return true;
+>>>>>>> cbfea97e2870dd2798f28a6d93a7fccae5eeb634
             }
         });
     }
@@ -74,15 +93,25 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         public final TextView fechaNacPersona;
         public Persona mItem;
         public final Button btnDelete;
+<<<<<<< HEAD
         public final CardView infoPersona;
+=======
+        public final Button btnEditar;
+        public final CardView elementoPersona;
+>>>>>>> cbfea97e2870dd2798f28a6d93a7fccae5eeb634
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            nombrePersona = view.findViewById(R.id.nombrePersona);
-            fechaNacPersona = view.findViewById(R.id.fechaNacPersona);
+            nombrePersona = view.findViewById(R.id.addNombrePersona);
+            fechaNacPersona = view.findViewById(R.id.addFechaNacPersona);
             btnDelete = view.findViewById(R.id.btnDeletePersona);
+<<<<<<< HEAD
             infoPersona = view.findViewById(R.id.cardViewPersonas);
+=======
+            btnEditar = view.findViewById(R.id.btnEditPersona);
+            elementoPersona = view.findViewById(R.id.cardView);
+>>>>>>> cbfea97e2870dd2798f28a6d93a7fccae5eeb634
         }
 
         @Override

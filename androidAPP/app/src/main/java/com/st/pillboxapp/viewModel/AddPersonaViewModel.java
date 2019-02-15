@@ -2,7 +2,6 @@ package com.st.pillboxapp.viewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModel;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.widget.Toast;

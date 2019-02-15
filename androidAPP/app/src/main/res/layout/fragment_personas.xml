@@ -19,7 +19,7 @@
             app:layout_constraintGuide_begin="122dp" />
 
         <TextView
-            android:id="@+id/nombrePersona"
+            android:id="@+id/addNombrePersona"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fechaNacPersona"
+            android:id="@+id/addFechaNacPersona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -38,7 +38,7 @@
             android:text="TextView"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nombrePersona" />
+            app:layout_constraintTop_toBottomOf="@+id/addNombrePersona" />
 
         <Button
             android:id="@+id/btnDeletePersona"
