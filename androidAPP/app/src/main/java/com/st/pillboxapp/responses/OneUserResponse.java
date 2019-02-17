@@ -1,5 +1,6 @@
 package com.st.pillboxapp.responses;
 
+import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Persona;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public class OneUserResponse {
     private String nombre;
     private String picture;
     private List<Persona> personas;
+    private List<Medicamento> medicamentos;
 
     public OneUserResponse() {
     }

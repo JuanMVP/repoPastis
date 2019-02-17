@@ -59,4 +59,12 @@ public class Medicamento {
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
     }
+
+    public String getPersona_id() {
+        return persona_id;
+    }
+
+    public void setPersona_id(String persona_id) {
+        this.persona_id = persona_id;
+    }
 }

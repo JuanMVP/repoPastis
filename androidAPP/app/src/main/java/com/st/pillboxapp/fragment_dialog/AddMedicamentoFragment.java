@@ -109,12 +109,9 @@ public class AddMedicamentoFragment extends DialogFragment {
         nombre = view.findViewById(R.id.nombreAddMedicamentoFrag);
         dosis = view.findViewById(R.id.dosisAddMedicamentoFrag);
         spinnerPersonas = view.findViewById(R.id.spinnerPersonas);
-<<<<<<< HEAD
 
-=======
         rg_diaSemana = view.findViewById(R.id.rgDiaSemana);
         rg_horaToma = view.findViewById(R.id.rgHoraToma);
->>>>>>> cf3c9c943caddc71af424718f7fad10783b7e056
 
         nombre.setText(argNombre);
         dosis.setText(argDosis);
@@ -145,41 +142,17 @@ public class AddMedicamentoFragment extends DialogFragment {
             public void onClick(final DialogInterface dialog, int id) {
                 String nombreMedicamento = nombre.getText().toString();
                 String dosisMedicamento = dosis.getText().toString();
-<<<<<<< HEAD
 
-                id_persona = ((Persona)spinnerPersonas.getSelectedItem()).getId();
-=======
+
+                id_persona = ((Persona) spinnerPersonas.getSelectedItem()).getId();
+
                 String casilla = asignarCasillaPastillero();
->>>>>>> cf3c9c943caddc71af424718f7fad10783b7e056
 
-                //*Petición a nuestra API*//
-                Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento,id_persona);
+                Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento, id_persona);
+                mViewModel.addMedicamento(medicamento, dialog, casilla);
 
-<<<<<<< HEAD
-                MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(getContext()), TipoAutenticacion.JWT);
-                Call<Medicamento> call = service.addMedicamento(medicamento);
 
-                call.enqueue(new Callback<Medicamento>() {
-                    @Override
-                    public void onResponse(Call<Medicamento> call, Response<Medicamento> response) {
 
-                        if (response.isSuccessful()) {
-                            dialog.dismiss();
-                            //TODO Implementar refresh al cerrar este DialogFragment
-                        } else {
-                            //TODO Implementar Toast
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Medicamento> call, Throwable t) {
-                        Log.i("ERROR", "error: " + t);
-                        //TODO Implementar Toast
-                    }
-                });
-=======
-                mViewModel.addMedicamento(resultado, dialog, casilla);
->>>>>>> cf3c9c943caddc71af424718f7fad10783b7e056
             }
         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -191,8 +164,6 @@ public class AddMedicamentoFragment extends DialogFragment {
 
         return builder.create();
     }
-
-
 
 
     public void cargarSpinner() {
@@ -220,11 +191,9 @@ public class AddMedicamentoFragment extends DialogFragment {
         });
 
 
-
-
     }
 
-    public String seleccionarHora(){
+    public String seleccionarHora() {
         String numCasilla = null;
 
         switch (rg_horaToma.getCheckedRadioButtonId()) {
@@ -251,25 +220,25 @@ public class AddMedicamentoFragment extends DialogFragment {
 
         switch (rg_diaSemana.getCheckedRadioButtonId()) {
             case R.id.rdbtnLunes:
-                casilla = "Lunes "+seleccionarHora();
+                casilla = "Lunes " + seleccionarHora();
                 break;
             case R.id.rdbtnMartes:
-                casilla = "Martes "+seleccionarHora();
+                casilla = "Martes " + seleccionarHora();
                 break;
             case R.id.rdbtnMiercoles:
-                casilla = "Miercoles "+seleccionarHora();
+                casilla = "Miercoles " + seleccionarHora();
                 break;
             case R.id.rdbtnJueves:
-                casilla = "Jueves "+seleccionarHora();
+                casilla = "Jueves " + seleccionarHora();
                 break;
             case R.id.rdbtnViernes:
-                casilla = "Viernes "+seleccionarHora();
+                casilla = "Viernes " + seleccionarHora();
                 break;
             case R.id.rdbtnSabado:
-                casilla = "Sabado "+seleccionarHora();
+                casilla = "Sabado " + seleccionarHora();
                 break;
             case R.id.rdbtnDomingo:
-                casilla = "Domingo "+seleccionarHora();
+                casilla = "Domingo " + seleccionarHora();
                 break;
         }
 

@@ -9,7 +9,7 @@ public class Persona {
     private String nombre;
     private String fecha_nacimiento;
     private String user_id;
-    private List<Resultado> medicamentos;
+    private List<Medicamento> medicamentos;
 
     public Persona(){}
 
@@ -29,7 +29,7 @@ public class Persona {
         this.user_id = user_id;
     }
 
-    public Persona(String id, String nombre, String fecha_nacimiento, String user_id, List<Resultado> medicamentos) {
+    public Persona(String id, String nombre, String fecha_nacimiento, String user_id, List<Medicamento> medicamentos) {
         this.id = id;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -57,11 +57,11 @@ public class Persona {
         return nombre;
     }
 
-    public List<Resultado> getMedicamentos() {
+    public List<Medicamento> getMedicamentos() {
         return medicamentos;
     }
 
-    public void setMedicamentos(List<Resultado> medicamentos) {
+    public void setMedicamentos(List<Medicamento> medicamentos) {
         this.medicamentos = medicamentos;
     }
 

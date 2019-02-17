@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.st.pillboxapp.responses.OneUserResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.UserService;
 import com.st.pillboxapp.util.Util;
+
+import java.io.Console;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -114,6 +117,7 @@ public class PersonasFragment extends Fragment {
 
             @Override
             public void onFailure(Call<OneUserResponse> call, Throwable t) {
+
 
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             }

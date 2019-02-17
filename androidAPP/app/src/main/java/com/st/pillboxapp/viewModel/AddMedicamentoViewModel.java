@@ -25,14 +25,14 @@ public class AddMedicamentoViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void addMedicamento(final Resultado resultado, final DialogInterface dialog, final String casilla) {
+    public void addMedicamento(final Medicamento medicamento, final DialogInterface dialog, final String casilla) {
 
         MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(getApplication().getApplicationContext()), TipoAutenticacion.JWT);
-        Call<Resultado> call = service.addMedicamento(resultado);
+        Call<Medicamento> call = service.addMedicamento(medicamento);
 
-        call.enqueue(new Callback<Resultado>() {
+        call.enqueue(new Callback<Medicamento>() {
             @Override
-            public void onResponse(Call<Resultado> call, Response<Resultado> response) {
+            public void onResponse(Call<Medicamento> call, Response<Medicamento> response) {
 
                 if (response.isSuccessful()) {
                     dialog.dismiss();
@@ -43,7 +43,7 @@ public class AddMedicamentoViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Resultado> call, Throwable t) {
+            public void onFailure(Call<Medicamento> call, Throwable t) {
                 Toast.makeText(getApplication().getApplicationContext(), "Error al añadir medicamento", Toast.LENGTH_SHORT).show();
             }
         });
