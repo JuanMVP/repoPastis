@@ -120,20 +120,6 @@ public class AddMedicamentoFragment extends DialogFragment {
         dosis.setEnabled(true);
         cargarSpinner();
 
-        spinnerPersonas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Persona persona = listpersonas.get(position);
-                Toast.makeText(getContext(), persona.getId(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
 
         //*Se crea el DialogFragment*//
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -150,7 +136,6 @@ public class AddMedicamentoFragment extends DialogFragment {
 
                 Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento, id_persona);
                 mViewModel.addMedicamento(medicamento, dialog, casilla);
-
 
 
             }

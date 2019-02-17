@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -29,22 +27,13 @@ import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
 import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
 import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
-import com.st.pillboxapp.fragment_dialog.InfoPersonaDialogFragment;
 import com.st.pillboxapp.fragments_list.MedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.Resultado;
-import com.st.pillboxapp.models.TipoAutenticacion;
-import com.st.pillboxapp.responses.PersonaResponse;
-import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
-import com.st.pillboxapp.retrofit.services.PersonaService;
 import com.st.pillboxapp.util.Util;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener {

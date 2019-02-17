@@ -1,4 +1,4 @@
-package com.st.pillboxapp.viewModel;
+package com.st.pillboxapp.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
