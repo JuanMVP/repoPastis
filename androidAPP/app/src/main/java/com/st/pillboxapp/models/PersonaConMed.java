@@ -1,33 +1,39 @@
 package com.st.pillboxapp.models;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
-import java.util.Objects;
 
-public class Persona {
+public class PersonaConMed {
 
     private String id;
     private String nombre;
     private String fecha_nacimiento;
     private String user_id;
+    private List<Medicamento> medicamentos;
 
-    public Persona(){}
+    public PersonaConMed(){}
 
 
-    public Persona(String nombre, String fecha_nacimiento, String user_id) {
+    public PersonaConMed(String nombre, String fecha_nacimiento, String user_id) {
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
         this.user_id = user_id;
     }
 
 
-    public Persona(String id, String nombre, String fecha_nacimiento, String user_id) {
+
+    public PersonaConMed(String id, String nombre, String fecha_nacimiento, String user_id) {
         this.id = id;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
         this.user_id = user_id;
+    }
+
+    public PersonaConMed(String id, String nombre, String fecha_nacimiento, String user_id, List<Medicamento> medicamentos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.user_id = user_id;
+        this.medicamentos = medicamentos;
     }
 
     public String getUser_id() {
@@ -48,6 +54,14 @@ public class Persona {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public List<Medicamento> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(List<Medicamento> medicamentos) {
+        this.medicamentos = medicamentos;
     }
 
     public void setNombre(String nombre) {

@@ -11,7 +11,6 @@ public class OneUserResponse {
     private String nombre;
     private String picture;
     private List<Persona> personas;
-    private List<Medicamento> medicamentos;
 
     public OneUserResponse() {
     }
