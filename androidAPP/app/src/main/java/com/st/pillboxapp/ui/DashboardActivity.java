@@ -28,12 +28,9 @@ import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
 import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
 import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
-<<<<<<< HEAD
 import com.st.pillboxapp.fragments_list.BuscarMedicamentosFragment;
-=======
 import com.st.pillboxapp.fragments_list.InfoPersonaFragment;
-import com.st.pillboxapp.fragments_list.MedicamentosFragment;
->>>>>>> 65db1cb8da6ec6269b52fb6a7d275a760d440d97
+import com.st.pillboxapp.fragments_list.MisMedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
@@ -190,7 +187,11 @@ public class DashboardActivity extends AppCompatActivity
             fab.hide();
             toolbar.setTitle("Buscar Medicamentos");
 
-        } else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_misMedicamentos){
+
+            f = new MisMedicamentosFragment();
+
+        }else if (id == R.id.nav_logout) {
             Util.clearSharedPreferences(DashboardActivity.this);
 
             Intent i = new Intent(DashboardActivity.this, LoginActivity.class);
