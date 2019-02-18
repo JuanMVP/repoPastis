@@ -5,15 +5,15 @@ import com.st.pillboxapp.models.Resultado;
 
 import java.util.List;
 
-public class MedicamentoResponse {
+public class ResultadoResponse {
 
     private List<Resultado> resultados;
     private List<Foto> fotos;
 
-    public MedicamentoResponse() {
+    public ResultadoResponse() {
     }
 
-    public MedicamentoResponse(List<Resultado> resultados, List<Foto> fotos) {
+    public ResultadoResponse(List<Resultado> resultados, List<Foto> fotos) {
         this.resultados = resultados;
         this.fotos = fotos;
     }
@@ -37,7 +37,7 @@ public class MedicamentoResponse {
 
     @Override
     public String toString() {
-        return "MedicamentoResponse{" +
+        return "ResultadoResponse{" +
                 "resultados=" + resultados +
                 ", fotos=" + fotos +
                 '}';

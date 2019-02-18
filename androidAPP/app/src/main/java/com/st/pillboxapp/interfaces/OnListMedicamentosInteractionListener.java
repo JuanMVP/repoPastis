@@ -1,9 +1,9 @@
 package com.st.pillboxapp.interfaces;
 
-import com.st.pillboxapp.models.Resultado;
+import com.st.pillboxapp.models.Medicamento;
 
 public interface OnListMedicamentosInteractionListener {
 
-    public void onClickBtnAddMedicamento(Resultado resultado);
+    public void onClickBtnAddMedicamento(Medicamento medicamento);
 
 }

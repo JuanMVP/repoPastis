@@ -12,11 +12,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
+import com.st.pillboxapp.models.Medicamento;
+import com.st.pillboxapp.models.TipoAutenticacion;
+import com.st.pillboxapp.responses.MyMedicamentoResponse;
+import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
+import com.st.pillboxapp.retrofit.services.MedicamentoService;
+import com.st.pillboxapp.util.Util;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MisMedicamentosFragment extends Fragment {
 
@@ -26,8 +35,6 @@ public class MisMedicamentosFragment extends Fragment {
     private MyMisMedicamentosRecyclerViewAdapter adapter;
     private Context ctx;
     private RecyclerView recyclerView;
-    private EditText nombreMisMedicamento;
-    private ImageButton btnMisMedicamento;
     private SwipeRefreshLayout swipe;
 
 
@@ -55,9 +62,6 @@ public class MisMedicamentosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mis_medicamentos_list, container, false);
 
-        nombreMisMedicamento = view.findViewById(R.id.nombreMisMedicamento);
-        btnMisMedicamento = view.findViewById(R.id.anadirMisMedicamento);
-
         swipe = view.findViewById(R.id.swipePersonas);
         swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
 
@@ -71,24 +75,49 @@ public class MisMedicamentosFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-
-            swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            // actualizar datos
-                            swipe.setRefreshing(false);
-                        }
-                    }, 3000);
-                }
-
-
-            });
-
+            //*Peticion a nuestra API*//
+            cargarDatos(recyclerView);
         }
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // actualizar datos
+                        swipe.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+
+
+        });
+
         return view;
+    }
+
+    public void cargarDatos(final RecyclerView recyclerView){
+        MedicamentoService medicamentoService = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
+        Call<MyMedicamentoResponse> call = medicamentoService.getMisMedicamentos();
+
+        call.enqueue(new Callback<MyMedicamentoResponse>() {
+            @Override
+            public void onResponse(Call<MyMedicamentoResponse> call, Response<MyMedicamentoResponse> response) {
+                if(response.isSuccessful()){
+                    adapter = new MyMisMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_mis_medicamentos, response.body().getMedicamentos(), mListener);
+                    recyclerView.setAdapter(adapter);
+                }else{
+                    Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyMedicamentoResponse> call, Throwable t) {
+
+                Toast.makeText(getContext(), "Error de conexion", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -108,5 +137,10 @@ public class MisMedicamentosFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    public void actualizarDatos(){
+        cargarDatos(recyclerView);
+    }
+
 
 }

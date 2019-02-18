@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -190,8 +191,14 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_misMedicamentos){
 
             f = new MisMedicamentosFragment();
+            fab.hide();
+            toolbar.setTitle("Mis Medicamentos");
 
-        }else if (id == R.id.nav_logout) {
+        } else if(id == R.id.nav_pastillero){
+
+            Toast.makeText(this, "Se encuentra en construccion la pantalla de sincronización", Toast.LENGTH_LONG).show();
+
+        } else if (id == R.id.nav_logout) {
             Util.clearSharedPreferences(DashboardActivity.this);
 
             Intent i = new Intent(DashboardActivity.this, LoginActivity.class);

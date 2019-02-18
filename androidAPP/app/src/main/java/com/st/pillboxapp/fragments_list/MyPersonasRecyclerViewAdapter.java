@@ -53,29 +53,19 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             }
         });
 
+        //*Click para editar una persona*//
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onEditPersonaClick(holder.mItem);
+            }
+        });
+
         //*Click corto para ver info una persona*//
         holder.infoPersona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onClickPersona(holder.mItem);
-
-                //*Click para editar una persona*//
-                holder.btnEditar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mListener.onEditPersonaClick(holder.mItem);
-                    }
-                });
-
-//                //*Click largo para ver informacion de una persona*//
-//                holder.elementoPersona.setOnLongClickListener(new View.OnLongClickListener() {
-//                    @Override
-//                    public boolean onLongClick(View v) {
-//                        Toast.makeText(ctx, "Se encuentra en construccion", Toast.LENGTH_LONG).show();
-//                        //  mListener.onEditPersonaClick(holder.mItem);
-//                        return true;
-//                    }
-//                });
             }
 
         });

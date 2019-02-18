@@ -55,7 +55,6 @@ public class InfoPersonaFragment extends Fragment {
     private List<Resultado> listaMedicamentos;
     private ArrayAdapter<Resultado> medicamentos;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -65,8 +64,6 @@ public class InfoPersonaFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    // TODO: Rename and change types and number of parameters
     public static InfoPersonaFragment newInstance(Persona p) {
         InfoPersonaFragment fragment = new InfoPersonaFragment();
         Bundle args = new Bundle();
@@ -96,8 +93,6 @@ public class InfoPersonaFragment extends Fragment {
         nombreInfoPersona.setText(argNombrePersona);
         fechaInfoPersona.setText(argFechaPersona);
         cargarSpinner();
-
-
 
 
 

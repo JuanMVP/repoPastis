@@ -142,7 +142,6 @@ public class PersonasFragment extends Fragment {
         mListener = null;
     }
 
-
     public void actualizarDatos(){
         cargarDatos(recyclerView);
     }

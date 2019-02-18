@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
-import com.st.pillboxapp.responses.MedicamentoResponse;
+import com.st.pillboxapp.responses.ResultadoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
 
@@ -143,11 +143,11 @@ public class BuscarMedicamentosFragment extends Fragment {
 
                 //*Petición al API de medicamentos*//
                 MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
-                Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
+                Call<ResultadoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
 
-                callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+                callMedicamento.enqueue(new Callback<ResultadoResponse>() {
                     @Override
-                    public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
+                    public void onResponse(Call<ResultadoResponse> call, Response<ResultadoResponse> response) {
                         if (response.isSuccessful()) {
                             progressDialog.dismiss();
                             adapter = new MyBuscarMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_buscar_medicamentos, response.body().getResultados(), mListener);
@@ -160,7 +160,7 @@ public class BuscarMedicamentosFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+                    public void onFailure(Call<ResultadoResponse> call, Throwable t) {
                         progressDialog.dismiss();
                         Toast.makeText(getContext(), "Error de conexión.", Toast.LENGTH_LONG).show();
 
@@ -184,11 +184,11 @@ public class BuscarMedicamentosFragment extends Fragment {
 
         //*Petición a nuestra API*//
         MedicamentoService medicamentoService = ServiceApiGenerator.createService(MedicamentoService.class);
-        Call<MedicamentoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
+        Call<ResultadoResponse> callMedicamento = medicamentoService.getMedicamentos(findMedicamento);
 
-        callMedicamento.enqueue(new Callback<MedicamentoResponse>() {
+        callMedicamento.enqueue(new Callback<ResultadoResponse>() {
             @Override
-            public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
+            public void onResponse(Call<ResultadoResponse> call, Response<ResultadoResponse> response) {
                 if (response.isSuccessful()) {
                     adapter = new MyBuscarMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_buscar_medicamentos, response.body().getResultados(), mListener);
                     recyclerView.setAdapter(adapter);
@@ -199,7 +199,7 @@ public class BuscarMedicamentosFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<MedicamentoResponse> call, Throwable t) {
+            public void onFailure(Call<ResultadoResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
 
             }
