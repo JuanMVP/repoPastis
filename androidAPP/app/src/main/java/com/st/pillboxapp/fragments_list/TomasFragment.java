@@ -34,12 +34,14 @@ public class TomasFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String ARG_NOMBRE_INFO = "nombre";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListTomasInteractionListener mListener;
     private MyTomasRecyclerViewAdapter adapter;
     private Context ctx;
     private RecyclerView recyclerView;
+    private String argNombrePersona;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -50,10 +52,10 @@ public class TomasFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static TomasFragment newInstance(Persona columnCount) {
+    public static TomasFragment newInstance(Persona p) {
         TomasFragment fragment = new TomasFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putString(ARG_NOMBRE_INFO, p.getNombre());
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,7 +65,7 @@ public class TomasFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            argNombrePersona = getArguments().getString(ARG_NOMBRE_INFO);
         }
     }
 

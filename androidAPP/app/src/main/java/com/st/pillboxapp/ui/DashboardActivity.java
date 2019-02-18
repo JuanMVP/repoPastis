@@ -263,6 +263,11 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public void onClickPersona(Persona p) {
 
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedor, TomasFragment.newInstance(p))
+                .commit();
+
     }
 
 
