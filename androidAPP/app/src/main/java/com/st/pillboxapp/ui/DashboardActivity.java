@@ -37,10 +37,9 @@ import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.fragments_list.TomasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
-<<<<<<< HEAD
-=======
+
 import com.st.pillboxapp.interfaces.OnListTomasInteractionListener;
->>>>>>> 9979f0c39ba214eb7077dffe09605caf4e37943c
+
 import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.Resultado;
@@ -296,10 +295,7 @@ public class DashboardActivity extends AppCompatActivity
 
 
 
-    @Override
-    public void onClickBtnAddMedicamento(Medicamento medicamento) {
 
-    }
 
     @Override
     public void onClickPersonaToma(Persona p) {
