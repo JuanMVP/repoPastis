@@ -24,8 +24,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
+import com.st.pillboxapp.R;
+import com.st.pillboxapp.fragment_dialog.AddTratamientoFragment;
 import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
 import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
@@ -35,6 +36,7 @@ import com.st.pillboxapp.fragments_list.MisMedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
+import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.util.Util;
@@ -285,7 +287,7 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onClickBtnAddMedicamento(Resultado resultado) {
-        AddMedicamentoFragment f = AddMedicamentoFragment.newInstance(resultado);
+        AddTratamientoFragment f = AddTratamientoFragment.newInstance(resultado);
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "AñadirMedicamento");
 
@@ -294,5 +296,22 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onClickBtnAddMedicamento(Medicamento medicamento) {
+        AddMedicamentoFragment f = AddMedicamentoFragment.newInstance();
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "DeletePersona");
     }
 }

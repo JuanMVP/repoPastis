@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
+import com.st.pillboxapp.adapter.MyBuscarMedicamentosRecyclerViewAdapter;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.responses.ResultadoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;

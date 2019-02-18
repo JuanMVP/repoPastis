@@ -9,7 +9,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +16,13 @@ import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 
+import com.st.pillboxapp.adapter.MyPersonasRecyclerViewAdapter;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.OneUserResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.UserService;
 import com.st.pillboxapp.util.Util;
-
-import java.io.Console;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,4 +1,4 @@
-package com.st.pillboxapp.fragments_list;
+package com.st.pillboxapp.adapter;
 
 import android.content.Context;
 

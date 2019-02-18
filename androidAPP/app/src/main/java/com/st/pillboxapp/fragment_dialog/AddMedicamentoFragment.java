@@ -5,70 +5,35 @@ import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.st.pillboxapp.R;
-
-import com.st.pillboxapp.fragments_list.MyPersonasRecyclerViewAdapter;
 import com.st.pillboxapp.models.Medicamento;
-import com.st.pillboxapp.models.Persona;
-import com.st.pillboxapp.models.Resultado;
-import com.st.pillboxapp.models.TipoAutenticacion;
-
-import com.st.pillboxapp.responses.OneUserResponse;
-import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
-import com.st.pillboxapp.retrofit.services.MedicamentoService;
-
-import com.st.pillboxapp.retrofit.services.UserService;
-import com.st.pillboxapp.util.Util;
 import com.st.pillboxapp.viewModel.AddMedicamentoViewModel;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AddMedicamentoFragment extends DialogFragment {
 
+    private static final String ARG_NOMBRE = "nombre";
+    private static final String ARG_ID_MEDICAMENTO = "id_medicamento";
     private AddMedicamentoViewModel mViewModel;
-    private static final String ARG_DOSIS = "dosis";
-    private static final String ARG_NOMBRE_MED = "nombre";
-    private static final String ARG_ID_MEDICAMENTO = "nregistro";
 
+    private DialogInterface.OnDismissListener onDismissListener;
+
+    private View view;
+    private TextView nombre;
+    private String argNombre, argId;
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
 
     public static AddMedicamentoFragment newInstance() {
         return new AddMedicamentoFragment();
     }
-
-    private View view;
-    private TextView nombre, dosis;
-    private String argNombre, argDosis, argIdMedicamento;
-    private RadioGroup rg_diaSemana, rg_horaToma;
-    private Spinner spinnerPersonas;
-    private ArrayAdapter<Persona> personas;
-    private List<Persona> listpersonas;
-    private String id_persona;
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -81,16 +46,14 @@ public class AddMedicamentoFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            argNombre = getArguments().getString(ARG_NOMBRE_MED);
-            argIdMedicamento = getArguments().getString(ARG_ID_MEDICAMENTO);
-            argDosis = getArguments().getString(ARG_DOSIS);
+            argNombre = getArguments().getString(ARG_NOMBRE);
+            argId = getArguments().getString(ARG_ID_MEDICAMENTO);
         }
     }
 
-    public static AddMedicamentoFragment newInstance(Resultado resultado) {
+    public static AddMedicamentoFragment newInstance(String nombre) {
         Bundle args = new Bundle();
-        args.putString(ARG_NOMBRE_MED, resultado.getNombre());
-        args.putString(ARG_DOSIS, resultado.getDosis());
+        args.putString(ARG_NOMBRE, nombre);
 
         AddMedicamentoFragment fragment = new AddMedicamentoFragment();
         fragment.setArguments(args);
@@ -99,136 +62,49 @@ public class AddMedicamentoFragment extends DialogFragment {
 
     }
 
-    @NonNull
     @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.add_medicamento_fragment, null);
 
-        nombre = view.findViewById(R.id.nombreAddMedicamentoFrag);
-        dosis = view.findViewById(R.id.dosisAddMedicamentoFrag);
-        spinnerPersonas = view.findViewById(R.id.spinnerPersonas);
-
-        rg_diaSemana = view.findViewById(R.id.rgDiaSemana);
-        rg_horaToma = view.findViewById(R.id.rgHoraToma);
+        nombre = view.findViewById(R.id.addMedicamento);
 
         nombre.setText(argNombre);
-        dosis.setText(argDosis);
-
-        nombre.setEnabled(true);
-        dosis.setEnabled(true);
-        cargarSpinner();
-
 
         //*Se crea el DialogFragment*//
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, int id) {
-                String nombreMedicamento = nombre.getText().toString();
-                String dosisMedicamento = dosis.getText().toString();
+        builder.setMessage("Añadir: ")
 
+                .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
 
-                id_persona = ((Persona) spinnerPersonas.getSelectedItem()).getId();
+                    public void onClick(final DialogInterface dialog, int id) {
+                        String nombreEditado = nombre.getText().toString();
 
-                String casilla = asignarCasillaPastillero();
+                        Medicamento medicamento = new Medicamento();
+                        mViewModel.addMedicamento(medicamento, dialog);
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
 
-                Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento, id_persona);
-                mViewModel.addMedicamento(medicamento, dialog, casilla);
-
-
-            }
-        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
 
         builder.setView(view);
-
         return builder.create();
     }
 
-
-    public void cargarSpinner() {
-
-        UserService userService = ServiceGenerator.createService(UserService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-        Call<OneUserResponse> call = userService.oneUserById(Util.getUserId(this.getActivity()));
-
-        call.enqueue(new Callback<OneUserResponse>() {
-            @Override
-            public void onResponse(Call<OneUserResponse> call, Response<OneUserResponse> response) {
-                if (response.isSuccessful()) {
-                    listpersonas = new ArrayList<>(response.body().getPersonas());
-                    personas = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, listpersonas);
-                    spinnerPersonas.setAdapter(personas);
-                } else {
-                    Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OneUserResponse> call, Throwable t) {
-
-                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-    }
-
-    public String seleccionarHora() {
-        String numCasilla = null;
-
-        switch (rg_horaToma.getCheckedRadioButtonId()) {
-            case R.id.rdbtnDesayuno:
-                numCasilla = "Desayuno";
-                break;
-            case R.id.rdbtnMediaManana:
-                numCasilla = "M.Mediamañana";
-                break;
-            case R.id.rdbtnAlmuerzo:
-                numCasilla = "Almuerzo";
-                break;
-            case R.id.rdbtnCena:
-                numCasilla = "Cenar";
-                break;
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
         }
-
-        return numCasilla;
     }
 
-    public String asignarCasillaPastillero() {
 
-        String casilla = null;
-
-        switch (rg_diaSemana.getCheckedRadioButtonId()) {
-            case R.id.rdbtnLunes:
-                casilla = "Lunes " + seleccionarHora();
-                break;
-            case R.id.rdbtnMartes:
-                casilla = "Martes " + seleccionarHora();
-                break;
-            case R.id.rdbtnMiercoles:
-                casilla = "Miercoles " + seleccionarHora();
-                break;
-            case R.id.rdbtnJueves:
-                casilla = "Jueves " + seleccionarHora();
-                break;
-            case R.id.rdbtnViernes:
-                casilla = "Viernes " + seleccionarHora();
-                break;
-            case R.id.rdbtnSabado:
-                casilla = "Sabado " + seleccionarHora();
-                break;
-            case R.id.rdbtnDomingo:
-                casilla = "Domingo " + seleccionarHora();
-                break;
-        }
-
-        return casilla;
-
-    }
 
 }

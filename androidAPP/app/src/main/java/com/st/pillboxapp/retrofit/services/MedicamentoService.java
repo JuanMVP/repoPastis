@@ -12,6 +12,9 @@ import retrofit2.http.Query;
 
 public interface MedicamentoService {
 
+    @POST("/medicamentos")
+    Call<MyMedicamentoResponse> register(@Body Medicamento medicamento);
+
     @GET("/medicamentos")
     Call<MyMedicamentoResponse> getMisMedicamentos();
 

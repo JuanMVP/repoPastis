@@ -1,4 +1,4 @@
-package com.st.pillboxapp.fragments_list;
+package com.st.pillboxapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.models.Medicamento;

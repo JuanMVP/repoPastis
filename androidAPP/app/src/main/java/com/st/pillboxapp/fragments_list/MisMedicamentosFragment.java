@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
+import com.st.pillboxapp.adapter.MyMisMedicamentosRecyclerViewAdapter;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
-import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.MyMedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
@@ -85,7 +85,7 @@ public class MisMedicamentosFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        // actualizar datos
+                        actualizarDatos();
                         swipe.setRefreshing(false);
                     }
                 }, 3000);
