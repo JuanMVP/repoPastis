@@ -91,8 +91,8 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            nombrePersona = view.findViewById(R.id.addNombrePersona);
-            fechaNacPersona = view.findViewById(R.id.addFechaNacPersona);
+            nombrePersona = view.findViewById(R.id.nombreMedicamento);
+            fechaNacPersona = view.findViewById(R.id.diaSemana);
             btnDelete = view.findViewById(R.id.btnDeletePersona);
             infoPersona = view.findViewById(R.id.cardViewPersonas);
             btnEditar = view.findViewById(R.id.btnEditPersona);

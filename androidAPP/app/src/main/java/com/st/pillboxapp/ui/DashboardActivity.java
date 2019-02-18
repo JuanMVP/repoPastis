@@ -34,15 +34,20 @@ import com.st.pillboxapp.fragments_list.BuscarMedicamentosFragment;
 import com.st.pillboxapp.fragments_list.InfoPersonaFragment;
 import com.st.pillboxapp.fragments_list.MisMedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
+import com.st.pillboxapp.fragments_list.TomasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
+<<<<<<< HEAD
+=======
+import com.st.pillboxapp.interfaces.OnListTomasInteractionListener;
+>>>>>>> 9979f0c39ba214eb7077dffe09605caf4e37943c
 import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.util.Util;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener, InfoPersonaFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener, OnListTomasInteractionListener {
 
 
     private Fragment f;
@@ -259,12 +264,8 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public void onClickPersona(Persona p) {
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.contenedor, InfoPersonaFragment.newInstance(p))
-                .commit();
-
     }
+
 
     @Override
     public void onDeleteBtnClick(String id, String nombre) {
@@ -285,7 +286,7 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
-    @Override
+
     public void onClickBtnAddMedicamento(Resultado resultado) {
         AddTratamientoFragment f = AddTratamientoFragment.newInstance(resultado);
         FragmentManager fm = getSupportFragmentManager();
@@ -293,8 +294,20 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
+
+
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onClickBtnAddMedicamento(Medicamento medicamento) {
+
+    }
+
+    @Override
+    public void onClickPersonaToma(Persona p) {
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedor, TomasFragment.newInstance(p))
+                .commit();
 
     }
 
