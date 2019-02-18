@@ -122,6 +122,7 @@ public class TomasFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        ctx = context;
         super.onAttach(context);
         if (context instanceof OnListTomasInteractionListener) {
             mListener = (OnListTomasInteractionListener) context;
