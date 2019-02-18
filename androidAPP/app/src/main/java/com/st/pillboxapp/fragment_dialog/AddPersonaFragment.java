@@ -43,8 +43,8 @@ public class AddPersonaFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.add_persona_fragment, null);
 
-        nombre = view.findViewById(R.id.addNombrePersona);
-        fechaNacimiento = view.findViewById(R.id.addFechaNacPersona);
+        nombre = view.findViewById(R.id.nombreMedicamento);
+        fechaNacimiento = view.findViewById(R.id.diaSemana);
 
         //*Se crea el DialogFragment*//
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
