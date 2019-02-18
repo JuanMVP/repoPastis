@@ -3,6 +3,7 @@ package com.st.pillboxapp.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -27,7 +28,12 @@ import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
 import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
 import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
+<<<<<<< HEAD
 import com.st.pillboxapp.fragments_list.BuscarMedicamentosFragment;
+=======
+import com.st.pillboxapp.fragments_list.InfoPersonaFragment;
+import com.st.pillboxapp.fragments_list.MedicamentosFragment;
+>>>>>>> 65db1cb8da6ec6269b52fb6a7d275a760d440d97
 import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
@@ -36,7 +42,7 @@ import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.util.Util;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener, InfoPersonaFragment.OnFragmentInteractionListener {
 
 
     private Fragment f;
@@ -243,9 +249,10 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public void onClickPersona(Persona p) {
 
-        InfoPersonaDialogFragment f = InfoPersonaDialogFragment.newInstance(p);
-        FragmentManager fm = getSupportFragmentManager();
-        f.show(fm, "Infopersona");
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedor, InfoPersonaFragment.newInstance(p))
+                .commit();
 
     }
 
@@ -273,6 +280,11 @@ public class DashboardActivity extends AppCompatActivity
         AddMedicamentoFragment f = AddMedicamentoFragment.newInstance(resultado);
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "AñadirMedicamento");
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }
