@@ -29,23 +29,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MedicamentosFragment extends Fragment {
+public class BuscarMedicamentosFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListMedicamentosInteractionListener mListener;
-    private MyMedicamentosRecyclerViewAdapter adapter;
+    private MyBuscarMedicamentosRecyclerViewAdapter adapter;
     private Context ctx;
     private RecyclerView recyclerView;
     private EditText buscarMedicamentoPorNombre;
     private ImageButton btnBuscarMedicamento;
     private SwipeRefreshLayout swipe;
 
-    public MedicamentosFragment() {
+    public BuscarMedicamentosFragment() {
     }
 
-    public static MedicamentosFragment newInstance(int columnCount) {
-        MedicamentosFragment fragment = new MedicamentosFragment();
+    public static BuscarMedicamentosFragment newInstance(int columnCount) {
+        BuscarMedicamentosFragment fragment = new BuscarMedicamentosFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -61,10 +61,9 @@ public class MedicamentosFragment extends Fragment {
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_medicamentos_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_buscar_medicamentos_list, container, false);
 
         buscarMedicamentoPorNombre = view.findViewById(R.id.findMedicamento);
         btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
@@ -122,8 +121,6 @@ public class MedicamentosFragment extends Fragment {
         mListener = null;
     }
 
-
-
     /**Métodos propios **/
 
     public void buscarMedicamento() {
@@ -153,7 +150,7 @@ public class MedicamentosFragment extends Fragment {
                     public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
                         if (response.isSuccessful()) {
                             progressDialog.dismiss();
-                            adapter = new MyMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_medicamentos, response.body().getResultados(), mListener);
+                            adapter = new MyBuscarMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_buscar_medicamentos, response.body().getResultados(), mListener);
                             recyclerView.setAdapter(adapter);
                         } else {
                             progressDialog.dismiss();
@@ -193,7 +190,7 @@ public class MedicamentosFragment extends Fragment {
             @Override
             public void onResponse(Call<MedicamentoResponse> call, Response<MedicamentoResponse> response) {
                 if (response.isSuccessful()) {
-                    adapter = new MyMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_medicamentos, response.body().getResultados(), mListener);
+                    adapter = new MyBuscarMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_buscar_medicamentos, response.body().getResultados(), mListener);
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(getContext(), "Error. Intenta de nuevo.", Toast.LENGTH_LONG).show();

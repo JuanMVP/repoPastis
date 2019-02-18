@@ -14,7 +14,7 @@
         android:background="#ffffff">
 
         <ImageView
-            android:id="@+id/imagenMedicamento"
+            android:id="@+id/imagenMisMedicamento"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="16dp"
@@ -24,7 +24,7 @@
             app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/nombreMedicamento"
+            android:id="@+id/nombreMisMedicamento"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -35,12 +35,12 @@
             android:textAlignment="viewStart"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/anadirMedicamento"
-            app:layout_constraintStart_toEndOf="@+id/imagenMedicamento"
+            app:layout_constraintEnd_toStartOf="@+id/anadirMisMedicamento"
+            app:layout_constraintStart_toEndOf="@+id/imagenMisMedicamento"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/anadirMedicamento"
+            android:id="@+id/anadirMisMedicamento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -52,7 +52,7 @@
             app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/guideline3"
+            android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

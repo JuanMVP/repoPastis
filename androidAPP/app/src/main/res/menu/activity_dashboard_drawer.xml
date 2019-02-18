@@ -11,8 +11,16 @@
             android:title="Mis Personas" />
         <item
             android:id="@+id/nav_buscarMedicamento"
-            android:icon="@drawable/ic_medical_drug_pill"
+            android:icon="@drawable/ic_search_black_24dp"
             android:title="Buscar medicamentos" />
+        <item
+            android:id="@+id/nav_misMedicamentos"
+            android:icon="@drawable/ic_medical_drug_pill"
+            android:title="Mis medicamentos" />
+        <item
+            android:id="@+id/nav_pastillero"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Sincronizar Pastillero" />
     </group>
 
     <group android:checkableBehavior="single">

@@ -27,7 +27,7 @@ import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
 import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
 import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
-import com.st.pillboxapp.fragments_list.MedicamentosFragment;
+import com.st.pillboxapp.fragments_list.BuscarMedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
@@ -180,7 +180,7 @@ public class DashboardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_buscarMedicamento) {
 
-            f = new MedicamentosFragment();
+            f = new BuscarMedicamentosFragment();
             fab.hide();
             toolbar.setTitle("Buscar Medicamentos");
 
