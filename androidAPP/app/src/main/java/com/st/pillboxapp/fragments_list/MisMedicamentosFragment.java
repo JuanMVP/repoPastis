@@ -17,11 +17,17 @@ import android.widget.Toast;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.adapter.MyMisMedicamentosRecyclerViewAdapter;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
+import com.st.pillboxapp.interfaces.OnListMyMedicamentosInteractionListener;
+import com.st.pillboxapp.models.Medicamento;
+import com.st.pillboxapp.models.ResponseContainer;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.MyMedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
 import com.st.pillboxapp.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +37,7 @@ public class MisMedicamentosFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
-    private OnListMedicamentosInteractionListener mListener;
+    private OnListMyMedicamentosInteractionListener mListener;
     private MyMisMedicamentosRecyclerViewAdapter adapter;
     private Context ctx;
     private RecyclerView recyclerView;
@@ -99,13 +105,14 @@ public class MisMedicamentosFragment extends Fragment {
 
     public void cargarDatos(final RecyclerView recyclerView){
         MedicamentoService medicamentoService = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-        Call<MyMedicamentoResponse> call = medicamentoService.getMisMedicamentos(Util.getIdMedicamento(this.getActivity()));
+        Call<ResponseContainer<Medicamento>> call = medicamentoService.getMisMedicamentos();
 
-        call.enqueue(new Callback<MyMedicamentoResponse>() {
+        call.enqueue(new Callback<ResponseContainer<Medicamento>>() {
             @Override
-            public void onResponse(Call<MyMedicamentoResponse> call, Response<MyMedicamentoResponse> response) {
+            public void onResponse(Call<ResponseContainer<Medicamento>> call, Response<ResponseContainer<Medicamento>> response) {
                 if(response.isSuccessful()){
-                    adapter = new MyMisMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_mis_medicamentos, response.body().getMedicamentos(), mListener);
+
+                    adapter = new MyMisMedicamentosRecyclerViewAdapter(ctx, R.layout.fragment_mis_medicamentos, response.body().getRows(), mListener);
                     recyclerView.setAdapter(adapter);
                 }else{
                     Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_SHORT).show();
@@ -113,7 +120,7 @@ public class MisMedicamentosFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<MyMedicamentoResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<Medicamento>> call, Throwable t) {
 
                 Toast.makeText(getContext(), "Error de conexion", Toast.LENGTH_SHORT).show();
             }
@@ -124,8 +131,8 @@ public class MisMedicamentosFragment extends Fragment {
     public void onAttach(Context context) {
         ctx = context;
         super.onAttach(context);
-        if (context instanceof OnListMedicamentosInteractionListener) {
-            mListener = (OnListMedicamentosInteractionListener) context;
+        if (context instanceof OnListMyMedicamentosInteractionListener) {
+            mListener = (OnListMyMedicamentosInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");

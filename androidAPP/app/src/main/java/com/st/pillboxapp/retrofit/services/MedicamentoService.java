@@ -1,8 +1,11 @@
 package com.st.pillboxapp.retrofit.services;
 
 import com.st.pillboxapp.models.Medicamento;
+import com.st.pillboxapp.models.ResponseContainer;
 import com.st.pillboxapp.responses.MyMedicamentoResponse;
 import com.st.pillboxapp.responses.ResultadoResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,8 +16,8 @@ import retrofit2.http.Query;
 
 public interface MedicamentoService {
 
-    @GET("/medicamentos/{id}")
-    Call<MyMedicamentoResponse> getMisMedicamentos(@Path("id") String id);
+    @GET("/medicamentos")
+    Call<ResponseContainer<Medicamento>> getMisMedicamentos();
 
     @GET("/cima/rest/medicamentos")
     Call<ResultadoResponse> getMedicamentos(@Query("nombre") String nombre);

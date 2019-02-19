@@ -9,8 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
+import com.st.pillboxapp.interfaces.OnListMyMedicamentosInteractionListener;
 import com.st.pillboxapp.models.Medicamento;
 
 import java.util.List;
@@ -18,10 +20,10 @@ import java.util.List;
 public class MyMisMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<MyMisMedicamentosRecyclerViewAdapter.ViewHolder> {
 
     private final List<Medicamento> mValues;
-    private final OnListMedicamentosInteractionListener mListener;
+    private final OnListMyMedicamentosInteractionListener mListener;
     private Context ctx;
 
-    public MyMisMedicamentosRecyclerViewAdapter(Context context, int layaout, List<Medicamento> items, OnListMedicamentosInteractionListener listener) {
+    public MyMisMedicamentosRecyclerViewAdapter(Context context, int layaout, List<Medicamento> items, OnListMyMedicamentosInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = context;
@@ -39,11 +41,13 @@ public class MyMisMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<M
         holder.mItem = mValues.get(position);
         holder.nombreMisMedicamento.setText(holder.mItem.getNombre());
 
+        Glide.with(ctx).load(holder.mItem.getImagenUrl()).into(holder.imagenMisMedicamento);
+
         //*Click para añadir tratamiento*//
         holder.btnAddMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClickBtnAddTratamiento(holder.mItem);
+                mListener.onAddTratamientoClick(holder.mItem);
             }
         });
     }

@@ -20,14 +20,14 @@ public class AddMedicamentoFragment extends DialogFragment {
 
     private static final String ARG_NOMBRE = "nombre";
     private static final String ARG_DOSIS= "dosis";
-    private static final String ARG_IMGURL= "imagUrl";
+    private static final String ARG_IMAGE= "imagenUrl";
     private AddMedicamentoViewModel mViewModel;
 
     private DialogInterface.OnDismissListener onDismissListener;
 
     private View view;
     private TextView nombre;
-    private String argNombre, argDosis, argImgurl;
+    private String argNombre, argDosis, argImagen;
 
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         this.onDismissListener = onDismissListener;
@@ -50,7 +50,7 @@ public class AddMedicamentoFragment extends DialogFragment {
         if (getArguments() != null) {
             argNombre = getArguments().getString(ARG_NOMBRE);
             argDosis = getArguments().getString(ARG_DOSIS);
-            argImgurl = getArguments().getString(ARG_IMGURL);
+            argImagen = getArguments().getString(ARG_IMAGE);
         }
     }
 
@@ -58,7 +58,8 @@ public class AddMedicamentoFragment extends DialogFragment {
         Bundle args = new Bundle();
         args.putString(ARG_NOMBRE, resultado.getNombre());
         args.putString(ARG_DOSIS, resultado.getDosis());
-        args.putString(ARG_IMGURL, resultado.getFotos().get(0).getUrl());
+        args.putString(ARG_IMAGE, resultado.getFotos().get(0).getUrl());
+
 
         AddMedicamentoFragment fragment = new AddMedicamentoFragment();
         fragment.setArguments(args);
@@ -86,7 +87,7 @@ public class AddMedicamentoFragment extends DialogFragment {
 
                     public void onClick(final DialogInterface dialog, int id) {
 
-                        Medicamento medicamento = new Medicamento(argNombre, argDosis, argImgurl);
+                        Medicamento medicamento = new Medicamento(argNombre, argDosis,argImagen);
                         mViewModel.addMedicamento(medicamento, dialog);
                     }
                 })

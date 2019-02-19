@@ -59,7 +59,6 @@ public class AddTratamientoFragment extends DialogFragment {
     private Spinner spinnerPersonas;
     private ArrayAdapter<Persona> personas;
     private List<Persona> listpersonas;
-    private String id_persona;
 
 
     @Override
@@ -122,11 +121,9 @@ public class AddTratamientoFragment extends DialogFragment {
                 String dosisMedicamento = dosis.getText().toString();
 
 
-                id_persona = ((Persona) spinnerPersonas.getSelectedItem()).getId();
-
                 String casilla = asignarCasillaPastillero();
 
-                Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento, id_persona);
+                Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento);
                 mViewModel.addMedicamento(medicamento, dialog, casilla);
 
 

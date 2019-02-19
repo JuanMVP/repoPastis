@@ -36,6 +36,7 @@ import com.st.pillboxapp.fragments_list.MisMedicamentosFragment;
 import com.st.pillboxapp.fragments_list.PersonasFragment;
 import com.st.pillboxapp.fragments_list.TomasFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
+import com.st.pillboxapp.interfaces.OnListMyMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListPersonasInteractionListener;
 
 import com.st.pillboxapp.interfaces.OnListTomasInteractionListener;
@@ -46,7 +47,7 @@ import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.util.Util;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnListPersonasInteractionListener, OnListMedicamentosInteractionListener, OnListTomasInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListMyMedicamentosInteractionListener,OnListPersonasInteractionListener, OnListMedicamentosInteractionListener, OnListTomasInteractionListener {
 
 
     private Fragment f;

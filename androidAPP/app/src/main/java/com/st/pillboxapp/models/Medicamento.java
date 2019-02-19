@@ -6,7 +6,13 @@ public class Medicamento {
     private String dosis;
     private String imagenUrl;
 
+
     public Medicamento(){}
+
+    public Medicamento(String nombre, String dosis) {
+        this.nombre = nombre;
+        this.dosis = dosis;
+    }
 
     public Medicamento(String nombre, String dosis, String imagenUrl) {
         this.nombre = nombre;
@@ -38,4 +44,13 @@ public class Medicamento {
         this.imagenUrl = imagenUrl;
     }
 
+
+    @Override
+    public String toString() {
+        return "Medicamento{" +
+                "nombre='" + nombre + '\'' +
+                ", dosis='" + dosis + '\'' +
+                ", imagenUrl='" + imagenUrl + '\'' +
+                '}';
+    }
 }
