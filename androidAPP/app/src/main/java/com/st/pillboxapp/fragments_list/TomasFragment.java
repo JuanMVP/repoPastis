@@ -15,7 +15,9 @@ import com.st.pillboxapp.R;
 import com.st.pillboxapp.adapter.MyTomasRecyclerViewAdapter;
 import com.st.pillboxapp.interfaces.OnListTomasInteractionListener;
 import com.st.pillboxapp.models.Persona;
+import com.st.pillboxapp.models.ResponseContainer;
 import com.st.pillboxapp.models.TipoAutenticacion;
+import com.st.pillboxapp.models.Tomas;
 import com.st.pillboxapp.responses.TomasResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.TomasService;
@@ -89,26 +91,24 @@ public class TomasFragment extends Fragment {
 
     private void cargarDatos(final RecyclerView recyclerView) {
         TomasService tomasService = ServiceGenerator.createService(TomasService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-        Call<TomasResponse> call = tomasService.getTomas();
+        Call<ResponseContainer<Tomas>> call = tomasService.getTomas();
 
-        call.enqueue(new Callback<TomasResponse>() {
+        call.enqueue(new Callback<ResponseContainer<Tomas>>() {
             @Override
-            public void onResponse(Call<TomasResponse> call, Response<TomasResponse> response) {
+            public void onResponse(Call<ResponseContainer<Tomas>> call, Response<ResponseContainer<Tomas>> response) {
                 if(response.isSuccessful()){
 
-                    adapter = new MyTomasRecyclerViewAdapter(ctx,R.layout.fragment_tomas,response.body().getListaTomas(),mListener);
+                    adapter = new MyTomasRecyclerViewAdapter(ctx, R.layout.fragment_mis_medicamentos, response.body().getRows(), mListener);
                     recyclerView.setAdapter(adapter);
-
                 }else{
-                    Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
-
-
+                    Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<TomasResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<Tomas>> call, Throwable t) {
 
+                Toast.makeText(getContext(), "Error de conexion", Toast.LENGTH_SHORT).show();
             }
         });
 
