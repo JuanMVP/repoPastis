@@ -97,8 +97,8 @@ public class MyBuscarMedicamentosRecyclerViewAdapter extends RecyclerView.Adapte
             super(view);
             mView = view;
             nombreMedicamento = view.findViewById(R.id.nombreMedicamento);
-            imagenMedicamemto = view.findViewById(R.id.imagenMisMedicamento);
-            btnAddMedicamento = view.findViewById(R.id.anadirMisMedicamento);
+            imagenMedicamemto = view.findViewById(R.id.imagenMedicamento);
+            btnAddMedicamento = view.findViewById(R.id.anadirMedicamento);
 
         }
 
