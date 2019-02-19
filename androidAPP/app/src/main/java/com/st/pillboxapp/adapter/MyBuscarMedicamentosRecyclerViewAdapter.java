@@ -47,14 +47,12 @@ public class MyBuscarMedicamentosRecyclerViewAdapter extends RecyclerView.Adapte
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.nombreMedicamento.setText(holder.mItem.getNombre());
+
         if (holder.mItem.getFotos() != null) {
-
             Glide.with(ctx).load(holder.mItem.getFotos().get(0).getUrl()).into(holder.imagenMedicamemto);
-
         } else {
             holder.imagenMedicamemto.setImageResource(R.drawable.ic_no_photo);
         }
-
 
         //*Para aumentar la imagen del medicamento al hacer click*//
         final ImagePopup imagePopup = new ImagePopup(ctx);
@@ -74,8 +72,7 @@ public class MyBuscarMedicamentosRecyclerViewAdapter extends RecyclerView.Adapte
         holder.btnAddMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // mListener.onClickBtnAddMedicamento(holder.mItem);
-                Toast.makeText(ctx, "Se ha añadido correctamente", Toast.LENGTH_SHORT).show();
+                mListener.onAddMedicamentoClick(holder.mItem);
             }
         });
 
@@ -98,7 +95,7 @@ public class MyBuscarMedicamentosRecyclerViewAdapter extends RecyclerView.Adapte
             mView = view;
             nombreMedicamento = view.findViewById(R.id.nombreMedicamento);
             imagenMedicamemto = view.findViewById(R.id.imagenMedicamento);
-            btnAddMedicamento = view.findViewById(R.id.anadirMedicamento);
+            btnAddMedicamento = view.findViewById(R.id.addMedToMy);
 
         }
 

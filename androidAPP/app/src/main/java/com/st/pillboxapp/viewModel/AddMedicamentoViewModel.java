@@ -23,20 +23,21 @@ public class AddMedicamentoViewModel extends AndroidViewModel {
 
     public void addMedicamento(Medicamento medicamento, final DialogInterface dialog){
         MedicamentoService mService = ServiceGenerator.createService(MedicamentoService.class);
-        Call<MyMedicamentoResponse> call = mService.register(medicamento);
+        Call<Medicamento> call = mService.addMedicamento(medicamento);
 
-        call.enqueue(new Callback<MyMedicamentoResponse>() {
+        call.enqueue(new Callback<Medicamento>() {
             @Override
-            public void onResponse(Call<MyMedicamentoResponse> call, Response<MyMedicamentoResponse> response) {
+            public void onResponse(Call<Medicamento> call, Response<Medicamento> response) {
                 if (response.isSuccessful()) {
                     dialog.dismiss();
+
                 } else {
                     Toast.makeText(getApplication().getApplicationContext(), "Error al añadir", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<MyMedicamentoResponse> call, Throwable t) {
+            public void onFailure(Call<Medicamento> call, Throwable t) {
                 Toast.makeText(getApplication().getApplicationContext(), "Error al añadir", Toast.LENGTH_SHORT).show();
             }
         });

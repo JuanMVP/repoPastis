@@ -5,9 +5,9 @@ import com.st.pillboxapp.models.Resultado;
 
 public interface OnListMedicamentosInteractionListener {
 
-    public void onClickBtnAddMedicamento(Medicamento medicamento);
+    public void onAddTratamientoClick(Medicamento medicamento);
 
-    public void onClickBtnAddMedicamento(Resultado resultado);
+    public void onAddMedicamentoClick(Resultado resultado);
 
 
 }

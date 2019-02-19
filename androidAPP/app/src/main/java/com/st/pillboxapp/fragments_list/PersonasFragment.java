@@ -66,9 +66,11 @@ public class PersonasFragment extends Fragment {
 
         if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
+
             recyclerView = view.findViewById(R.id.listPersonas);
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
+
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

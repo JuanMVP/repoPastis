@@ -38,8 +38,7 @@ public class MisMedicamentosFragment extends Fragment {
     private SwipeRefreshLayout swipe;
 
 
-    public MisMedicamentosFragment() {
-    }
+    public MisMedicamentosFragment() { }
 
     public static MisMedicamentosFragment newInstance(int columnCount) {
         MisMedicamentosFragment fragment = new MisMedicamentosFragment();
@@ -52,7 +51,6 @@ public class MisMedicamentosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -62,14 +60,16 @@ public class MisMedicamentosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mis_medicamentos_list, container, false);
 
-        swipe = view.findViewById(R.id.swipePersonas);
+        swipe = view.findViewById(R.id.swipeMedicamentos);
         swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
 
         if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
-            recyclerView = view.findViewById(R.id.listPersonas);
+
+            recyclerView = view.findViewById(R.id.listMedicamentos);
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
+
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -99,7 +99,7 @@ public class MisMedicamentosFragment extends Fragment {
 
     public void cargarDatos(final RecyclerView recyclerView){
         MedicamentoService medicamentoService = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-        Call<MyMedicamentoResponse> call = medicamentoService.getMisMedicamentos();
+        Call<MyMedicamentoResponse> call = medicamentoService.getMisMedicamentos(Util.getIdMedicamento(this.getActivity()));
 
         call.enqueue(new Callback<MyMedicamentoResponse>() {
             @Override

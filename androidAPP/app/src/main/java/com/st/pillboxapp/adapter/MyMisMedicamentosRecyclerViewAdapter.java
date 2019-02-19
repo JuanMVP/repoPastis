@@ -39,12 +39,11 @@ public class MyMisMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<M
         holder.mItem = mValues.get(position);
         holder.nombreMisMedicamento.setText(holder.mItem.getNombre());
 
-        //*Click para que se abra el activity de añadir medicamento*//
+        //*Click para añadir tratamiento*//
         holder.btnAddMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClickBtnAddMedicamento(holder.mItem);
-                // Toast.makeText(ctx, "Se ha añadido correctamente", Toast.LENGTH_SHORT).show();
+                mListener.onClickBtnAddTratamiento(holder.mItem);
             }
         });
     }

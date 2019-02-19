@@ -49,7 +49,7 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onDeleteBtnClick(holder.mItem.getId(), holder.mItem.getNombre());
+                mListener.onDeletePersonaClick(holder.mItem.getId(), holder.mItem.getNombre());
             }
         });
 
@@ -96,7 +96,6 @@ public class MyPersonasRecyclerViewAdapter extends RecyclerView.Adapter<MyPerson
             btnDelete = view.findViewById(R.id.btnDeletePersona);
             infoPersona = view.findViewById(R.id.cardViewPersonas);
             btnEditar = view.findViewById(R.id.btnEditPersona);
-            //elementoPersona = view.findViewById(R.id.cardView);
         }
 
         @Override

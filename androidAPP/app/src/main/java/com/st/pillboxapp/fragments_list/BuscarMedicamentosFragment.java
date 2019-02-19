@@ -2,9 +2,12 @@ package com.st.pillboxapp.fragments_list;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,10 +23,16 @@ import android.widget.Toast;
 
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.adapter.MyBuscarMedicamentosRecyclerViewAdapter;
+import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
+import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
+import com.st.pillboxapp.models.TipoAutenticacion;
+import com.st.pillboxapp.responses.MyMedicamentoResponse;
 import com.st.pillboxapp.responses.ResultadoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceApiGenerator;
+import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
+import com.st.pillboxapp.util.Util;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,11 +48,10 @@ public class BuscarMedicamentosFragment extends Fragment {
     private Context ctx;
     private RecyclerView recyclerView;
     private EditText buscarMedicamentoPorNombre;
-    private ImageButton btnBuscarMedicamento;
+    private ImageButton btnBuscarMedicamento, addMedicamento;
     private SwipeRefreshLayout swipe;
 
-    public BuscarMedicamentosFragment() {
-    }
+    public BuscarMedicamentosFragment() { }
 
     public static BuscarMedicamentosFragment newInstance(int columnCount) {
         BuscarMedicamentosFragment fragment = new BuscarMedicamentosFragment();
@@ -69,12 +77,12 @@ public class BuscarMedicamentosFragment extends Fragment {
         buscarMedicamentoPorNombre = view.findViewById(R.id.findMedicamento);
         btnBuscarMedicamento = view.findViewById(R.id.buttonBuscarMedicamento);
 
-        swipe = view.findViewById(R.id.swipePersonas);
+        swipe = view.findViewById(R.id.swipeBuscarMedicamentos);
         swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
 
         if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
-            recyclerView = view.findViewById(R.id.listPersonas);
+            recyclerView = view.findViewById(R.id.listBuscarMedicamentos);
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
             if (mColumnCount <= 1) {

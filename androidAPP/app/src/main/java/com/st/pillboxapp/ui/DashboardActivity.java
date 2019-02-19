@@ -270,9 +270,8 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
-
     @Override
-    public void onDeleteBtnClick(String id, String nombre) {
+    public void onDeletePersonaClick(String id, String nombre) {
 
         DeletePersonaFragment f = DeletePersonaFragment.newInstance(id, nombre);
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -291,16 +290,12 @@ public class DashboardActivity extends AppCompatActivity
     }
 
 
-    public void onClickBtnAddMedicamento(Resultado resultado) {
-        AddTratamientoFragment f = AddTratamientoFragment.newInstance(resultado);
+    public void onAddMedicamentoClick(Resultado resultado) {
+        AddMedicamentoFragment f = AddMedicamentoFragment.newInstance(resultado);
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "AñadirMedicamento");
 
     }
-
-
-
-
 
     @Override
     public void onClickPersonaToma(Persona p) {
@@ -313,7 +308,7 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClickBtnAddMedicamento(Medicamento medicamento) {
+    public void onAddTratamientoClick(Medicamento medicamento) {
         AddMedicamentoFragment f = AddMedicamentoFragment.newInstance();
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -326,6 +321,6 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
         FragmentManager fm = getSupportFragmentManager();
-        f.show(fm, "DeletePersona");
+        f.show(fm, "AddMedicamento");
     }
 }

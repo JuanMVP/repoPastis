@@ -12,18 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.st.pillboxapp.R;
-import com.st.pillboxapp.fragments_list.dummy.DummyContent;
-import com.st.pillboxapp.fragments_list.dummy.DummyContent.DummyItem;
+import com.st.pillboxapp.adapter.MyTomasRecyclerViewAdapter;
 import com.st.pillboxapp.interfaces.OnListTomasInteractionListener;
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.responses.TomasResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.TomasService;
-import com.st.pillboxapp.retrofit.services.UserService;
 import com.st.pillboxapp.util.Util;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

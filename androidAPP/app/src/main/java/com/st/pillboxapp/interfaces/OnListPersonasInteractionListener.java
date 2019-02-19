@@ -4,7 +4,7 @@ import com.st.pillboxapp.models.Persona;
 
 public interface OnListPersonasInteractionListener {
 
-    public void onDeleteBtnClick(String id, String nombre);
+    public void onDeletePersonaClick(String id, String nombre);
 
     public void onEditPersonaClick(Persona p);
 

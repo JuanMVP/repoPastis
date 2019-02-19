@@ -1,4 +1,4 @@
-package com.st.pillboxapp.fragments_list;
+package com.st.pillboxapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.st.pillboxapp.R;
 
-import com.st.pillboxapp.fragments_list.dummy.DummyContent.DummyItem;
 import com.st.pillboxapp.interfaces.OnListTomasInteractionListener;
 import com.st.pillboxapp.models.Tomas;
 

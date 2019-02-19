@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.models.TipoAutenticacion;
+import com.st.pillboxapp.responses.MyMedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
 import com.st.pillboxapp.util.Util;
