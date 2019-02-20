@@ -3,12 +3,14 @@ package com.st.pillboxapp.retrofit.services;
 import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.ResponseContainer;
 import com.st.pillboxapp.responses.MyMedicamentoResponse;
+import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.responses.ResultadoResponse;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -27,4 +29,7 @@ public interface MedicamentoService {
 
     @POST("/medicamentos")
     Call<Medicamento> addMedicamento(@Body Medicamento medicamento);
+
+    @DELETE("/medicamentos/{nombre}")
+    Call<MyMedicamentoResponse> deleteOne(@Path("nombre") String nombre);
 }

@@ -11,9 +11,11 @@ import android.widget.Toast;
 import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.models.TipoAutenticacion;
+import com.st.pillboxapp.models.Tomas;
 import com.st.pillboxapp.responses.MyMedicamentoResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 import com.st.pillboxapp.retrofit.services.MedicamentoService;
+import com.st.pillboxapp.retrofit.services.TomasService;
 import com.st.pillboxapp.util.Util;
 
 import retrofit2.Call;
@@ -26,26 +28,25 @@ public class AddTratamientoViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void addMedicamento(final Medicamento medicamento, final DialogInterface dialog, final String casilla) {
+    public void addTratamiento(final Tomas tomas, final DialogInterface dialog) {
 
-        MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(getApplication().getApplicationContext()), TipoAutenticacion.JWT);
-        Call<Medicamento> call = service.addMedicamento(medicamento);
+        TomasService service = ServiceGenerator.createService(TomasService.class, Util.getToken(getApplication().getApplicationContext()), TipoAutenticacion.JWT);
+        Call<Tomas> call = service.add(tomas);
 
-        call.enqueue(new Callback<Medicamento>() {
+        call.enqueue(new Callback<Tomas>() {
             @Override
-            public void onResponse(Call<Medicamento> call, Response<Medicamento> response) {
+            public void onResponse(Call<Tomas> call, Response<Tomas> response) {
 
                 if (response.isSuccessful()) {
                     dialog.dismiss();
-                    Toast.makeText(getApplication().getApplicationContext(), "Agregar pastilla a "+casilla, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplication().getApplicationContext(), "Error al añadir medicamento", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication().getApplicationContext(), "Error al añadir tratamiento", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Medicamento> call, Throwable t) {
-                Toast.makeText(getApplication().getApplicationContext(), "Error al añadir medicamento", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Tomas> call, Throwable t) {
+                Toast.makeText(getApplication().getApplicationContext(), "Error de conexion al añadir tratamiento", Toast.LENGTH_SHORT).show();
             }
         });
 

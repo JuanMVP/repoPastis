@@ -26,6 +26,7 @@ import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.Resultado;
 import com.st.pillboxapp.models.TipoAutenticacion;
 
+import com.st.pillboxapp.models.Tomas;
 import com.st.pillboxapp.responses.OneUserResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
 
@@ -109,8 +110,8 @@ public class AddTratamientoFragment extends DialogFragment {
 
         nombre.setEnabled(true);
         dosis.setEnabled(true);
-        cargarSpinner();
 
+        cargarSpinner();
 
         //*Se crea el DialogFragment*//
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -120,11 +121,16 @@ public class AddTratamientoFragment extends DialogFragment {
                 String nombreMedicamento = nombre.getText().toString();
                 String dosisMedicamento = dosis.getText().toString();
 
-
-                String casilla = asignarCasillaPastillero();
+                String diaSemana = seleccionarDia();
+                String horaToma = seleccionarHora();
 
                 Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento);
-                mViewModel.addMedicamento(medicamento, dialog, casilla);
+
+                //PERSONA ESTA VACIO, ¿COMO COGER INFORMACION DE PERSONA A TRAVES DEL SPINNER?
+
+                Persona persona = new Persona();
+                Tomas tomas = new Tomas(medicamento, persona, diaSemana, horaToma);
+                mViewModel.addTratamiento(tomas, dialog);
 
 
             }
@@ -188,7 +194,7 @@ public class AddTratamientoFragment extends DialogFragment {
         return numCasilla;
     }
 
-    public String asignarCasillaPastillero() {
+    public String seleccionarDia() {
 
         String casilla = null;
 

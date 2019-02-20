@@ -28,6 +28,7 @@ import com.st.pillboxapp.fragment_dialog.AddMedicamentoFragment;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.fragment_dialog.AddTratamientoFragment;
 import com.st.pillboxapp.fragment_dialog.AddPersonaFragment;
+import com.st.pillboxapp.fragment_dialog.DeleteMisMedicamentos;
 import com.st.pillboxapp.fragment_dialog.DeletePersonaFragment;
 import com.st.pillboxapp.fragment_dialog.EditPersonaFragment;
 import com.st.pillboxapp.fragments_list.BuscarMedicamentosFragment;
@@ -309,6 +310,11 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
+    public void onAddToma(Medicamento medicamento) {
+
+    }
+
+    @Override
     public void onAddTratamientoClick(Medicamento medicamento) {
         AddMedicamentoFragment f = AddMedicamentoFragment.newInstance();
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -323,5 +329,22 @@ public class DashboardActivity extends AppCompatActivity
         });
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "AddMedicamento");
+    }
+
+    @Override
+    public void onDeleteMisMedicamentosClick(String nombre) {
+//        DeleteMisMedicamentos f = DeleteMisMedicamentos.newInstance(nombre);
+//        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag();
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.detach(currentFragment);
+//                fragmentTransaction.attach(currentFragment);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//        FragmentManager fm = getSupportFragmentManager();
+//        f.show(fm, "DeleteMedicamento");
     }
 }

@@ -2,7 +2,10 @@ package com.st.pillboxapp.fragments_list;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,26 +33,19 @@ import retrofit2.Response;
 
 public class TomasFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String ARG_NOMBRE_INFO = "nombre";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListTomasInteractionListener mListener;
     private MyTomasRecyclerViewAdapter adapter;
     private Context ctx;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipe;
+
     private String argNombrePersona;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public TomasFragment() {
-    }
+    public TomasFragment() { }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static TomasFragment newInstance(Persona p) {
         TomasFragment fragment = new TomasFragment();
         Bundle args = new Bundle();
@@ -72,10 +68,15 @@ public class TomasFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tomas_list, container, false);
 
-        // Set the adapter
+        swipe = view.findViewById(R.id.swipeTomas);
+        swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
+
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
+
             recyclerView = view.findViewById(R.id.listaTomas);
+            recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+                    DividerItemDecoration.VERTICAL));
 
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -83,9 +84,26 @@ public class TomasFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
+            //*Pticion a nuestra API*//
             cargarDatos(recyclerView);
 
         }
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        actualizarDatos();
+                        swipe.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+
+
+        });
+
         return view;
     }
 
@@ -134,5 +152,8 @@ public class TomasFragment extends Fragment {
         mListener = null;
     }
 
+    public void actualizarDatos(){
+        cargarDatos(recyclerView);
+    }
 
 }

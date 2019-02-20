@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.st.pillboxapp.R;
 import com.st.pillboxapp.interfaces.OnListMedicamentosInteractionListener;
 import com.st.pillboxapp.interfaces.OnListMyMedicamentosInteractionListener;
+import com.st.pillboxapp.interfaces.OnListTomasInteractionListener;
 import com.st.pillboxapp.models.Medicamento;
 
 import java.util.List;
@@ -50,6 +51,14 @@ public class MyMisMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<M
                 mListener.onAddTratamientoClick(holder.mItem);
             }
         });
+
+        //*Click para borrar un tratamiento*//
+        holder.btnDeleteMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onDeleteMisMedicamentosClick(holder.mItem.getNombre());
+            }
+        });
     }
 
     @Override
@@ -61,7 +70,7 @@ public class MyMisMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<M
         public final View mView;
         public final TextView nombreMisMedicamento;
         public final ImageView imagenMisMedicamento;
-        public final ImageButton btnAddMedicamento;
+        public final ImageButton btnAddMedicamento, btnDeleteMedicamento;
         public Medicamento mItem;
 
         public ViewHolder(View view) {
@@ -70,6 +79,7 @@ public class MyMisMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<M
             nombreMisMedicamento =  view.findViewById(R.id.nombreMisMedicamento);
             imagenMisMedicamento =  view.findViewById(R.id.imagenMisMedicamento);
             btnAddMedicamento =  view.findViewById(R.id.anadirMisMedicamento);
+            btnDeleteMedicamento = view.findViewById(R.id.deleteMisMedicamentos);
         }
 
         @Override
