@@ -14,7 +14,7 @@ public interface TomasService {
     @GET("/tomas")
     Call<ResponseContainer<Tomas>> getTomas();
 
-    @POST("/persona")
+    @POST("/tomas")
     Call<Tomas> add (@Body Tomas tomas);
 
 

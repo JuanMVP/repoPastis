@@ -37,7 +37,7 @@ public class MyTomasRecyclerViewAdapter extends RecyclerView.Adapter<MyTomasRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.nombreMedicamentoInfo.setText(holder.mItem.getMedicamento().getNombre());
+       // holder.nombreMedicamentoInfo.setText(holder.mItem.getMedicamento().getNombre());
         holder.diaSemanaToma.setText(holder.mItem.getDia_semana());
         holder.horaToma.setText(holder.mItem.getHora_toma());
 

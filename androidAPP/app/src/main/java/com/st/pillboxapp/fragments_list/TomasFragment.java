@@ -71,7 +71,7 @@ public class TomasFragment extends Fragment {
         swipe = view.findViewById(R.id.swipeTomas);
         swipe.setColorSchemeResources(R.color.azulSwipe, R.color.rojoSwipe);
 
-        if (view instanceof RecyclerView) {
+        if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
 
             recyclerView = view.findViewById(R.id.listaTomas);

@@ -2,35 +2,45 @@ package com.st.pillboxapp.models;
 
 public class Tomas {
 
-    private Medicamento medicamento;
-    private Persona persona;
+    private String medicamento_id;
+    private String persona_id;
     private String dia_semana;
     private String hora_toma;
 
     public Tomas (){}
 
 
-    public Tomas(Medicamento medicamento, Persona persona, String dia_semana, String hora_toma) {
-        this.medicamento = medicamento;
-        this.persona = persona;
+    public Tomas(String medicamento_id, String persona_id, String dia_semana, String hora_toma) {
+        this.medicamento_id = medicamento_id;
+        this.persona_id = persona_id;
         this.dia_semana = dia_semana;
         this.hora_toma = hora_toma;
     }
 
-    public Medicamento getMedicamento() {
-        return medicamento;
+    @Override
+    public String toString() {
+        return "Tomas{" +
+                "medicamento_id='" + medicamento_id + '\'' +
+                ", persona_id='" + persona_id + '\'' +
+                ", dia_semana='" + dia_semana + '\'' +
+                ", hora_toma='" + hora_toma + '\'' +
+                '}';
     }
 
-    public void setMedicamento(Medicamento medicamento) {
-        this.medicamento = medicamento;
+    public String getMedicamento_id() {
+        return medicamento_id;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public void setMedicamento_id(String medicamento_id) {
+        this.medicamento_id = medicamento_id;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public String getPersona_id() {
+        return persona_id;
+    }
+
+    public void setPersona_id(String persona_id) {
+        this.persona_id = persona_id;
     }
 
     public String getDia_semana() {
@@ -47,16 +57,5 @@ public class Tomas {
 
     public void setHora_toma(String hora_toma) {
         this.hora_toma = hora_toma;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Tomas{" +
-                "medicamento=" + medicamento +
-                ", persona=" + persona +
-                ", dia_semana='" + dia_semana + '\'' +
-                ", hora_toma='" + hora_toma + '\'' +
-                '}';
     }
 }

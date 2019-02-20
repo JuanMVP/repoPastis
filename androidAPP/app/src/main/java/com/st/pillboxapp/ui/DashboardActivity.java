@@ -316,19 +316,19 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onAddTratamientoClick(Medicamento medicamento) {
-        AddMedicamentoFragment f = AddMedicamentoFragment.newInstance();
-        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.detach(currentFragment);
-                fragmentTransaction.attach(currentFragment);
-                fragmentTransaction.commit();
-            }
-        });
+        AddTratamientoFragment f = AddTratamientoFragment.newInstance(medicamento);
+//        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.detach(currentFragment);
+//                fragmentTransaction.attach(currentFragment);
+//                fragmentTransaction.commit();
+//            }
+//        });
         FragmentManager fm = getSupportFragmentManager();
-        f.show(fm, "AddMedicamento");
+        f.show(fm, "AddTratamiento");
     }
 
     @Override

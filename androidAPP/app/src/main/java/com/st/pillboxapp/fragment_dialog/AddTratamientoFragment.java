@@ -60,6 +60,7 @@ public class AddTratamientoFragment extends DialogFragment {
     private Spinner spinnerPersonas;
     private ArrayAdapter<Persona> personas;
     private List<Persona> listpersonas;
+    private String id_persona;
 
 
     @Override
@@ -79,10 +80,10 @@ public class AddTratamientoFragment extends DialogFragment {
         }
     }
 
-    public static AddTratamientoFragment newInstance(Resultado resultado) {
+    public static AddTratamientoFragment newInstance(Medicamento medicamento) {
         Bundle args = new Bundle();
-        args.putString(ARG_NOMBRE_MED, resultado.getNombre());
-        args.putString(ARG_DOSIS, resultado.getDosis());
+        args.putString(ARG_NOMBRE_MED, medicamento.getNombre());
+        args.putString(ARG_DOSIS, medicamento.getDosis());
 
         AddTratamientoFragment fragment = new AddTratamientoFragment();
         fragment.setArguments(args);
@@ -121,15 +122,17 @@ public class AddTratamientoFragment extends DialogFragment {
                 String nombreMedicamento = nombre.getText().toString();
                 String dosisMedicamento = dosis.getText().toString();
 
+                Persona p = (Persona)spinnerPersonas.getSelectedItem();
+                id_persona = p.getUser_id();
+
+
                 String diaSemana = seleccionarDia();
                 String horaToma = seleccionarHora();
 
-                Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento);
+               // Medicamento medicamento = new Medicamento(nombreMedicamento, dosisMedicamento);
 
                 //PERSONA ESTA VACIO, ¿COMO COGER INFORMACION DE PERSONA A TRAVES DEL SPINNER?
-
-                Persona persona = new Persona();
-                Tomas tomas = new Tomas(medicamento, persona, diaSemana, horaToma);
+                Tomas tomas = new Tomas(argIdMedicamento, id_persona, diaSemana, horaToma);
                 mViewModel.addTratamiento(tomas, dialog);
 
 
