@@ -335,7 +335,7 @@ public class DashboardActivity extends AppCompatActivity
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("AddTratamiento");
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.detach(currentFragment);
                 fragmentTransaction.attach(currentFragment);

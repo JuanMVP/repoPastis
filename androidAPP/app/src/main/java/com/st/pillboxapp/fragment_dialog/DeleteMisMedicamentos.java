@@ -51,6 +51,8 @@ public class DeleteMisMedicamentos extends DialogFragment {
         if (getArguments() != null) {
             argNombre = getArguments().getString(ARG_NOMBRE);
             argIdMed = getArguments().getString(ARG_ID_MED);
+            System.out.print(argIdMed);
+            System.out.print(argNombre);
         }
     }
 
@@ -58,6 +60,7 @@ public class DeleteMisMedicamentos extends DialogFragment {
         Bundle args = new Bundle();
         args.putString(ARG_NOMBRE, medicamento.getNombre());
         args.putString(ARG_ID_MED, medicamento.getId());
+
 
         DeleteMisMedicamentos fragment = new DeleteMisMedicamentos();
         fragment.setArguments(args);
@@ -71,8 +74,7 @@ public class DeleteMisMedicamentos extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.delete_mis_medicamentos_fragment, null);
 
-        nombre = view.findViewById(R.id.deleteMisMedicamentos);
-
+        nombre = view.findViewById(R.id.deleteNombreMisMedicamentos);
         nombre.setText(argNombre);
 
         //*Se crea el DialogFragment*//
