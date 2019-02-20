@@ -2,6 +2,7 @@ package com.st.pillboxapp.models;
 
 public class Medicamento {
 
+    private String id;
     private String nombre;
     private String dosis;
     private String imagenUrl;
@@ -9,7 +10,8 @@ public class Medicamento {
 
     public Medicamento(){}
 
-    public Medicamento(String nombre, String dosis) {
+    public Medicamento(String id, String nombre, String dosis) {
+        this.id = id;
         this.nombre = nombre;
         this.dosis = dosis;
     }
@@ -18,6 +20,14 @@ public class Medicamento {
         this.nombre = nombre;
         this.dosis = dosis;
         this.imagenUrl = imagenUrl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
