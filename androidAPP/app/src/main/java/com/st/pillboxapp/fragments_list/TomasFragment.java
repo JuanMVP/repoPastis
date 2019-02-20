@@ -21,8 +21,10 @@ import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.ResponseContainer;
 import com.st.pillboxapp.models.TipoAutenticacion;
 import com.st.pillboxapp.models.Tomas;
+import com.st.pillboxapp.responses.PersonaResponse;
 import com.st.pillboxapp.responses.TomasResponse;
 import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
+import com.st.pillboxapp.retrofit.services.PersonaService;
 import com.st.pillboxapp.retrofit.services.TomasService;
 import com.st.pillboxapp.util.Util;
 
@@ -108,15 +110,15 @@ public class TomasFragment extends Fragment {
     }
 
     private void cargarDatos(final RecyclerView recyclerView) {
-        TomasService tomasService = ServiceGenerator.createService(TomasService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-        Call<ResponseContainer<Tomas>> call = tomasService.getTomas();
+        PersonaService personaService = ServiceGenerator.createService(PersonaService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
+        Call<PersonaResponse> call = personaService.findOne(Util.getUserId(this.getActivity()));
 
-        call.enqueue(new Callback<ResponseContainer<Tomas>>() {
+        call.enqueue(new Callback<PersonaResponse>() {
             @Override
-            public void onResponse(Call<ResponseContainer<Tomas>> call, Response<ResponseContainer<Tomas>> response) {
+            public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
                 if(response.isSuccessful()){
 
-                    adapter = new MyTomasRecyclerViewAdapter(ctx, R.layout.fragment_mis_medicamentos, response.body().getRows(), mListener);
+                    adapter = new MyTomasRecyclerViewAdapter(ctx, R.layout.fragment_tomas, response.body().getListaTomas(), mListener);
                     recyclerView.setAdapter(adapter);
                 }else{
                     Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_SHORT).show();
@@ -124,7 +126,7 @@ public class TomasFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseContainer<Tomas>> call, Throwable t) {
+            public void onFailure(Call<PersonaResponse> call, Throwable t) {
 
                 Toast.makeText(getContext(), "Error de conexion", Toast.LENGTH_SHORT).show();
             }

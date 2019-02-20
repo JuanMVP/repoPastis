@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 
 import com.st.pillboxapp.models.Persona;
 import com.st.pillboxapp.models.Resultado;
+import com.st.pillboxapp.models.Tomas;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class PersonaResponse {
     private String nombre;
     private String fechaNacimiento;
     private List<Resultado> medicamentos;
+    private List<Tomas> listaTomas;
 
     public PersonaResponse() { }
 
@@ -29,6 +31,14 @@ public class PersonaResponse {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.medicamentos = medicamentos;
+    }
+
+    public PersonaResponse(String id, String nombre, String fechaNacimiento, List<Resultado> medicamentos, List<Tomas> listaTomas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.medicamentos = medicamentos;
+        this.listaTomas = listaTomas;
     }
 
     public String getId() {
@@ -61,6 +71,14 @@ public class PersonaResponse {
 
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public List<Tomas> getListaTomas() {
+        return listaTomas;
+    }
+
+    public void setListaTomas(List<Tomas> listaTomas) {
+        this.listaTomas = listaTomas;
     }
 
     @Override
