@@ -15,10 +15,10 @@ public class PersonaResponse {
     private String id;
     private String nombre;
     private String fechaNacimiento;
-    private List<Resultado> medicamentos;
     private List<Tomas> listaTomas;
 
     public PersonaResponse() { }
+
 
     public PersonaResponse(String id, String nombre, String fechaNacimiento) {
         this.id = id;
@@ -26,18 +26,10 @@ public class PersonaResponse {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public PersonaResponse(String id, String nombre, String fechaNacimiento, List<Resultado> medicamentos) {
+    public PersonaResponse(String id, String nombre, String fechaNacimiento,List<Tomas> listaTomas) {
         this.id = id;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
-        this.medicamentos = medicamentos;
-    }
-
-    public PersonaResponse(String id, String nombre, String fechaNacimiento, List<Resultado> medicamentos, List<Tomas> listaTomas) {
-        this.id = id;
-        this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
-        this.medicamentos = medicamentos;
         this.listaTomas = listaTomas;
     }
 
@@ -59,14 +51,6 @@ public class PersonaResponse {
 
     public String getFechaNacimiento() {
         return fechaNacimiento;
-    }
-
-    public List<Resultado> getMedicamentos() {
-        return medicamentos;
-    }
-
-    public void setMedicamentos(List<Resultado> medicamentos) {
-        this.medicamentos = medicamentos;
     }
 
     public void setFechaNacimiento(String fechaNacimiento) {

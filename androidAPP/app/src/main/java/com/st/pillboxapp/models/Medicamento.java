@@ -6,14 +6,17 @@ public class Medicamento {
     private String nombre;
     private String dosis;
     private String imagenUrl;
+    private int num;
 
 
     public Medicamento(){}
 
-    public Medicamento(String id, String nombre, String dosis) {
+    public Medicamento(String id, String nombre, String dosis,int num) {
         this.id = id;
         this.nombre = nombre;
         this.dosis = dosis;
+        this.num=1;
+
     }
 
     public Medicamento(String nombre, String dosis, String imagenUrl) {

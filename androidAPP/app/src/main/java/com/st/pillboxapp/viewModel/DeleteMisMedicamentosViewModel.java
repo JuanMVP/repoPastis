@@ -22,9 +22,9 @@ public class DeleteMisMedicamentosViewModel extends AndroidViewModel {
 
     public DeleteMisMedicamentosViewModel(@NonNull Application application) {super(application);}
 
-    public void deleteMisMedicamentos(String nombre, final DialogInterface dialog) {
+    public void deleteMisMedicamentos(String id, final DialogInterface dialog) {
         MedicamentoService service = ServiceGenerator.createService(MedicamentoService.class, Util.getToken(getApplication().getApplicationContext()), TipoAutenticacion.JWT);
-        Call<MyMedicamentoResponse> call = service.deleteOne(nombre);
+        Call<MyMedicamentoResponse> call = service.deleteOne(id);
 
         call.enqueue(new Callback<MyMedicamentoResponse>() {
             @Override

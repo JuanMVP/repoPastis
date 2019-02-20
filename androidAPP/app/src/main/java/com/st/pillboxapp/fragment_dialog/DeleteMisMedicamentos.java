@@ -83,9 +83,9 @@ public class DeleteMisMedicamentos extends DialogFragment {
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
 
                     public void onClick(final DialogInterface dialog, int id) {
-                        String nombreEditado = nombre.getText().toString();
 
-                        mViewModel.deleteMisMedicamentos(nombreEditado, dialog);
+
+                        mViewModel.deleteMisMedicamentos(argIdMed, dialog);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

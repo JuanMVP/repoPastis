@@ -68,7 +68,7 @@ public class DeletePersonaFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.delete_persona_fragment, null);
 
-        nombre = view.findViewById(R.id.deleteNombrePersona);
+        nombre = view.findViewById(R.id.deleteNombreMisMedicamentos);
 
         nombre.setText(argNombre);
 

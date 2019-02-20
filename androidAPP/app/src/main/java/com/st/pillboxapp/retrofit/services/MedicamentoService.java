@@ -30,6 +30,6 @@ public interface MedicamentoService {
     @POST("/medicamentos")
     Call<Medicamento> addMedicamento(@Body Medicamento medicamento);
 
-    @DELETE("/medicamentos/{nombre}")
-    Call<MyMedicamentoResponse> deleteOne(@Path("nombre") String nombre);
+    @DELETE("/medicamentos/{id}")
+    Call<MyMedicamentoResponse> deleteOne(@Path("id") String id);
 }

@@ -110,15 +110,15 @@ public class TomasFragment extends Fragment {
     }
 
     private void cargarDatos(final RecyclerView recyclerView) {
-        PersonaService personaService = ServiceGenerator.createService(PersonaService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-        Call<PersonaResponse> call = personaService.findOne(Util.getUserId(this.getActivity()));
+        TomasService service = ServiceGenerator.createService(TomasService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
+        Call<ResponseContainer<Tomas>> call = service.getTomas();
 
-        call.enqueue(new Callback<PersonaResponse>() {
+        call.enqueue(new Callback<ResponseContainer<Tomas>>() {
             @Override
-            public void onResponse(Call<PersonaResponse> call, Response<PersonaResponse> response) {
+            public void onResponse(Call<ResponseContainer<Tomas>> call, Response<ResponseContainer<Tomas>> response) {
                 if(response.isSuccessful()){
 
-                    adapter = new MyTomasRecyclerViewAdapter(ctx, R.layout.fragment_tomas, response.body().getListaTomas(), mListener);
+                    adapter = new MyTomasRecyclerViewAdapter(ctx, R.layout.fragment_tomas, response.body().getRows(), mListener);
                     recyclerView.setAdapter(adapter);
                 }else{
                     Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_SHORT).show();
@@ -126,7 +126,7 @@ public class TomasFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<PersonaResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<Tomas>> call, Throwable t) {
 
                 Toast.makeText(getContext(), "Error de conexion", Toast.LENGTH_SHORT).show();
             }
