@@ -15,18 +15,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.st.pillboxapp.R;
+import com.st.pillboxapp.models.Medicamento;
 import com.st.pillboxapp.viewModel.DeleteMisMedicamentosViewModel;
 
 public class DeleteMisMedicamentos extends DialogFragment {
 
     private static final String ARG_NOMBRE = "nombre";
+    private static final String ARG_ID_MED = "medicamentoId";
     private DeleteMisMedicamentosViewModel mViewModel;
 
     private DialogInterface.OnDismissListener onDismissListener;
 
     private View view;
     private TextView nombre;
-    private String argNombre;
+    private String argNombre,argIdMed;
 
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         this.onDismissListener = onDismissListener;
@@ -48,12 +50,14 @@ public class DeleteMisMedicamentos extends DialogFragment {
 
         if (getArguments() != null) {
             argNombre = getArguments().getString(ARG_NOMBRE);
+            argIdMed = getArguments().getString(ARG_ID_MED);
         }
     }
 
-    public static DeleteMisMedicamentos newInstance(String nombre) {
+    public static DeleteMisMedicamentos newInstance(Medicamento medicamento) {
         Bundle args = new Bundle();
-        args.putString(ARG_NOMBRE, nombre);
+        args.putString(ARG_NOMBRE, medicamento.getNombre());
+        args.putString(ARG_ID_MED, medicamento.getId());
 
         DeleteMisMedicamentos fragment = new DeleteMisMedicamentos();
         fragment.setArguments(args);

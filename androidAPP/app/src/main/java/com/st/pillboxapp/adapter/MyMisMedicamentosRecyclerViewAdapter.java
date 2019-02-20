@@ -56,7 +56,7 @@ public class MyMisMedicamentosRecyclerViewAdapter extends RecyclerView.Adapter<M
         holder.btnDeleteMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onDeleteMisMedicamentosClick(holder.mItem.getNombre());
+                mListener.onDeleteMisMedicamentosClick(holder.mItem);
             }
         });
     }

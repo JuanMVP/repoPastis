@@ -332,19 +332,19 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDeleteMisMedicamentosClick(String nombre) {
-//        DeleteMisMedicamentos f = DeleteMisMedicamentos.newInstance(nombre);
-//        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag();
-//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.detach(currentFragment);
-//                fragmentTransaction.attach(currentFragment);
-//                fragmentTransaction.commit();
-//            }
-//        });
-//        FragmentManager fm = getSupportFragmentManager();
-//        f.show(fm, "DeleteMedicamento");
+    public void onDeleteMisMedicamentosClick(Medicamento medicamento) {
+        DeleteMisMedicamentos f = DeleteMisMedicamentos.newInstance(medicamento);
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("AddTratamiento");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "DeleteMedicamento");
     }
 }
